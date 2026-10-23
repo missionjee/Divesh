@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Divesh Kumar — Personal Website &amp; Catalog</title>
-  <meta name="description" content="Personal website of Divesh Kumar (@missionjee) — Class 11th PCM student, builder, and problem solver." />
+  <title>Divesh Kumar — Personal Website, Lab &amp; Catalog</title>
+  <meta name="description" content="Personal website and engineering workbench of Divesh Kumar (@missionjee) — Class 11th PCM student, builder, and problem solver." />
 
   <!-- Favicon -->
   <link rel="icon" href="assets/avatar.png" type="image/png" />
@@ -19,7 +19,7 @@
   <!-- Google Fonts: Editorial Serif + Clean Sans + Minimalist Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -37,10 +37,10 @@
               surface: '#ffffff',
               muted: '#f4f1ea',
               border: '#e7e2d9',
-              dark: '#141312',
-              darkSurface: '#1c1b18',
-              darkMuted: '#262421',
-              darkBorder: '#383531'
+              dark: '#121211',
+              darkSurface: '#191816',
+              darkMuted: '#24221f',
+              darkBorder: '#35322d'
             },
             terracotta: {
               DEFAULT: '#c2410c',
@@ -65,18 +65,22 @@
       --text-muted: #78716c;
       --text-light: #a8a29e;
       --accent: #c2410c;
+      --accent-soft: #fff7ed;
+      --grid-line: rgba(0, 0, 0, 0.038);
     }
 
     html.dark {
-      --bg-color: #141312;
-      --surface-color: #1c1b18;
-      --surface-muted: #262421;
-      --border-color: #383531;
-      --border-subtle: #2d2a26;
+      --bg-color: #121211;
+      --surface-color: #191816;
+      --surface-muted: #24221f;
+      --border-color: #35322d;
+      --border-subtle: #292723;
       --text-main: #f5f2eb;
       --text-muted: #a8a29e;
       --text-light: #78716c;
       --accent: #ea580c;
+      --accent-soft: #2d1810;
+      --grid-line: rgba(255, 255, 255, 0.038);
     }
 
     body {
@@ -85,6 +89,10 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       transition: background-color 0.25s ease, color 0.25s ease;
       -webkit-font-smoothing: antialiased;
+      background-image: 
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 32px 32px;
     }
 
     .font-serif-headline {
@@ -112,11 +120,11 @@
     .editorial-card:hover {
       border-color: var(--text-main);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.08);
     }
 
     html.dark .editorial-card:hover {
-      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.45);
     }
 
     .btn-editorial {
@@ -139,46 +147,119 @@
       border-color: var(--text-main);
       background-color: var(--surface-muted);
     }
+
+    /* Technical Drafting Crosshairs */
+    .crosshair-corner {
+      position: relative;
+    }
+    .crosshair-corner::before,
+    .crosshair-corner::after {
+      content: '+';
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-light);
+      pointer-events: none;
+      line-height: 1;
+    }
+    .crosshair-corner::before {
+      top: 6px;
+      left: 7px;
+    }
+    .crosshair-corner::after {
+      bottom: 6px;
+      right: 7px;
+    }
+
+    /* Animated pulse dot */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.4); opacity: 0; }
+      100% { transform: scale(0.95); opacity: 0; }
+    }
+    .pulse-indicator {
+      position: relative;
+    }
+    .pulse-indicator::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 9999px;
+      border: 1.5px solid var(--accent);
+      animation: pulse-ring 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    }
+
+    /* Wave visualizer animation */
+    @keyframes wave-bar {
+      0%, 100% { height: 18%; }
+      50% { height: 95%; }
+    }
+
+    /* Custom range input styling */
+    input[type=range] {
+      accent-color: var(--accent);
+    }
+
+    /* Flow connection dashed lines */
+    .flow-line {
+      stroke-dasharray: 4, 4;
+      animation: dash-anim 20s linear infinite;
+    }
+    @keyframes dash-anim {
+      to {
+        stroke-dashoffset: -100;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-stone-200 selection:text-stone-900 dark:selection:bg-stone-800 dark:selection:text-stone-100">
 
   <!-- ==================== HEADER / MASTHEAD ==================== -->
-  <header class="sticky top-0 z-40 bg-[var(--bg-color)]/95 backdrop-blur-sm editorial-border-bottom transition-colors">
-    <div class="max-w-5xl mx-auto px-5 sm:px-8 h-18 py-4 flex items-center justify-between">
+  <header class="sticky top-0 z-40 bg-[var(--bg-color)]/95 backdrop-blur-md editorial-border-bottom transition-colors">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 h-18 py-3.5 flex items-center justify-between">
       
       <!-- Monogram & Identity -->
       <a href="#top" class="flex items-center gap-3.5 group focus:outline-none">
-        <div class="w-9 h-9 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] flex items-center justify-center font-serif-headline text-xl text-[var(--text-main)] group-hover:border-[var(--text-main)] transition-colors">
+        <div class="w-10 h-10 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] flex items-center justify-center font-serif-headline text-2xl text-[var(--text-main)] group-hover:border-[var(--text-main)] transition-colors shadow-sm">
           D
         </div>
         <div>
-          <span class="font-serif-headline text-2xl tracking-tight text-[var(--text-main)] block leading-none" id="headerName">Divesh Kumar</span>
-          <span class="text-[11px] font-mono text-[var(--text-muted)] tracking-wider uppercase mt-1 block">Class 11th • India</span>
+          <div class="flex items-center gap-2">
+            <span class="font-serif-headline text-2xl tracking-tight text-[var(--text-main)] block leading-none" id="headerName">Divesh Kumar</span>
+            <span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono border border-[var(--border-color)] bg-[var(--surface-muted)] text-[var(--text-muted)]">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block pulse-indicator"></span>
+              <span>PCM 11</span>
+            </span>
+          </div>
+          <span class="text-[11px] font-mono text-[var(--text-muted)] tracking-wider uppercase mt-1 block">Student &bull; Builder &bull; India</span>
         </div>
       </a>
 
       <!-- Clean Typographic Navigation -->
-      <nav class="hidden md:flex items-center gap-7 text-xs font-medium tracking-wide">
+      <nav class="hidden md:flex items-center gap-6 text-xs font-medium tracking-wide">
         <a href="#about" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">About</a>
+        <a href="#physics-lab" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors flex items-center gap-1">
+          <i data-lucide="activity" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+          <span>Physics Lab</span>
+        </a>
         <a href="#milestones" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">Milestones</a>
         <a href="#projects" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors flex items-center gap-1.5">
           <span>Projects</span>
           <span id="navCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded border border-[var(--border-color)] text-[var(--text-muted)]">0</span>
         </a>
-        <a href="#how-i-work" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">Method</a>
+        <a href="#method" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">Method</a>
         <a href="#contact" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">Contact</a>
       </nav>
 
       <!-- Right Controls -->
       <div class="flex items-center gap-3">
         <!-- Minimalist Theme Switcher -->
-        <button type="button" id="themeToggleBtn" class="p-2 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--text-main)] transition-all" title="Toggle Mode">
+        <button type="button" id="themeToggleBtn" class="p-2 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--text-main)] transition-all" title="Toggle Theme">
           <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
           <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
         </button>
 
-        <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-xs font-mono text-[var(--text-main)] hover:border-[var(--text-main)] transition-all">
+        <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-xs font-mono text-[var(--text-main)] hover:border-[var(--text-main)] transition-all shadow-sm">
           <i data-lucide="github" class="w-3.5 h-3.5 text-[var(--text-muted)]"></i>
           <span>@missionjee</span>
         </a>
@@ -187,17 +268,19 @@
   </header>
 
   <!-- ==================== MAIN CONTENT ==================== -->
-  <main class="flex-1 max-w-5xl w-full mx-auto px-5 sm:px-8 py-12 sm:py-16 space-y-20">
+  <main class="flex-1 max-w-5xl w-full mx-auto px-5 sm:px-8 py-10 sm:py-14 space-y-20">
 
-    <!-- HERO SECTION: EDITORIAL LETTER -->
-    <section id="top" class="space-y-8 pt-4">
+    <!-- HERO SECTION: EDITORIAL LETTER & IDENTITY -->
+    <section id="top" class="space-y-8 pt-2">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
         
         <!-- Left: Typographic Introduction -->
         <div class="md:col-span-8 space-y-6">
-          <div class="inline-flex items-center gap-2 text-xs font-mono tracking-wider text-[var(--text-muted)] uppercase">
-            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
-            <span>Academic Track • Class 11th PCM (IIT-JEE)</span>
+          <div class="inline-flex items-center gap-2.5 px-2.5 py-1 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-xs font-mono tracking-wider text-[var(--text-muted)] uppercase shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
+            <span>Academic Track &bull; Class 11th PCM (IIT-JEE)</span>
+            <span class="text-[var(--border-color)]">|</span>
+            <span class="text-[var(--text-light)]">India</span>
           </div>
 
           <h1 class="font-serif-headline text-4xl sm:text-6xl text-[var(--text-main)] leading-[1.08] tracking-tight">
@@ -206,126 +289,304 @@
 
           <p class="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed max-w-2xl" id="heroBio">
             I am Divesh Kumar, currently studying in Class 11th with Physics, Chemistry, and Mathematics. 
-            I look at computing not as a theoretical novelty, but as a practical workbench — building functional Android utilities, web tools, and systems alongside my daily academic preparation.
+            I look at computing not as a theoretical novelty, but as a practical workbench — building functional Android utilities, web security tools, and interactive systems alongside my daily academic preparation.
           </p>
 
           <div class="flex flex-wrap items-center gap-3 pt-2 text-xs font-medium">
-            <a href="#projects" class="btn-editorial px-5 py-2.5 rounded-md flex items-center gap-2">
+            <a href="#projects" class="btn-editorial px-5 py-2.5 rounded-md flex items-center gap-2 shadow-sm">
               <span>View Projects Catalog</span>
               <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
             </a>
 
-            <a href="#contact" class="btn-outline px-4 py-2.5 rounded-md flex items-center gap-2">
-              <i data-lucide="mail" class="w-3.5 h-3.5 text-[var(--text-muted)]"></i>
-              <span>Get in Touch</span>
+            <a href="#physics-lab" class="btn-outline px-4 py-2.5 rounded-md flex items-center gap-2 shadow-sm">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              <span>Open Physics Lab</span>
             </a>
 
-            <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="btn-outline px-4 py-2.5 rounded-md font-mono flex items-center gap-2">
-              <i data-lucide="external-link" class="w-3 h-3 text-[var(--text-muted)]"></i>
-              <span>GitHub</span>
+            <a href="#contact" class="btn-outline px-4 py-2.5 rounded-md flex items-center gap-2 shadow-sm">
+              <i data-lucide="mail" class="w-3.5 h-3.5 text-[var(--text-muted)]"></i>
+              <span>Get in Touch</span>
             </a>
           </div>
         </div>
 
-        <!-- Right: Real Portrait with Human Tactile Styling -->
+        <!-- Right: Real Portrait with Human Tactile Styling & Technical Stamp -->
         <div class="md:col-span-4 flex flex-col items-start md:items-end">
-          <div class="p-2 bg-[var(--surface-color)] editorial-border rounded-lg shadow-sm">
-            <div class="w-48 h-48 sm:w-56 sm:h-56 rounded overflow-hidden bg-[var(--surface-muted)]">
-              <img src="assets/avatar.png" alt="Divesh Kumar" class="w-full h-full object-cover filter contrast-[1.02]" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'" />
+          <div class="p-2.5 bg-[var(--surface-color)] editorial-border rounded-lg shadow-sm crosshair-corner w-full sm:w-auto">
+            <div class="relative w-full sm:w-56 h-56 rounded overflow-hidden bg-[var(--surface-muted)] border border-[var(--border-color)]">
+              <img src="assets/avatar.png" alt="Divesh Kumar" class="w-full h-full object-cover filter contrast-[1.03]" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'" />
+              
+              <!-- Subtle blueprint overlay tag -->
+              <div class="absolute bottom-2 left-2 bg-black/65 backdrop-blur-sm text-white px-2 py-0.5 rounded text-[10px] font-mono border border-white/20">
+                CLASS 11 PCM
+              </div>
             </div>
-            <div class="mt-2.5 px-1 flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
-              <span>DIVESH KUMAR</span>
-              <span>EST. 2026</span>
+
+            <div class="mt-3 px-1 flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
+              <div class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>DIVESH KUMAR</span>
+              </div>
+              <span class="text-[var(--text-light)]">STUDENT ARCHIVE</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Understated Editorial Metrics -->
-      <div class="editorial-border-top pt-6 grid grid-cols-2 sm:grid-cols-4 gap-6 text-xs">
-        <div>
-          <span class="font-mono text-[11px] text-[var(--text-light)] uppercase block">Curriculum</span>
-          <span class="font-medium text-[var(--text-main)] mt-0.5 block">Class 11th (PCM)</span>
+      <!-- Understated Editorial Metrics Bar with Blueprint Accents -->
+      <div class="editorial-border rounded-lg p-5 bg-[var(--surface-color)] grid grid-cols-2 sm:grid-cols-4 gap-6 text-xs shadow-sm">
+        <div class="space-y-1">
+          <div class="flex items-center gap-1.5 text-[var(--text-light)] font-mono text-[11px] uppercase">
+            <i data-lucide="book-open" class="w-3 h-3 text-[var(--accent)]"></i>
+            <span>Curriculum</span>
+          </div>
+          <span class="font-semibold text-[var(--text-main)] block text-sm">Class 11th (PCM)</span>
+          <span class="text-[11px] text-[var(--text-muted)] block">Physics &bull; Chemistry &bull; Math</span>
         </div>
-        <div>
-          <span class="font-mono text-[11px] text-[var(--text-light)] uppercase block">Preparation</span>
-          <span class="font-medium text-[var(--text-main)] mt-0.5 block">IIT-JEE Examination</span>
+
+        <div class="space-y-1">
+          <div class="flex items-center gap-1.5 text-[var(--text-light)] font-mono text-[11px] uppercase">
+            <i data-lucide="target" class="w-3 h-3 text-[var(--accent)]"></i>
+            <span>Focus Track</span>
+          </div>
+          <span class="font-semibold text-[var(--text-main)] block text-sm">IIT-JEE Aspirant</span>
+          <span class="text-[11px] text-[var(--text-muted)] block">CBSE 10th Completed</span>
         </div>
-        <div>
-          <span class="font-mono text-[11px] text-[var(--text-light)] uppercase block">Building Style</span>
-          <span class="font-medium text-[var(--text-main)] mt-0.5 block">Applied AI &amp; Prototyping</span>
+
+        <div class="space-y-1">
+          <div class="flex items-center gap-1.5 text-[var(--text-light)] font-mono text-[11px] uppercase">
+            <i data-lucide="terminal" class="w-3 h-3 text-[var(--accent)]"></i>
+            <span>Workbench</span>
+          </div>
+          <span class="font-semibold text-[var(--text-main)] block text-sm">Android &bull; Web &bull; Crypto</span>
+          <span class="text-[11px] text-[var(--text-muted)] block">AI-Augmented Prototyping</span>
         </div>
-        <div>
-          <span class="font-mono text-[11px] text-[var(--text-light)] uppercase block">Code Status</span>
-          <span class="font-medium text-[var(--text-main)] mt-0.5 block">Open Source Public</span>
+
+        <div class="space-y-1">
+          <div class="flex items-center gap-1.5 text-[var(--text-light)] font-mono text-[11px] uppercase">
+            <i data-lucide="git-branch" class="w-3 h-3 text-[var(--accent)]"></i>
+            <span>Code Status</span>
+          </div>
+          <span class="font-semibold text-[var(--text-main)] block text-sm">Public &bull; Open Source</span>
+          <span class="text-[11px] text-[var(--text-muted)] block">GitHub @missionjee</span>
         </div>
       </div>
     </section>
 
-    <!-- SECTION: ACADEMIC MILESTONES (STRICTLY REQUESTED DETAILS) -->
+    <!-- ==================== INTERACTIVE PCM COMPUTATIONAL LAB ==================== -->
+    <section id="physics-lab" class="space-y-6 pt-4 editorial-border-top">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-[var(--accent)] uppercase tracking-wider">
+            <i data-lucide="atom" class="w-3.5 h-3.5"></i>
+            <span>Interactive Graphic Workbench</span>
+          </div>
+          <h2 class="font-serif-headline text-3xl sm:text-4xl text-[var(--text-main)] mt-1">PCM Computational Lab</h2>
+          <p class="text-xs text-[var(--text-muted)] mt-1 max-w-xl">
+            Real-time interactive mathematical and physical simulations written in pure HTML5 Canvas. Experience harmonic oscillator knots, standing wave superposition, and Keplerian orbital fields.
+          </p>
+        </div>
+
+        <!-- Simulation Mode Switcher -->
+        <div class="flex items-center p-1 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-xs font-mono" id="simModeGroup">
+          <button type="button" data-sim="lissajous" class="sim-mode-btn px-2.5 py-1 rounded font-medium bg-[var(--text-main)] text-[var(--bg-color)] transition-all">
+            Lissajous
+          </button>
+          <button type="button" data-sim="standing-wave" class="sim-mode-btn px-2.5 py-1 rounded font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-all">
+            Standing Waves
+          </button>
+          <button type="button" data-sim="gravity-field" class="sim-mode-btn px-2.5 py-1 rounded font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-all">
+            Orbital Field
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Canvas Board -->
+      <div class="editorial-card rounded-lg overflow-hidden crosshair-corner shadow-sm border border-[var(--border-color)] bg-[var(--surface-color)]">
+        
+        <!-- Canvas Status & Telemetry Header -->
+        <div class="p-3 sm:px-5 border-b border-[var(--border-color)] bg-[var(--surface-muted)] flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 text-[var(--text-main)] font-semibold">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="canvasSimTitle">Lissajous Resonance Knot</span>
+            </span>
+            <span class="text-[var(--border-color)]">|</span>
+            <span class="text-[var(--text-muted)] hidden sm:inline" id="canvasSimFormula">x = A·sin(3t + δ), y = B·sin(2t)</span>
+          </div>
+
+          <div class="flex items-center gap-4 text-[11px] text-[var(--text-muted)]">
+            <span>FPS: <strong id="simFps" class="font-mono text-[var(--text-main)]">60</strong></span>
+            <span>PHASE: <strong id="simPhaseReadout" class="font-mono text-[var(--accent)]">0.00 rad</strong></span>
+            <button type="button" id="simPauseBtn" class="px-2 py-0.5 rounded border border-[var(--border-color)] bg-[var(--surface-color)] hover:border-[var(--text-main)] text-[var(--text-main)]">
+              Pause
+            </button>
+          </div>
+        </div>
+
+        <!-- The Canvas viewport -->
+        <div class="relative w-full h-72 sm:h-80 bg-[var(--bg-color)] overflow-hidden cursor-crosshair">
+          <canvas id="physicsCanvas" class="w-full h-full block"></canvas>
+
+          <!-- Interactive Overlay Hint -->
+          <div class="absolute bottom-3 left-4 pointer-events-none text-[10px] font-mono text-[var(--text-light)] bg-[var(--surface-color)]/80 px-2 py-1 rounded border border-[var(--border-color)] backdrop-blur-sm">
+            Drag mouse or touch to perturb vector coordinates
+          </div>
+        </div>
+
+        <!-- Controls Footer -->
+        <div class="p-4 sm:px-6 border-t border-[var(--border-color)] bg-[var(--surface-color)] grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono">
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px]">
+              <span class="text-[var(--text-muted)]">Frequency Ratio (a:b)</span>
+              <span id="ratioLabel" class="text-[var(--text-main)] font-semibold">3 : 2</span>
+            </div>
+            <input type="range" id="ratioSlider" min="1" max="7" value="3" step="1" class="w-full h-1.5 bg-[var(--surface-muted)] rounded-lg appearance-none cursor-pointer" />
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px]">
+              <span class="text-[var(--text-muted)]">Phase Velocity (&omega;)</span>
+              <span id="speedLabel" class="text-[var(--text-main)] font-semibold">1.0x</span>
+            </div>
+            <input type="range" id="speedSlider" min="0.2" max="3" value="1.0" step="0.1" class="w-full h-1.5 bg-[var(--surface-muted)] rounded-lg appearance-none cursor-pointer" />
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-[11px]">
+              <span class="text-[var(--text-muted)]">Trail Persistence</span>
+              <span id="trailLabel" class="text-[var(--text-main)] font-semibold">Medium</span>
+            </div>
+            <input type="range" id="trailSlider" min="0.05" max="0.4" value="0.15" step="0.02" class="w-full h-1.5 bg-[var(--surface-muted)] rounded-lg appearance-none cursor-pointer" />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== ACADEMIC MILESTONES & PCM SPECTRUM ==================== -->
     <section id="milestones" class="space-y-6 pt-4 editorial-border-top">
       <div class="flex items-baseline justify-between">
         <div>
           <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Academic Ledger</span>
           <h2 class="font-serif-headline text-3xl sm:text-4xl text-[var(--text-main)] mt-1">Journey &amp; Milestones</h2>
         </div>
-        <span class="text-xs font-mono text-[var(--text-light)] hidden sm:block">CBSE Record</span>
+        <span class="text-xs font-mono text-[var(--text-light)] hidden sm:block">CBSE Board &bull; India</span>
       </div>
 
       <!-- Ledger Table -->
-      <div class="editorial-border rounded-lg overflow-hidden bg-[var(--surface-color)] divide-y divide-[var(--border-color)]">
+      <div class="editorial-border rounded-lg overflow-hidden bg-[var(--surface-color)] divide-y divide-[var(--border-color)] shadow-sm">
         
         <!-- Milestone 1: 11th PCM -->
         <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div class="space-y-1">
             <div class="flex items-center gap-2.5">
-              <span class="font-mono text-xs font-semibold text-[var(--accent)]">01</span>
+              <span class="font-mono text-xs font-bold text-[var(--accent)]">01</span>
               <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">Class 11th (PCM)</h3>
-              <span class="px-2 py-0.5 text-[10px] font-mono border border-[var(--border-color)] rounded text-[var(--text-muted)] bg-[var(--surface-muted)]">Current</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono border border-[var(--border-color)] rounded text-[var(--accent)] bg-[var(--accent-soft)] font-medium">Currently Studying</span>
             </div>
-            <p class="text-xs text-[var(--text-muted)] pl-6">Focusing on Physics, Chemistry, and Mathematics for IIT-JEE.</p>
+            <p class="text-xs text-[var(--text-muted)] pl-6">Focusing on Physics, Chemistry, and Mathematics for national engineering entrance (IIT-JEE).</p>
           </div>
-          <span class="font-mono text-xs text-[var(--text-light)] pl-6 sm:pl-0">Currently Studying</span>
+          <div class="pl-6 sm:pl-0 text-right">
+            <span class="font-mono text-xs text-[var(--text-light)] block">Session 2026–27</span>
+            <span class="font-mono text-[11px] text-[var(--accent)]">Enrolled &bull; In Progress</span>
+          </div>
         </div>
 
         <!-- Milestone 2: 10th CBSE -->
         <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div class="space-y-1">
             <div class="flex items-center gap-2.5">
-              <span class="font-mono text-xs font-semibold text-[var(--text-muted)]">02</span>
+              <span class="font-mono text-xs font-bold text-[var(--text-muted)]">02</span>
               <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">Class 10th (CBSE)</h3>
-              <span class="px-2 py-0.5 text-[10px] font-mono border border-[var(--border-color)] rounded text-[var(--text-muted)] bg-[var(--surface-muted)]">Completed</span>
+              <span class="px-2 py-0.5 text-[10px] font-mono border border-[var(--border-color)] rounded text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 font-medium">Completed</span>
             </div>
             <p class="text-xs text-[var(--text-muted)] pl-6">Completed Secondary School Examination under the Central Board of Secondary Education.</p>
           </div>
-          <span class="font-mono text-xs text-[var(--text-light)] pl-6 sm:pl-0">Year 2025–26</span>
+          <div class="pl-6 sm:pl-0 text-right">
+            <span class="font-mono text-xs text-[var(--text-light)] block">Year 2025–26</span>
+            <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">CBSE Certificate Verified</span>
+          </div>
         </div>
 
       </div>
+
+      <!-- PCM Core Knowledge Matrix (Visual Technical Cards) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+        <!-- Physics -->
+        <div class="editorial-card rounded-lg p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs text-[var(--accent)] font-semibold">PHYSICS 11</span>
+            <i data-lucide="compass" class="w-4 h-4 text-[var(--accent)]"></i>
+          </div>
+          <h4 class="font-serif-headline text-xl text-[var(--text-main)]">Mechanics &amp; Oscillations</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Kinematics, Newton's Laws of Motion, Work-Energy-Power, Rotational Dynamics, Centre of Mass, Gravitation, and Harmonic Waves.
+          </p>
+          <div class="pt-2 border-t border-[var(--border-color)] flex items-center justify-between text-[11px] font-mono text-[var(--text-light)]">
+            <span>IIT-JEE Core</span>
+            <span>Rigid Dynamics</span>
+          </div>
+        </div>
+
+        <!-- Chemistry -->
+        <div class="editorial-card rounded-lg p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs text-[var(--accent)] font-semibold">CHEMISTRY 11</span>
+            <i data-lucide="flask-conical" class="w-4 h-4 text-[var(--accent)]"></i>
+          </div>
+          <h4 class="font-serif-headline text-xl text-[var(--text-main)]">Structure &amp; Thermodynamics</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Quantum Atomic Model, Chemical Bonding &amp; Molecular Orbital Theory, Thermodynamics, Chemical &amp; Ionic Equilibrium.
+          </p>
+          <div class="pt-2 border-t border-[var(--border-color)] flex items-center justify-between text-[11px] font-mono text-[var(--text-light)]">
+            <span>Physical &bull; Inorganic</span>
+            <span>Molecular Orbitals</span>
+          </div>
+        </div>
+
+        <!-- Mathematics -->
+        <div class="editorial-card rounded-lg p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs text-[var(--accent)] font-semibold">MATHEMATICS 11</span>
+            <i data-lucide="binary" class="w-4 h-4 text-[var(--accent)]"></i>
+          </div>
+          <h4 class="font-serif-headline text-xl text-[var(--text-main)]">Coordinate Geometry &amp; Calculus</h4>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Straight Lines, Conic Sections (Parabola, Ellipse, Hyperbola), Complex Numbers, Trigonometric Functions, and Differential Limits.
+          </p>
+          <div class="pt-2 border-t border-[var(--border-color)] flex items-center justify-between text-[11px] font-mono text-[var(--text-light)]">
+            <span>Analytical Geometry</span>
+            <span>Calculus Rigor</span>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- SECTION: PROJECTS CATALOG (DYNAMICALLY EXTRACTED CATEGORIES) -->
+    <!-- ==================== PROJECTS CATALOG WITH INTERACTIVE SCHEMATICS ==================== -->
     <section id="projects" class="space-y-6 pt-4 editorial-border-top">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
-          <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Index &amp; Archive</span>
+          <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Index &amp; Blueprints</span>
           <h2 class="font-serif-headline text-3xl sm:text-4xl text-[var(--text-main)] mt-1">Projects &amp; Utilities</h2>
-          <p class="text-xs text-[var(--text-muted)] mt-1">Tools built to solve practical needs, explore systems, and support daily workflows.</p>
+          <p class="text-xs text-[var(--text-muted)] mt-1">
+            Functional tools built to solve actual problems. Toggle each project between interactive technical schematic and visual cover.
+          </p>
         </div>
 
         <!-- Search Bar -->
         <div class="relative w-full sm:w-64">
           <i data-lucide="search" class="w-3.5 h-3.5 text-[var(--text-light)] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-          <input type="text" id="projectSearchInput" placeholder="Filter by keyword..." class="w-full pl-8 pr-3 py-1.5 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-xs text-[var(--text-main)] placeholder-[var(--text-light)] focus:outline-none focus:border-[var(--text-main)] transition-colors" />
+          <input type="text" id="projectSearchInput" placeholder="Filter by keyword..." class="w-full pl-8 pr-3 py-1.5 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-xs text-[var(--text-main)] placeholder-[var(--text-light)] focus:outline-none focus:border-[var(--text-main)] transition-colors shadow-sm" />
         </div>
       </div>
 
-      <!-- DYNAMIC CATEGORY FILTER TABS (ZERO hardcoding in code!) -->
+      <!-- DYNAMIC CATEGORY FILTER TABS -->
       <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none" id="categoryFilterContainer"></div>
 
       <!-- PROJECTS CATALOG GRID -->
-      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
 
       <!-- Empty State -->
       <div id="emptyProjectsState" class="hidden p-10 editorial-border rounded-lg text-center space-y-2 bg-[var(--surface-color)]">
@@ -335,52 +596,80 @@
       </div>
     </section>
 
-    <!-- SECTION: HOW I WORK (HONEST HUMAN METHODOLOGY) -->
-    <section id="how-i-work" class="space-y-6 pt-4 editorial-border-top">
+    <!-- ==================== HOW I WORK / THE BUILDER METHOD ==================== -->
+    <section id="method" class="space-y-6 pt-4 editorial-border-top">
       <div class="max-w-2xl space-y-3">
-        <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Philosophy &amp; Method</span>
+        <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Engineering Philosophy</span>
         <h2 class="font-serif-headline text-3xl sm:text-4xl text-[var(--text-main)]">How I Build As a High School Student</h2>
+        <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+          Clear problem articulation, rigorous logic, and applied modern AI tools. Here is the exact architectural pipeline behind every project.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        
-        <div class="editorial-card rounded-lg p-6 space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-[var(--text-light)]">
-            <span>01</span>
-            <span>APPROACH</span>
+      <!-- Interactive SVG Builder Pipeline Diagram -->
+      <div class="editorial-card rounded-lg p-6 bg-[var(--surface-color)] overflow-x-auto crosshair-corner shadow-sm">
+        <div class="min-w-[650px] space-y-5">
+          <div class="flex items-center justify-between text-xs font-mono text-[var(--text-muted)] border-b border-[var(--border-color)] pb-3">
+            <span>PIPELINE: SCHEMATIC SPECIFICATION</span>
+            <span class="text-[var(--accent)]">PHASE 01 &rarr; 04</span>
           </div>
-          <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">Logic First, AI as Co-pilot</h3>
-          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-            I don't pretend to have years of legacy language mastery. Instead, I understand logical problem structures and collaborate with AI models to architect and write clean code.
-          </p>
-        </div>
 
-        <div class="editorial-card rounded-lg p-6 space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-[var(--text-light)]">
-            <span>02</span>
-            <span>OBJECTIVE</span>
+          <div class="grid grid-cols-4 gap-4 text-xs">
+            
+            <!-- Step 1 -->
+            <div class="p-3.5 rounded border border-[var(--border-color)] bg-[var(--surface-muted)] space-y-2">
+              <div class="flex items-center justify-between text-[10px] font-mono text-[var(--text-light)]">
+                <span>STAGE 01</span>
+                <i data-lucide="help-circle" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </div>
+              <h4 class="font-semibold text-[var(--text-main)]">Problem Articulation</h4>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Identify a genuine friction point (e.g. missed UPI payments or CBT exam timers) and reduce it to analytical components.
+              </p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="p-3.5 rounded border border-[var(--border-color)] bg-[var(--surface-muted)] space-y-2">
+              <div class="flex items-center justify-between text-[10px] font-mono text-[var(--text-light)]">
+                <span>STAGE 02</span>
+                <i data-lucide="cpu" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </div>
+              <h4 class="font-semibold text-[var(--text-main)]">AI-Pair Architecture</h4>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Formulate data schemas, state machines, and system APIs collaboratively using advanced AI models as rapid sparring partners.
+              </p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="p-3.5 rounded border border-[var(--border-color)] bg-[var(--surface-muted)] space-y-2">
+              <div class="flex items-center justify-between text-[10px] font-mono text-[var(--text-light)]">
+                <span>STAGE 03</span>
+                <i data-lucide="terminal" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </div>
+              <h4 class="font-semibold text-[var(--text-main)]">Empirical Prototyping</h4>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Compile on Linux, test Android APKs on real hardware, and audit edge cases until performance and reliability are achieved.
+              </p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="p-3.5 rounded border border-[var(--border-color)] bg-[var(--surface-muted)] space-y-2">
+              <div class="flex items-center justify-between text-[10px] font-mono text-[var(--text-light)]">
+                <span>STAGE 04</span>
+                <i data-lucide="git-merge" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+              </div>
+              <h4 class="font-semibold text-[var(--text-main)]">Open Release</h4>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Commit clean code to GitHub, configure continuous deployments, and document findings clearly for other student builders.
+              </p>
+            </div>
+
           </div>
-          <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">Building What Works</h3>
-          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-            Every build solves a genuine need — from an Android UPI soundbox to local-first markdown notes and examination simulators. Function comes before vanity.
-          </p>
         </div>
-
-        <div class="editorial-card rounded-lg p-6 space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-[var(--text-light)]">
-            <span>03</span>
-            <span>FOUNDATIONS</span>
-          </div>
-          <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">PCM &amp; Academic Focus</h3>
-          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-            My primary priority remains Class 11th Physics, Chemistry, and Mathematics for JEE. Coding reinforces the mathematical and analytical clarity needed for competitive problem solving.
-          </p>
-        </div>
-
       </div>
     </section>
 
-    <!-- SECTION: CORRESPONDENCE / CONTACT (CONNECTED TO SUPABASE & ADMIN) -->
+    <!-- ==================== CORRESPONDENCE / CONTACT ==================== -->
     <section id="contact" class="space-y-6 pt-4 editorial-border-top">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
         
@@ -396,7 +685,7 @@
           </p>
 
           <div class="space-y-3 pt-2 text-xs">
-            <div class="editorial-border rounded-md p-3 bg-[var(--surface-color)] flex items-center justify-between">
+            <div class="editorial-border rounded-md p-3.5 bg-[var(--surface-color)] flex items-center justify-between shadow-sm">
               <div>
                 <span class="font-mono text-[10px] text-[var(--text-light)] block uppercase">Direct Email</span>
                 <a href="mailto:diveshsah2@gmail.com" class="font-medium text-[var(--text-main)] hover:underline" id="contactEmail">diveshsah2@gmail.com</a>
@@ -404,7 +693,7 @@
               <i data-lucide="arrow-up-right" class="w-4 h-4 text-[var(--text-light)]"></i>
             </div>
 
-            <div class="editorial-border rounded-md p-3 bg-[var(--surface-color)] flex items-center justify-between">
+            <div class="editorial-border rounded-md p-3.5 bg-[var(--surface-color)] flex items-center justify-between shadow-sm">
               <div>
                 <span class="font-mono text-[10px] text-[var(--text-light)] block uppercase">GitHub Repositories</span>
                 <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="font-medium text-[var(--text-main)] font-mono hover:underline">github.com/missionjee</a>
@@ -415,7 +704,7 @@
         </div>
 
         <!-- Right: Dispatch Form -->
-        <div class="md:col-span-7 editorial-border rounded-lg p-6 sm:p-8 bg-[var(--surface-color)] space-y-4">
+        <div class="md:col-span-7 editorial-border rounded-lg p-6 sm:p-8 bg-[var(--surface-color)] space-y-4 shadow-sm crosshair-corner">
           <div class="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
             <span class="font-mono text-xs text-[var(--text-main)] font-semibold">WRITE A MESSAGE</span>
             <span class="text-[10px] font-mono text-[var(--text-light)]">DIRECT DISPATCH</span>
@@ -443,9 +732,9 @@
               <textarea id="senderMessage" rows="4" required placeholder="Write your note..." class="w-full px-3 py-2 rounded border border-[var(--border-color)] bg-[var(--bg-color)] text-[var(--text-main)] focus:outline-none focus:border-[var(--text-main)] transition-colors resize-none"></textarea>
             </div>
 
-            <div id="contactStatus" class="hidden p-3 rounded text-xs"></div>
+            <div id="contactStatus" class="hidden p-3 rounded text-xs font-mono"></div>
 
-            <button type="submit" id="contactSubmitBtn" class="btn-editorial px-5 py-2.5 rounded font-medium text-xs flex items-center gap-2">
+            <button type="submit" id="contactSubmitBtn" class="btn-editorial px-5 py-2.5 rounded font-medium text-xs flex items-center gap-2 shadow-sm">
               <span>Send Note</span>
               <i data-lucide="send" class="w-3.5 h-3.5"></i>
             </button>
@@ -459,7 +748,7 @@
 
   <!-- ==================== PROJECT DETAILS MODAL ==================== -->
   <div id="projectModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-    <div class="editorial-card w-full max-w-xl rounded-lg overflow-hidden max-h-[90vh] flex flex-col bg-[var(--surface-color)]">
+    <div class="editorial-card w-full max-w-xl rounded-lg overflow-hidden max-h-[90vh] flex flex-col bg-[var(--surface-color)] shadow-2xl">
       <div class="relative h-52 sm:h-60 bg-[var(--surface-muted)] shrink-0 overflow-hidden">
         <img id="modalProjectImage" src="" alt="" class="w-full h-full object-cover" />
         <button type="button" id="closeModalBtn" class="absolute top-3 right-3 p-1.5 rounded-full bg-black/60 hover:bg-black text-white transition-all">
@@ -482,7 +771,7 @@
 
         <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between">
           <span id="modalProjectDate" class="text-xs font-mono text-[var(--text-light)]"></span>
-          <a id="modalProjectLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-editorial px-4 py-2 rounded text-xs font-medium flex items-center gap-1.5">
+          <a id="modalProjectLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-editorial px-4 py-2 rounded text-xs font-medium flex items-center gap-1.5 shadow-sm">
             <span>Open Source / Live</span>
             <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
@@ -497,10 +786,14 @@
       <div class="flex items-center gap-2">
         <span class="font-serif-headline text-lg text-[var(--text-main)]">Divesh Kumar</span>
         <span>&bull;</span>
-        <span class="font-mono text-[11px]">&copy; <span id="currentYear"></span> All rights reserved.</span>
+        <span class="font-mono text-[11px]">&copy; <span id="currentYear"></span> &bull; Class 11th PCM &bull; India</span>
       </div>
 
       <div class="flex items-center gap-5 font-mono text-[11px]">
+        <a href="#physics-lab" class="hover:text-[var(--text-main)] transition-colors flex items-center gap-1">
+          <i data-lucide="atom" class="w-3 h-3 text-[var(--accent)]"></i>
+          <span>Physics Lab</span>
+        </a>
         <a href="#top" class="hover:text-[var(--text-main)] transition-colors flex items-center gap-1">
           <span>Back to Top</span>
           <i data-lucide="arrow-up" class="w-3 h-3"></i>
@@ -509,7 +802,7 @@
     </div>
   </footer>
 
-  <!-- ==================== SCRIPTS: DYNAMIC ENGINE ==================== -->
+  <!-- ==================== SCRIPTS: DYNAMIC ENGINE & GRAPHICS ==================== -->
   <script>
     const SUPABASE_URL = "https://ukoxijpkxmdckamcmczz.supabase.co";
     let supabaseClient = null;
@@ -522,9 +815,9 @@
       {
         id: "proj-1",
         title: "PayBell Soundbox Utility",
-        category: "Android Utilities",
-        description: "Background listener app for Android that announces incoming UPI transaction payments through vocal synthesis.",
-        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+        category: "Android Apps",
+        description: "Smart Android background listener that transforms any smartphone into an instant voice-alert soundbox for real-time UPI and banking transaction announcements.",
+        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80",
         link: "https://github.com/missionjee",
         tags: ["Android", "Kotlin", "Accessibility API", "TTS"],
         featured: true,
@@ -534,8 +827,8 @@
         id: "proj-2",
         title: "Enigma KeyGen & Security Console",
         category: "Web Security",
-        description: "Cryptographic license generation console with entropy calculations, tier verification, and batch CSV export.",
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+        description: "High-throughput cryptographic license key generator and web security console featuring custom entropy algorithms, tier validation, and batch CSV export.",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80",
         link: "https://github.com/missionjee",
         tags: ["JavaScript", "Cryptography", "Security", "Analytics"],
         featured: true,
@@ -544,22 +837,22 @@
       {
         id: "proj-3",
         title: "MissionJEE CBT Assessment Engine",
-        category: "EdTech",
-        description: "Computer-Based Test simulation portal calibrated to national engineering entrance examination standards.",
-        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
+        category: "Web Apps",
+        description: "Interactive, high-fidelity Computer-Based Test simulator calibrated to national engineering entrance exam specifications with time-trap analytics and live scoring.",
+        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=80",
         link: "https://github.com/missionjee/Divesh-",
-        tags: ["HTML5", "Tailwind CSS", "JavaScript"],
+        tags: ["HTML5", "Tailwind CSS", "JavaScript", "EdTech"],
         featured: true,
         date: "2026"
       },
       {
         id: "proj-4",
         title: "InkNote Productivity Suite",
-        category: "Software Tools",
-        description: "Minimalist, markdown-centric local-first notebook with instantaneous search and distraction-free workspace.",
-        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80",
+        category: "Productivity",
+        description: "Distraction-free markdown note-taking environment with instantaneous search, local-first storage, syntax highlighting, and clean export formatting.",
+        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=80",
         link: "https://github.com/missionjee",
-        tags: ["Local-First", "Markdown", "JavaScript"],
+        tags: ["Local-First", "Markdown", "JavaScript", "UI/UX"],
         featured: false,
         date: "2025"
       }
@@ -649,7 +942,7 @@
         btn.type = 'button';
         btn.className = `px-3 py-1 rounded text-xs font-mono transition-colors ${
           activeCategory === cat
-            ? 'bg-[var(--text-main)] text-[var(--bg-color)] font-medium'
+            ? 'bg-[var(--text-main)] text-[var(--bg-color)] font-medium shadow-sm'
             : 'border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)] hover:text-[var(--text-main)]'
         }`;
         btn.textContent = cat;
@@ -694,26 +987,190 @@
       if (window.lucide) lucide.createIcons();
     }
 
+    // High Craft Project Card with Interactive Graphic Workbench
     function createProjectCard(p, number) {
       const card = document.createElement('div');
-      card.className = 'editorial-card rounded-lg overflow-hidden flex flex-col justify-between group';
+      card.className = 'editorial-card rounded-lg overflow-hidden flex flex-col justify-between group shadow-sm border border-[var(--border-color)]';
 
-      const imageSrc = p.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80';
       const numFormatted = String(number).padStart(2, '0');
+      const imageSrc = p.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80';
+
+      // Custom Interactive Graphic Blueprint for Each Build
+      let schematicHtml = '';
+      if (p.id === 'proj-1') {
+        // PayBell Soundbox: Interactive Audio Visualizer & Chime trigger
+        schematicHtml = `
+          <div class="h-52 bg-[var(--surface-muted)] p-4 flex flex-col justify-between border-b border-[var(--border-color)] font-mono text-xs">
+            <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)]">
+              <span class="flex items-center gap-1.5 text-[var(--accent)] font-semibold">
+                <i data-lucide="radio" class="w-3.5 h-3.5"></i>
+                <span>PAYBELL HUD &bull; ANDROID SERVICE</span>
+              </span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded border border-[var(--border-color)] bg-[var(--surface-color)]">TTS 44.1kHz</span>
+            </div>
+
+            <!-- Oscilloscope soundwave visualization -->
+            <div class="h-16 flex items-center justify-center gap-1 my-1 px-4 bg-[var(--surface-color)] rounded border border-[var(--border-color)]">
+              <span class="w-1.5 bg-[var(--accent)] rounded-full h-4 transition-all duration-300 soundwave-bar"></span>
+              <span class="w-1.5 bg-[var(--accent)] rounded-full h-8 transition-all duration-300 soundwave-bar"></span>
+              <span class="w-1.5 bg-[var(--accent)] rounded-full h-12 transition-all duration-300 soundwave-bar"></span>
+              <span class="w-1.5 bg-[var(--accent)] rounded-full h-6 transition-all duration-300 soundwave-bar"></span>
+              <span class="w-1.5 bg-[var(--accent)] rounded-full h-14 transition-all duration-300 soundwave-bar"></span>
+              <span class="w-1.5 bg-[var(--accent)] rounded-full h-9 transition-all duration-300 soundwave-bar"></span>
+              <span class="w-1.5 bg-[var(--accent)] rounded-full h-4 transition-all duration-300 soundwave-bar"></span>
+              <span class="w-1.5 bg-[var(--accent)] rounded-full h-11 transition-all duration-300 soundwave-bar"></span>
+            </div>
+
+            <!-- Interactive Trigger -->
+            <div class="flex items-center justify-between gap-2 pt-1">
+              <span class="text-[10px] text-[var(--text-muted)] truncate soundbox-status">Tap to trigger synthesized UPI chime:</span>
+              <button type="button" class="btn-test-chime px-2.5 py-1 rounded bg-[var(--text-main)] text-[var(--bg-color)] text-[10px] font-semibold flex items-center gap-1 hover:opacity-90">
+                <i data-lucide="volume-2" class="w-3 h-3"></i>
+                <span>Play Chime</span>
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (p.id === 'proj-2') {
+        // Enigma KeyGen: Live Cryptographic Entropy Rotor
+        schematicHtml = `
+          <div class="h-52 bg-[var(--surface-muted)] p-4 flex flex-col justify-between border-b border-[var(--border-color)] font-mono text-xs">
+            <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)]">
+              <span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                <span>ENIGMA CRYPTO ENGINE</span>
+              </span>
+              <span class="text-[10px] text-[var(--text-light)]">SHA-256 / 256-bit</span>
+            </div>
+
+            <div class="bg-[var(--surface-color)] p-2.5 rounded border border-[var(--border-color)] space-y-1 text-[11px]">
+              <div class="flex justify-between text-[10px] text-[var(--text-light)]">
+                <span>GENERATED TOKEN:</span>
+                <span class="text-emerald-600 dark:text-emerald-400 font-semibold">VALIDATED</span>
+              </div>
+              <div class="font-mono text-xs text-[var(--text-main)] tracking-wider keygen-display font-semibold">
+                ENIG-94F2-87C1-B603
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pt-1">
+              <span class="text-[10px] text-[var(--text-muted)]">Entropy: 7.98 bits/byte</span>
+              <button type="button" class="btn-gen-key px-2.5 py-1 rounded border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-main)] text-[10px] font-semibold flex items-center gap-1 hover:border-[var(--text-main)]">
+                <i data-lucide="refresh-cw" class="w-3 h-3"></i>
+                <span>Cycle Key</span>
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (p.id === 'proj-3') {
+        // MissionJEE CBT Engine: Live 10-Question Matrix & Scoring Rule
+        schematicHtml = `
+          <div class="h-52 bg-[var(--surface-muted)] p-4 flex flex-col justify-between border-b border-[var(--border-color)] font-mono text-xs">
+            <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)]">
+              <span class="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 font-semibold">
+                <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                <span>JEE CBT PALETTE &bull; EXAM HUD</span>
+              </span>
+              <span class="text-[10px] text-[var(--accent)] font-semibold">+4 / -1</span>
+            </div>
+
+            <!-- Mini 10-Question Interactive Matrix -->
+            <div class="grid grid-cols-5 gap-1.5 my-1">
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-emerald-600 text-white">01</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-emerald-600 text-white">02</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-purple-600 text-white">03</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-emerald-600 text-white">04</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)]">05</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-emerald-600 text-white">06</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-purple-600 text-white">07</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-emerald-600 text-white">08</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)]">09</button>
+              <button type="button" class="cbt-q-btn p-1 text-[10px] rounded text-center font-bold border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)]">10</button>
+            </div>
+
+            <div class="flex items-center justify-between text-[10px] text-[var(--text-muted)] pt-1">
+              <span>Click cells to toggle status</span>
+              <span class="text-emerald-600 font-semibold">Answered: 5</span>
+            </div>
+          </div>
+        `;
+      } else if (p.id === 'proj-4') {
+        // InkNote: Interactive Markdown & Lexer Sandbox
+        schematicHtml = `
+          <div class="h-52 bg-[var(--surface-muted)] p-4 flex flex-col justify-between border-b border-[var(--border-color)] font-mono text-xs">
+            <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)]">
+              <span class="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 font-semibold">
+                <i data-lucide="file-code" class="w-3.5 h-3.5"></i>
+                <span>INKNOTE &bull; AST LEXER</span>
+              </span>
+              <span class="text-[10px] text-[var(--text-light)]">Local-First</span>
+            </div>
+
+            <div class="bg-[var(--surface-color)] p-2.5 rounded border border-[var(--border-color)] space-y-1">
+              <input type="text" class="inknote-test-input w-full bg-transparent border-b border-[var(--border-color)] pb-1 text-xs text-[var(--text-main)] font-mono focus:outline-none" value="# Momentum: p = mv" />
+              <div class="inknote-token-preview text-[10px] text-[var(--text-muted)] pt-0.5 flex items-center justify-between">
+                <span>Tokens: [ H1, Ident, Eq, Prod ]</span>
+                <span class="text-[var(--accent)]">Sync: 0ms</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-[10px] text-[var(--text-muted)] pt-1">
+              <span>Real-time syntax lexer</span>
+              <span class="text-[var(--text-main)] font-mono">UTF-8 Clean</span>
+            </div>
+          </div>
+        `;
+      } else {
+        // Generic bespoke schematic for custom projects
+        schematicHtml = `
+          <div class="h-52 bg-[var(--surface-muted)] p-4 flex flex-col justify-between border-b border-[var(--border-color)] font-mono text-xs">
+            <div class="flex items-center justify-between text-[11px] text-[var(--text-muted)]">
+              <span class="font-semibold text-[var(--accent)]">${escapeHtml(p.category || 'PROJECT')}</span>
+              <span class="text-[10px]">#${numFormatted}</span>
+            </div>
+            <div class="p-3 bg-[var(--surface-color)] rounded border border-[var(--border-color)] text-center space-y-1">
+              <span class="font-mono text-xs font-semibold text-[var(--text-main)] block">${escapeHtml(p.title)}</span>
+              <span class="text-[10px] text-[var(--text-light)] block font-mono">ARCHITECTURAL SPECIFICATION</span>
+            </div>
+            <div class="text-[10px] text-[var(--text-muted)] flex justify-between">
+              <span>Stack: ${(p.tags || []).slice(0, 2).join(', ')}</span>
+              <span>${p.date || '2026'}</span>
+            </div>
+          </div>
+        `;
+      }
 
       card.innerHTML = `
         <div>
-          <!-- Thumbnail -->
-          <div class="relative h-48 bg-[var(--surface-muted)] overflow-hidden border-b border-[var(--border-color)]">
-            <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(p.title)}" loading="lazy" class="w-full h-full object-cover filter contrast-[1.03] group-hover:scale-102 transition-transform duration-300" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80'" />
-            <div class="absolute top-3 left-3 flex items-center gap-1.5">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[var(--surface-color)]/90 border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
-                ${escapeHtml(p.category || 'General')}
-              </span>
+          <!-- Header Bar: Category & Blueprint Toggle Switch -->
+          <div class="px-4 py-2 border-b border-[var(--border-color)] bg-[var(--surface-color)] flex items-center justify-between text-xs font-mono">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-[var(--accent)]">#${numFormatted}</span>
+              <span class="text-[var(--border-color)]">/</span>
+              <span class="text-[var(--text-muted)] text-[11px] uppercase">${escapeHtml(p.category || 'General')}</span>
             </div>
-            <div class="absolute top-3 right-3">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--surface-color)]/90 border border-[var(--border-color)] text-[var(--text-muted)]">
-                #${numFormatted}
+
+            <!-- Toggle View Switch (Blueprint vs Cover Art) -->
+            <div class="inline-flex items-center p-0.5 rounded border border-[var(--border-color)] bg-[var(--surface-muted)] text-[10px]">
+              <button type="button" class="view-toggle-btn active-view px-2 py-0.5 rounded font-medium bg-[var(--surface-color)] text-[var(--text-main)] shadow-sm" data-view="schematic">
+                Schematic
+              </button>
+              <button type="button" class="view-toggle-btn px-2 py-0.5 rounded font-medium text-[var(--text-muted)] hover:text-[var(--text-main)]" data-view="cover">
+                Cover
+              </button>
+            </div>
+          </div>
+
+          <!-- Graphic Viewport: Displays Schematic OR Cover Art -->
+          <div class="viewport-schematic block">
+            ${schematicHtml}
+          </div>
+
+          <div class="viewport-cover hidden relative h-52 bg-[var(--surface-muted)] overflow-hidden border-b border-[var(--border-color)]">
+            <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(p.title)}" loading="lazy" class="w-full h-full object-cover filter contrast-[1.03] group-hover:scale-102 transition-transform duration-300" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80'" />
+            <div class="absolute bottom-3 left-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-black/60 backdrop-blur-sm text-white border border-white/20">
+                ${escapeHtml(p.category || 'Build')}
               </span>
             </div>
           </div>
@@ -727,6 +1184,10 @@
             <p class="text-xs text-[var(--text-muted)] leading-relaxed line-clamp-3">
               ${escapeHtml(p.description)}
             </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              ${(p.tags || []).map(t => `<span class="px-2 py-0.5 rounded text-[10px] font-mono border border-[var(--border-color)] bg-[var(--surface-muted)] text-[var(--text-muted)]">${escapeHtml(t)}</span>`).join('')}
+            </div>
           </div>
         </div>
 
@@ -737,15 +1198,125 @@
             <span>Details</span>
           </button>
 
-          <a href="${escapeHtml(p.link || '#')}" target="_blank" rel="noopener noreferrer" class="font-mono text-[11px] text-[var(--text-main)] hover:underline flex items-center gap-1">
-            <span>View Project</span>
+          <a href="${escapeHtml(p.link || '#')}" target="_blank" rel="noopener noreferrer" class="font-mono text-[11px] text-[var(--text-main)] hover:underline flex items-center gap-1 font-medium">
+            <span>View Code</span>
             <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
       `;
 
+      // Wire View Toggle (Schematic vs Cover)
+      const toggleBtns = card.querySelectorAll('.view-toggle-btn');
+      const schematicView = card.querySelector('.viewport-schematic');
+      const coverView = card.querySelector('.viewport-cover');
+
+      toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          toggleBtns.forEach(b => {
+            b.classList.remove('bg-[var(--surface-color)]', 'text-[var(--text-main)]', 'shadow-sm');
+            b.classList.add('text-[var(--text-muted)]');
+          });
+          btn.classList.add('bg-[var(--surface-color)]', 'text-[var(--text-main)]', 'shadow-sm');
+          btn.classList.remove('text-[var(--text-muted)]');
+
+          const view = btn.getAttribute('data-view');
+          if (view === 'schematic') {
+            schematicView.classList.remove('hidden');
+            coverView.classList.add('hidden');
+          } else {
+            schematicView.classList.add('hidden');
+            coverView.classList.remove('hidden');
+          }
+          if (window.lucide) lucide.createIcons();
+        });
+      });
+
+      // Wire interactive features inside schematics
+      if (p.id === 'proj-1') {
+        const chimeBtn = card.querySelector('.btn-test-chime');
+        const statusSpan = card.querySelector('.soundbox-status');
+        const bars = card.querySelectorAll('.soundwave-bar');
+        chimeBtn.addEventListener('click', () => {
+          playPayBellAlert();
+          statusSpan.textContent = 'UPI ₹500 received! Voice alert played.';
+          bars.forEach(b => {
+            b.style.height = `${Math.floor(Math.random() * 40 + 20)}px`;
+          });
+          setTimeout(() => {
+            statusSpan.textContent = 'Tap to trigger synthesized UPI chime:';
+            bars.forEach((b, i) => {
+              b.style.height = [16, 32, 48, 24, 56, 36, 16, 44][i % 8] + 'px';
+            });
+          }, 3500);
+        });
+      } else if (p.id === 'proj-2') {
+        const genBtn = card.querySelector('.btn-gen-key');
+        const keyDisplay = card.querySelector('.keygen-display');
+        genBtn.addEventListener('click', () => {
+          keyDisplay.textContent = generateEnigmaKey();
+        });
+      } else if (p.id === 'proj-3') {
+        const qBtns = card.querySelectorAll('.cbt-q-btn');
+        qBtns.forEach(q => {
+          q.addEventListener('click', () => {
+            if (q.classList.contains('bg-emerald-600')) {
+              q.className = 'cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-purple-600 text-white';
+            } else if (q.classList.contains('bg-purple-600')) {
+              q.className = 'cbt-q-btn p-1 text-[10px] rounded text-center font-bold border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)]';
+            } else {
+              q.className = 'cbt-q-btn p-1 text-[10px] rounded text-center font-bold bg-emerald-600 text-white';
+            }
+          });
+        });
+      } else if (p.id === 'proj-4') {
+        const input = card.querySelector('.inknote-test-input');
+        const tokenPreview = card.querySelector('.inknote-token-preview');
+        input.addEventListener('input', (e) => {
+          const val = e.target.value;
+          const words = val.trim().split(/\s+/).filter(Boolean).length;
+          tokenPreview.innerHTML = `<span>Tokens: [ ${words} words &bull; ${val.length} chars ]</span><span class="text-[var(--accent)]">Sync: OK</span>`;
+        });
+      }
+
       card.querySelector('.btn-view-details').addEventListener('click', () => openProjectModal(p));
       return card;
+    }
+
+    // Web Audio API Synthesizer for PayBell Soundbox Chime
+    function playPayBellAlert() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        if (ctx.state === 'suspended') ctx.resume();
+
+        // Dual harmonic chime (523.25 Hz C5 -> 659.25 Hz E5 -> 783.99 Hz G5)
+        const notes = [523.25, 659.25, 783.99];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.11);
+
+          gain.gain.setValueAtTime(0, ctx.currentTime + idx * 0.11);
+          gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + idx * 0.11 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.11 + 0.45);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + idx * 0.11);
+          osc.stop(ctx.currentTime + idx * 0.11 + 0.5);
+        });
+      } catch (e) {
+        console.warn('Audio note:', e);
+      }
+    }
+
+    // Enigma KeyGen algorithm
+    function generateEnigmaKey() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      const block = () => Array.from({length: 4}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+      return `ENIG-${block()}-${block()}-${block()}`;
     }
 
     function openProjectModal(p) {
@@ -753,7 +1324,7 @@
       document.getElementById('modalProjectTitle').textContent = p.title;
       document.getElementById('modalProjectCategory').textContent = p.category || 'General';
       document.getElementById('modalProjectDescription').textContent = p.description;
-      document.getElementById('modalProjectImage').src = p.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80';
+      document.getElementById('modalProjectImage').src = p.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80';
       document.getElementById('modalProjectLink').href = p.link || '#';
       document.getElementById('modalProjectDate').textContent = p.date ? `Year: ${p.date}` : '';
 
@@ -775,9 +1346,347 @@
       return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
 
+    // =========================================================================
+    // REAL-TIME PCM COMPUTATIONAL & PHYSICS CANVAS ENGINE
+    // =========================================================================
+    let canvas, ctx;
+    let animId = null;
+    let currentSimMode = 'lissajous';
+    let simRunning = true;
+    let phase = 0;
+    let lastTime = performance.now();
+    let frameCount = 0;
+    let fps = 60;
+    let mouse = { x: null, y: null, active: false };
+
+    const simConfig = {
+      ratioA: 3,
+      ratioB: 2,
+      speed: 1.0,
+      trail: 0.15
+    };
+
+    function initPhysicsCanvas() {
+      canvas = document.getElementById('physicsCanvas');
+      if (!canvas) return;
+      ctx = canvas.getContext('2d');
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      // Mouse & touch handlers for interactive perturbation
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+        mouse.active = true;
+      });
+      canvas.addEventListener('mouseleave', () => {
+        mouse.active = false;
+      });
+
+      // Simulation mode group buttons
+      const modeBtns = document.querySelectorAll('.sim-mode-btn');
+      modeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          modeBtns.forEach(b => {
+            b.classList.remove('bg-[var(--text-main)]', 'text-[var(--bg-color)]');
+            b.classList.add('text-[var(--text-muted)]');
+          });
+          btn.classList.add('bg-[var(--text-main)]', 'text-[var(--bg-color)]');
+          btn.classList.remove('text-[var(--text-muted)]');
+
+          currentSimMode = btn.getAttribute('data-sim');
+          updateSimTelemetry();
+        });
+      });
+
+      // Controls
+      const ratioSlider = document.getElementById('ratioSlider');
+      const ratioLabel = document.getElementById('ratioLabel');
+      ratioSlider.addEventListener('input', (e) => {
+        simConfig.ratioA = parseInt(e.target.value, 10);
+        ratioLabel.textContent = `${simConfig.ratioA} : ${simConfig.ratioB}`;
+        updateSimTelemetry();
+      });
+
+      const speedSlider = document.getElementById('speedSlider');
+      const speedLabel = document.getElementById('speedLabel');
+      speedSlider.addEventListener('input', (e) => {
+        simConfig.speed = parseFloat(e.target.value);
+        speedLabel.textContent = `${simConfig.speed.toFixed(1)}x`;
+      });
+
+      const trailSlider = document.getElementById('trailSlider');
+      const trailLabel = document.getElementById('trailLabel');
+      trailSlider.addEventListener('input', (e) => {
+        simConfig.trail = parseFloat(e.target.value);
+        trailLabel.textContent = simConfig.trail < 0.1 ? 'High (Crisp)' : (simConfig.trail > 0.25 ? 'Low (Fade)' : 'Medium');
+      });
+
+      const pauseBtn = document.getElementById('simPauseBtn');
+      pauseBtn.addEventListener('click', () => {
+        simRunning = !simRunning;
+        pauseBtn.textContent = simRunning ? 'Pause' : 'Resume';
+      });
+
+      updateSimTelemetry();
+      requestAnimationFrame(renderPhysicsLoop);
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+
+    function updateSimTelemetry() {
+      const title = document.getElementById('canvasSimTitle');
+      const formula = document.getElementById('canvasSimFormula');
+      if (currentSimMode === 'lissajous') {
+        title.textContent = 'Lissajous Resonance Knot';
+        formula.textContent = `x = A·sin(${simConfig.ratioA}t + δ), y = B·sin(${simConfig.ratioB}t)`;
+      } else if (currentSimMode === 'standing-wave') {
+        title.textContent = 'Harmonic Standing Wave Superposition';
+        formula.textContent = `ψ(x,t) = 2A·sin(kx)·cos(ωt)`;
+      } else if (currentSimMode === 'gravity-field') {
+        title.textContent = 'Orbital Gravitational Vector Field';
+        formula.textContent = `F = -G·(M·m / r²)·r̂`;
+      }
+    }
+
+    function renderPhysicsLoop(timestamp) {
+      // Calculate FPS
+      frameCount++;
+      if (timestamp - lastTime >= 1000) {
+        fps = frameCount;
+        frameCount = 0;
+        lastTime = timestamp;
+        const fpsEl = document.getElementById('simFps');
+        if (fpsEl) fpsEl.textContent = fps;
+      }
+
+      if (simRunning) {
+        phase += 0.015 * simConfig.speed;
+        const phaseReadout = document.getElementById('simPhaseReadout');
+        if (phaseReadout) phaseReadout.textContent = (phase % (Math.PI * 2)).toFixed(2) + ' rad';
+      }
+
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      // Dark vs light theme colors
+      const isDark = document.documentElement.classList.contains('dark');
+      const bgColor = isDark ? `rgba(18, 18, 17, ${simConfig.trail})` : `rgba(251, 250, 248, ${simConfig.trail})`;
+      const gridColor = isDark ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.04)';
+      const accentColor = isDark ? '#ea580c' : '#c2410c';
+      const secondaryColor = isDark ? '#38bdf8' : '#0284c7';
+      const textColor = isDark ? '#a8a29e' : '#78716c';
+
+      // Clear with trail
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, w, h);
+
+      // Coordinate grid lines
+      ctx.strokeStyle = gridColor;
+      ctx.lineWidth = 1;
+      const step = 40;
+      for (let x = 0; x < w; x += step) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+      for (let y = 0; y < h; y += step) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Draw active simulation
+      if (currentSimMode === 'lissajous') {
+        renderLissajous(w, h, accentColor, secondaryColor);
+      } else if (currentSimMode === 'standing-wave') {
+        renderStandingWaves(w, h, accentColor, secondaryColor, isDark);
+      } else if (currentSimMode === 'gravity-field') {
+        renderGravityField(w, h, accentColor, secondaryColor, isDark);
+      }
+
+      animId = requestAnimationFrame(renderPhysicsLoop);
+    }
+
+    // 1. Lissajous Resonance Knot
+    function renderLissajous(w, h, accentColor, secondaryColor) {
+      const cx = w / 2;
+      const cy = h / 2;
+      const radiusX = Math.min(w, h) * 0.38;
+      const radiusY = Math.min(w, h) * 0.34;
+      const a = simConfig.ratioA;
+      const b = simConfig.ratioB;
+
+      let delta = phase;
+      if (mouse.active && mouse.x) {
+        delta += (mouse.x - cx) * 0.005;
+      }
+
+      // Primary harmonic path
+      ctx.beginPath();
+      ctx.lineWidth = 2.2;
+      ctx.strokeStyle = accentColor;
+      for (let t = 0; t <= Math.PI * 2 + 0.05; t += 0.015) {
+        const x = cx + radiusX * Math.sin(a * t + delta);
+        const y = cy + radiusY * Math.sin(b * t);
+        if (t === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Ghost secondary phase reflection
+      ctx.beginPath();
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = secondaryColor;
+      for (let t = 0; t <= Math.PI * 2 + 0.05; t += 0.03) {
+        const x = cx + radiusX * 0.75 * Math.sin(a * t + delta * 0.5);
+        const y = cy + radiusY * 0.75 * Math.sin(b * t);
+        if (t === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Current particle head
+      const headX = cx + radiusX * Math.sin(a * phase + delta);
+      const headY = cy + radiusY * Math.sin(b * phase);
+      ctx.fillStyle = accentColor;
+      ctx.beginPath();
+      ctx.arc(headX, headY, 5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 2. Standing Wave Superposition
+    function renderStandingWaves(w, h, accentColor, secondaryColor, isDark) {
+      const cy = h / 2;
+      const amplitude = Math.min(h * 0.3, 70);
+      const nodes = simConfig.ratioA + 2;
+      const k = (Math.PI * nodes) / w;
+
+      // Equilibrium center line
+      ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.15)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(20, cy);
+      ctx.lineTo(w - 20, cy);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Envelope curves (+A, -A)
+      ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)';
+      ctx.beginPath();
+      for (let x = 20; x <= w - 20; x += 4) {
+        const env = Math.abs(2 * amplitude * Math.sin(k * (x - 20)));
+        if (x === 20) ctx.moveTo(x, cy - env);
+        else ctx.lineTo(x, cy - env);
+      }
+      ctx.stroke();
+
+      ctx.beginPath();
+      for (let x = 20; x <= w - 20; x += 4) {
+        const env = Math.abs(2 * amplitude * Math.sin(k * (x - 20)));
+        if (x === 20) ctx.moveTo(x, cy + env);
+        else ctx.lineTo(x, cy + env);
+      }
+      ctx.stroke();
+
+      // Active standing wave
+      ctx.lineWidth = 2.4;
+      ctx.strokeStyle = accentColor;
+      ctx.beginPath();
+      for (let x = 20; x <= w - 20; x += 3) {
+        const y = cy + 2 * amplitude * Math.sin(k * (x - 20)) * Math.cos(phase * 2);
+        if (x === 20) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Draw node dots
+      for (let n = 0; n <= nodes; n++) {
+        const nodeX = 20 + (n * (w - 40)) / nodes;
+        ctx.fillStyle = secondaryColor;
+        ctx.beginPath();
+        ctx.arc(nodeX, cy, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // 3. Orbital Gravitational Vector Field
+    let orbitParticles = [];
+    function initOrbitParticles(w, h) {
+      orbitParticles = [];
+      for (let i = 0; i < 35; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * Math.min(w, h) * 0.4 + 30;
+        orbitParticles.push({
+          angle,
+          dist,
+          speed: (Math.random() * 0.02 + 0.01) * (Math.random() > 0.5 ? 1 : -1),
+          size: Math.random() * 2 + 1.5
+        });
+      }
+    }
+
+    function renderGravityField(w, h, accentColor, secondaryColor, isDark) {
+      const cx = mouse.active ? mouse.x : w / 2;
+      const cy = mouse.active ? mouse.y : h / 2;
+
+      if (!orbitParticles.length) initOrbitParticles(w, h);
+
+      // Central gravitational attractor
+      ctx.fillStyle = accentColor;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = isDark ? 'rgba(234, 88, 12, 0.25)' : 'rgba(194, 65, 12, 0.25)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Orbiting test masses
+      orbitParticles.forEach(p => {
+        p.angle += p.speed * simConfig.speed;
+        const px = cx + p.dist * Math.cos(p.angle);
+        const py = cy + p.dist * 0.65 * Math.sin(p.angle); // Elliptical Keplerian orbit
+
+        ctx.fillStyle = secondaryColor;
+        ctx.beginPath();
+        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Vector velocity tick
+        const vx = -Math.sin(p.angle) * 7;
+        const vy = Math.cos(p.angle) * 5;
+        ctx.strokeStyle = isDark ? 'rgba(56, 189, 248, 0.4)' : 'rgba(2, 132, 199, 0.4)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px + vx, py + vy);
+        ctx.stroke();
+      });
+    }
+
+    // =========================================================================
+    // DOM READY & EVENT ATTACHMENTS
+    // =========================================================================
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('currentYear').textContent = new Date().getFullYear();
       loadData();
+      initPhysicsCanvas();
 
       // Modal Handlers
       document.getElementById('closeModalBtn').addEventListener('click', () => {
@@ -802,14 +1711,14 @@
         renderProjects();
       });
 
-      // Theme Switcher (Editorial Light & Ink Modes)
+      // Theme Switcher
       const themeBtn = document.getElementById('themeToggleBtn');
       themeBtn.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark');
         if (window.lucide) lucide.createIcons();
       });
 
-      // Contact Form: Dual Delivery to Supabase and Local Admin Panel
+      // Contact Form: Dispatch to Local Admin Server, LocalStorage, and Supabase
       const contactForm = document.getElementById('contactForm');
       const statusDiv = document.getElementById('contactStatus');
       const submitBtn = document.getElementById('contactSubmitBtn');
