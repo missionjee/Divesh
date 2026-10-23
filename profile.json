@@ -1,9 +1,9 @@
 {
   "name": "Divesh Kumar",
   "handle": "missionjee",
-  "tagline": "AI-Assisted Builder • High School Developer • JEE Aspirant",
-  "status": "Class 11th (PCM) • Learning, Problem Solving & Building Tools with AI",
-  "bio": "I am a Class 11th PCM student preparing for IIT-JEE. I pair foundational curiosity with state-of-the-art AI models to architect and ship practical software tools, Android utilities, and interactive web projects.",
+  "tagline": "Student, builder, and problem solver in Class 11th (PCM)",
+  "status": "Class 11th (PCM) • Preparing for IIT-JEE",
+  "bio": "I am a high school student in Class 11th studying Physics, Chemistry, and Mathematics. Alongside academic problem solving, I build practical software tools and Android utilities using modern AI models as collaborative partners.",
   "email": "diveshsah2@gmail.com",
   "github": "https://github.com/missionjee",
   "location": "India",
@@ -18,13 +18,5 @@
       "status": "Completed",
       "year": "2025–26"
     }
-  ],
-  "skills": [
-    { "name": "AI-Assisted Development", "desc": "Using LLMs and Autonomous Agents to build software", "level": "Active Workflow" },
-    { "name": "Prompt Engineering & Logic", "desc": "Translating real-world problems into precise system prompts", "level": "Core Skill" },
-    { "name": "Rapid Prototyping", "desc": "Turning ideas into functional web & mobile tools quickly", "level": "Active Workflow" },
-    { "name": "HTML5 & Tailwind CSS", "desc": "Crafting clean, responsive user interfaces", "level": "Practical" },
-    { "name": "JavaScript Fundamentals", "desc": "Core logic, DOM manipulation, APIs & LocalStorage", "level": "Practical" },
-    { "name": "Linux & Git Workflows", "desc": "Terminal commands, version control & open-source tools", "level": "Everyday Tool" }
   ]
 }

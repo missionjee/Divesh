@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Divesh Kumar — AI-Assisted Builder &amp; High School Developer</title>
-  <meta name="description" content="Personal portfolio of Divesh Kumar (@missionjee) — Class 11th PCM student, AI-assisted software builder, and IIT-JEE aspirant." />
-  
+  <title>Divesh Kumar — Personal Website &amp; Catalog</title>
+  <meta name="description" content="Personal website of Divesh Kumar (@missionjee) — Class 11th PCM student, builder, and problem solver." />
+
   <!-- Favicon -->
   <link rel="icon" href="assets/avatar.png" type="image/png" />
 
@@ -13,15 +13,13 @@
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
-  <!-- Three.js for 3D Experience -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- Supabase JS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Editorial Serif + Clean Sans + Minimalist Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -29,18 +27,26 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-            display: ['"Space Grotesk"', 'sans-serif'],
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace']
           },
           colors: {
-            brand: {
-              cyan: '#06b6d4',
-              violet: '#8b5cf6',
-              emerald: '#10b981',
-              dark: '#060a14',
-              card: 'rgba(15, 23, 42, 0.72)',
-              border: 'rgba(255, 255, 255, 0.08)'
+            paper: {
+              DEFAULT: '#fbfaf8',
+              surface: '#ffffff',
+              muted: '#f4f1ea',
+              border: '#e7e2d9',
+              dark: '#141312',
+              darkSurface: '#1c1b18',
+              darkMuted: '#262421',
+              darkBorder: '#383531'
+            },
+            terracotta: {
+              DEFAULT: '#c2410c',
+              hover: '#9a3412',
+              soft: '#fff7ed',
+              darkSoft: '#2d1810'
             }
           }
         }
@@ -50,566 +56,435 @@
 
   <style>
     :root {
-      --bg-surface: #060913;
-      --card-bg: rgba(15, 23, 42, 0.75);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-color: #fbfaf8;
+      --surface-color: #ffffff;
+      --surface-muted: #f4f1ea;
+      --border-color: #e7e2d9;
+      --border-subtle: #eeeae2;
+      --text-main: #1c1917;
+      --text-muted: #78716c;
+      --text-light: #a8a29e;
+      --accent: #c2410c;
     }
 
-    html.light {
-      --bg-surface: #f8fafc;
-      --card-bg: rgba(255, 255, 255, 0.88);
-      --card-border: rgba(148, 163, 184, 0.25);
-      --text-main: #0f172a;
-      --text-muted: #64748b;
+    html.dark {
+      --bg-color: #141312;
+      --surface-color: #1c1b18;
+      --surface-muted: #262421;
+      --border-color: #383531;
+      --border-subtle: #2d2a26;
+      --text-main: #f5f2eb;
+      --text-muted: #a8a29e;
+      --text-light: #78716c;
+      --accent: #ea580c;
     }
 
     body {
-      background-color: var(--bg-surface);
+      background-color: var(--bg-color);
       color: var(--text-main);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* 3D Background Canvas */
-    #threeJsCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.65;
+    .font-serif-headline {
+      font-family: 'Instrument Serif', Georgia, serif;
     }
 
-    .ambient-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      pointer-events: none;
-      z-index: 0;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.15) 0%, transparent 45%),
-        radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.16) 0%, transparent 50%),
-        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.09) 0%, transparent 45%);
+    .editorial-border {
+      border: 1px solid var(--border-color);
     }
 
-    .glass-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45);
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
-      transform-style: preserve-3d;
-      will-change: transform;
+    .editorial-border-bottom {
+      border-bottom: 1px solid var(--border-color);
     }
 
-    .glass-card:hover {
-      border-color: rgba(6, 182, 212, 0.45);
-      box-shadow: 0 20px 45px -12px rgba(6, 182, 212, 0.25);
+    .editorial-border-top {
+      border-top: 1px solid var(--border-color);
     }
 
-    .text-gradient {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .editorial-card {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .accent-gradient-btn {
-      background: linear-gradient(135deg, #06b6d4 0%, #7c3aed 100%);
-      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.35);
-      transition: all 0.25s ease;
-    }
-    .accent-gradient-btn:hover {
-      box-shadow: 0 8px 28px rgba(124, 58, 237, 0.5);
+    .editorial-card:hover {
+      border-color: var(--text-main);
       transform: translateY(-2px);
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.08);
     }
 
-    .cyber-grid {
-      background-size: 40px 40px;
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    html.dark .editorial-card:hover {
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.4);
     }
 
-    @keyframes floatAnimation {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(1deg); }
+    .btn-editorial {
+      background-color: var(--text-main);
+      color: var(--bg-color);
+      transition: opacity 0.2s ease, transform 0.15s ease;
     }
-    .float-slow {
-      animation: floatAnimation 6s ease-in-out infinite;
+    .btn-editorial:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      background-color: var(--surface-color);
+      transition: all 0.2s ease;
+    }
+    .btn-outline:hover {
+      border-color: var(--text-main);
+      background-color: var(--surface-muted);
     }
   </style>
 </head>
-<body class="cyber-grid relative min-h-screen flex flex-col antialiased">
-  <!-- 3D Canvas element in background -->
-  <canvas id="threeJsCanvas"></canvas>
-  <div class="ambient-glow"></div>
+<body class="min-h-screen flex flex-col selection:bg-stone-200 selection:text-stone-900 dark:selection:bg-stone-800 dark:selection:text-stone-100">
 
-  <!-- ==================== HEADER ==================== -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/75 dark:bg-slate-950/80 border-b border-white/10 transition-colors">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      <a href="#hero" class="flex items-center gap-3 group focus:outline-none">
-        <div class="w-10 h-10 rounded-xl accent-gradient-btn flex items-center justify-center font-display font-extrabold text-white text-base shadow-lg group-hover:scale-105 transition-transform">
-          DK
+  <!-- ==================== HEADER / MASTHEAD ==================== -->
+  <header class="sticky top-0 z-40 bg-[var(--bg-color)]/95 backdrop-blur-sm editorial-border-bottom transition-colors">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 h-18 py-4 flex items-center justify-between">
+      
+      <!-- Monogram & Identity -->
+      <a href="#top" class="flex items-center gap-3.5 group focus:outline-none">
+        <div class="w-9 h-9 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] flex items-center justify-center font-serif-headline text-xl text-[var(--text-main)] group-hover:border-[var(--text-main)] transition-colors">
+          D
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-display font-bold text-base tracking-tight text-white group-hover:text-cyan-400 transition-colors" id="headerName">Divesh Kumar</span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30" id="headerHandle">@missionjee</span>
-          </div>
-          <p class="text-[11px] text-slate-400 hidden sm:block">AI-Assisted Builder • Class 11th</p>
+          <span class="font-serif-headline text-2xl tracking-tight text-[var(--text-main)] block leading-none" id="headerName">Divesh Kumar</span>
+          <span class="text-[11px] font-mono text-[var(--text-muted)] tracking-wider uppercase mt-1 block">Class 11th • India</span>
         </div>
       </a>
 
-      <nav class="hidden md:flex items-center gap-1 bg-slate-900/60 p-1.5 rounded-2xl border border-white/10 text-xs font-medium">
-        <a href="#about" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all">About</a>
-        <a href="#journey" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all">Milestones</a>
-        <a href="#projects" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5">
+      <!-- Clean Typographic Navigation -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-medium tracking-wide">
+        <a href="#about" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">About</a>
+        <a href="#milestones" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">Milestones</a>
+        <a href="#projects" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors flex items-center gap-1.5">
           <span>Projects</span>
-          <span id="navProjectCountBadge" class="px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-mono">0</span>
+          <span id="navCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded border border-[var(--border-color)] text-[var(--text-muted)]">0</span>
         </a>
-        <a href="#skills" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all">How I Build</a>
-        <a href="#contact" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all">Contact</a>
+        <a href="#how-i-work" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">Method</a>
+        <a href="#contact" class="text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors">Contact</a>
       </nav>
 
-      <div class="flex items-center gap-2.5">
-        <button type="button" id="themeToggleBtn" class="p-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-300 hover:text-white transition-all" title="Toggle Theme">
-          <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-300"></i>
-          <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-cyan-400"></i>
+      <!-- Right Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Minimalist Theme Switcher -->
+        <button type="button" id="themeToggleBtn" class="p-2 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--text-main)] transition-all" title="Toggle Mode">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
         </button>
 
-        <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-300 hover:text-white transition-all flex items-center gap-1.5" title="GitHub Profile">
-          <i data-lucide="github" class="w-4 h-4"></i>
-          <span class="text-xs font-mono hidden sm:inline">missionjee</span>
+        <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-xs font-mono text-[var(--text-main)] hover:border-[var(--text-main)] transition-all">
+          <i data-lucide="github" class="w-3.5 h-3.5 text-[var(--text-muted)]"></i>
+          <span>@missionjee</span>
         </a>
-
-        <button type="button" id="mobileMenuBtn" class="p-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-300 md:hidden transition-all">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
       </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-slate-950/95 border-b border-white/10">
-      <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10">About Me</a>
-      <a href="#journey" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10">Milestones</a>
-      <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10 flex items-center justify-between">
-        <span>Projects Showcase</span>
-        <span id="mobileProjectCountBadge" class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-mono">0</span>
-      </a>
-      <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10">How I Build</a>
-      <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10">Contact</a>
     </div>
   </header>
 
-  <!-- ==================== MAIN ==================== -->
-  <main class="relative z-10 flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16 sm:space-y-24">
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-5 sm:px-8 py-12 sm:py-16 space-y-20">
 
-    <!-- HERO SECTION WITH 3D PARTICLES -->
-    <section id="hero" class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <!-- HERO SECTION: EDITORIAL LETTER -->
+    <section id="top" class="space-y-8 pt-4">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        <div class="lg:col-span-8 space-y-6">
-          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 font-medium">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span id="heroStatusText">Class 11th (PCM) • Learning, Problem Solving &amp; Building Tools with AI</span>
+        <!-- Left: Typographic Introduction -->
+        <div class="md:col-span-8 space-y-6">
+          <div class="inline-flex items-center gap-2 text-xs font-mono tracking-wider text-[var(--text-muted)] uppercase">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+            <span>Academic Track • Class 11th PCM (IIT-JEE)</span>
           </div>
 
-          <div class="space-y-3">
-            <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Hi, I'm <span class="text-gradient" id="heroName">Divesh Kumar</span>
-            </h1>
-            <p class="font-mono text-cyan-400 text-sm sm:text-base tracking-wide flex items-center gap-2" id="heroTagline">
-              <span class="text-slate-500">&gt;</span> AI-Assisted Builder • High School Developer • JEE Aspirant
-            </p>
-          </div>
+          <h1 class="font-serif-headline text-4xl sm:text-6xl text-[var(--text-main)] leading-[1.08] tracking-tight">
+            Curious student, analytical thinker, and independent software toolmaker.
+          </h1>
 
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl" id="heroBio">
-            I am a Class 11th PCM student preparing for IIT-JEE. Rather than memorizing code, I pair strong curiosity and problem-solving with advanced AI models to architect, iterate, and ship practical software tools and Android utilities.
+          <p class="text-sm sm:text-base text-[var(--text-muted)] leading-relaxed max-w-2xl" id="heroBio">
+            I am Divesh Kumar, currently studying in Class 11th with Physics, Chemistry, and Mathematics. 
+            I look at computing not as a theoretical novelty, but as a practical workbench — building functional Android utilities, web tools, and systems alongside my daily academic preparation.
           </p>
 
-          <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a href="#projects" class="accent-gradient-btn px-6 py-3 rounded-xl text-white font-semibold text-sm flex items-center gap-2 shadow-lg">
-              <i data-lucide="layout-grid" class="w-4 h-4"></i>
-              <span>Explore My Projects</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <div class="flex flex-wrap items-center gap-3 pt-2 text-xs font-medium">
+            <a href="#projects" class="btn-editorial px-5 py-2.5 rounded-md flex items-center gap-2">
+              <span>View Projects Catalog</span>
+              <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
             </a>
 
-            <a href="#contact" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/10 text-slate-200 text-sm font-semibold flex items-center gap-2 transition-all">
-              <i data-lucide="send" class="w-4 h-4 text-cyan-400"></i>
-              <span>Send Message</span>
+            <a href="#contact" class="btn-outline px-4 py-2.5 rounded-md flex items-center gap-2">
+              <i data-lucide="mail" class="w-3.5 h-3.5 text-[var(--text-muted)]"></i>
+              <span>Get in Touch</span>
             </a>
 
-            <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 text-sm font-mono flex items-center gap-2 transition-all">
-              <i data-lucide="github" class="w-4 h-4 text-violet-400"></i>
+            <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="btn-outline px-4 py-2.5 rounded-md font-mono flex items-center gap-2">
+              <i data-lucide="external-link" class="w-3 h-3 text-[var(--text-muted)]"></i>
               <span>GitHub</span>
             </a>
           </div>
         </div>
 
-        <div class="lg:col-span-4 flex flex-col items-center">
-          <div class="relative group float-slow">
-            <div class="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-600 rounded-3xl blur opacity-50 group-hover:opacity-85 transition duration-500"></div>
-            
-            <div class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl overflow-hidden bg-slate-950 border border-white/20 shadow-2xl flex items-center justify-center p-2">
-              <img id="avatarImage" src="assets/avatar.png" onerror="this.src='https://images.unsplash.com/photo-1534972195531-a756b1126f24?auto=format&fit=crop&w=400&q=80'" alt="Divesh Kumar" class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500" />
+        <!-- Right: Real Portrait with Human Tactile Styling -->
+        <div class="md:col-span-4 flex flex-col items-start md:items-end">
+          <div class="p-2 bg-[var(--surface-color)] editorial-border rounded-lg shadow-sm">
+            <div class="w-48 h-48 sm:w-56 sm:h-56 rounded overflow-hidden bg-[var(--surface-muted)]">
+              <img src="assets/avatar.png" alt="Divesh Kumar" class="w-full h-full object-cover filter contrast-[1.02]" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'" />
+            </div>
+            <div class="mt-2.5 px-1 flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
+              <span>DIVESH KUMAR</span>
+              <span>EST. 2026</span>
             </div>
           </div>
-
-          <div class="mt-4 text-center space-y-1">
-            <span class="text-xs font-mono text-cyan-400 font-semibold flex items-center justify-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Dynamic 3D Interactive Canvas
-            </span>
-            <p class="text-[11px] text-slate-400">Move your mouse to interact with the 3D space</p>
-          </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="space-y-6">
-      <div class="flex items-center gap-3">
-        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-          <i data-lucide="user-check" class="w-5 h-5"></i>
+      </div>
+
+      <!-- Understated Editorial Metrics -->
+      <div class="editorial-border-top pt-6 grid grid-cols-2 sm:grid-cols-4 gap-6 text-xs">
+        <div>
+          <span class="font-mono text-[11px] text-[var(--text-light)] uppercase block">Curriculum</span>
+          <span class="font-medium text-[var(--text-main)] mt-0.5 block">Class 11th (PCM)</span>
         </div>
         <div>
-          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">About Me</h2>
-          <p class="text-xs sm:text-sm text-slate-400">Balancing competitive high school academics with modern AI tool building</p>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="md:col-span-2 glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-          <h3 class="font-display text-lg font-bold text-white">How I Think &amp; Build</h3>
-          <p class="text-slate-300 text-sm leading-relaxed" id="aboutBioText">
-            I am a Class 11th student with Physics, Chemistry, and Mathematics preparing for competitive entrance examinations (JEE). 
-            Instead of spending years memorizing complex language syntax, I understand the foundational concepts and use cutting-edge AI models (Gemini, Claude, GPT) as my coding co-pilots.
-          </p>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            This modern approach allows me to go straight from an idea to a working product — whether it's an Android background notification soundbox for UPI transactions, security tools, or exam preparation utilities.
-          </p>
-
-          <div class="pt-2 flex flex-wrap gap-2 text-xs">
-            <span class="px-3 py-1 rounded-xl bg-slate-900 border border-cyan-500/30 text-cyan-300 font-mono">⚡ Rapid Prototyping</span>
-            <span class="px-3 py-1 rounded-xl bg-slate-900 border border-violet-500/30 text-violet-300 font-mono">🤖 AI-First Engineering</span>
-            <span class="px-3 py-1 rounded-xl bg-slate-900 border border-emerald-500/30 text-emerald-300 font-mono">📐 Analytical Logic</span>
-          </div>
-        </div>
-
-        <div class="glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between pb-3 border-b border-white/10">
-              <span class="font-mono text-xs text-cyan-400 font-semibold">PROFILE SUMMARY</span>
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-violet-500/20 text-violet-300">Active</span>
-            </div>
-            <div class="divide-y divide-white/5 text-xs">
-              <div class="py-2.5 flex justify-between items-center">
-                <span class="text-slate-400">Name</span>
-                <span class="text-white font-semibold" id="specName">Divesh Kumar</span>
-              </div>
-              <div class="py-2.5 flex justify-between items-center">
-                <span class="text-slate-400">Academic Level</span>
-                <span class="text-emerald-400 font-medium">Class 11th (PCM)</span>
-              </div>
-              <div class="py-2.5 flex justify-between items-center">
-                <span class="text-slate-400">GitHub</span>
-                <span class="font-mono text-cyan-300">@missionjee</span>
-              </div>
-              <div class="py-2.5 flex justify-between items-center">
-                <span class="text-slate-400">Database</span>
-                <span class="text-violet-300 font-mono text-[11px]">Supabase Connected</span>
-              </div>
-            </div>
-          </div>
-
-          <a href="#contact" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all">
-            <i data-lucide="send" class="w-3.5 h-3.5 text-cyan-400"></i>
-            <span>Send Direct Message</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- JOURNEY & MILESTONES (STRICTLY REQUESTED DETAILS) -->
-    <section id="journey" class="space-y-6">
-      <div class="flex items-center gap-3">
-        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-          <i data-lucide="milestone" class="w-5 h-5"></i>
+          <span class="font-mono text-[11px] text-[var(--text-light)] uppercase block">Preparation</span>
+          <span class="font-medium text-[var(--text-main)] mt-0.5 block">IIT-JEE Examination</span>
         </div>
         <div>
-          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Journey &amp; Milestones</h2>
-          <p class="text-xs sm:text-sm text-slate-400">Academic progress &amp; current focus</p>
+          <span class="font-mono text-[11px] text-[var(--text-light)] uppercase block">Building Style</span>
+          <span class="font-medium text-[var(--text-main)] mt-0.5 block">Applied AI &amp; Prototyping</span>
         </div>
-      </div>
-
-      <div class="glass-card rounded-2xl p-6 sm:p-8">
-        <div class="relative border-l-2 border-cyan-500/40 pl-6 sm:pl-8 space-y-8">
-          
-          <!-- Milestone 1: Current 11th PCM -->
-          <div class="relative group">
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-4 h-4 rounded-full bg-cyan-400 ring-4 ring-slate-950 animate-pulse"></div>
-            <div class="space-y-1">
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Currently Studying</span>
-              <h3 class="font-display text-base sm:text-lg font-bold text-white">Class 11th (PCM)</h3>
-              <p class="text-xs text-slate-300">Physics, Chemistry, and Mathematics</p>
-            </div>
-          </div>
-
-          <!-- Milestone 2: Class 10th CBSE 2025-26 -->
-          <div class="relative group">
-            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-4 h-4 rounded-full bg-violet-400 ring-4 ring-slate-950"></div>
-            <div class="space-y-1">
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-violet-500/20 text-violet-300 border border-violet-500/30">Year 2025–26</span>
-              <h3 class="font-display text-base sm:text-lg font-bold text-white">Class 10th (CBSE)</h3>
-              <p class="text-xs text-slate-300">Completed Secondary School Education (CBSE Board)</p>
-            </div>
-          </div>
-
+        <div>
+          <span class="font-mono text-[11px] text-[var(--text-light)] uppercase block">Code Status</span>
+          <span class="font-medium text-[var(--text-main)] mt-0.5 block">Open Source Public</span>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS SHOWCASE (DYNAMICALLY LOADED & DYNAMIC CATEGORIES) -->
-    <section id="projects" class="space-y-6 scroll-mt-24">
+    <!-- SECTION: ACADEMIC MILESTONES (STRICTLY REQUESTED DETAILS) -->
+    <section id="milestones" class="space-y-6 pt-4 editorial-border-top">
+      <div class="flex items-baseline justify-between">
+        <div>
+          <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Academic Ledger</span>
+          <h2 class="font-serif-headline text-3xl sm:text-4xl text-[var(--text-main)] mt-1">Journey &amp; Milestones</h2>
+        </div>
+        <span class="text-xs font-mono text-[var(--text-light)] hidden sm:block">CBSE Record</span>
+      </div>
+
+      <!-- Ledger Table -->
+      <div class="editorial-border rounded-lg overflow-hidden bg-[var(--surface-color)] divide-y divide-[var(--border-color)]">
+        
+        <!-- Milestone 1: 11th PCM -->
+        <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2.5">
+              <span class="font-mono text-xs font-semibold text-[var(--accent)]">01</span>
+              <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">Class 11th (PCM)</h3>
+              <span class="px-2 py-0.5 text-[10px] font-mono border border-[var(--border-color)] rounded text-[var(--text-muted)] bg-[var(--surface-muted)]">Current</span>
+            </div>
+            <p class="text-xs text-[var(--text-muted)] pl-6">Focusing on Physics, Chemistry, and Mathematics for IIT-JEE.</p>
+          </div>
+          <span class="font-mono text-xs text-[var(--text-light)] pl-6 sm:pl-0">Currently Studying</span>
+        </div>
+
+        <!-- Milestone 2: 10th CBSE -->
+        <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2.5">
+              <span class="font-mono text-xs font-semibold text-[var(--text-muted)]">02</span>
+              <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">Class 10th (CBSE)</h3>
+              <span class="px-2 py-0.5 text-[10px] font-mono border border-[var(--border-color)] rounded text-[var(--text-muted)] bg-[var(--surface-muted)]">Completed</span>
+            </div>
+            <p class="text-xs text-[var(--text-muted)] pl-6">Completed Secondary School Examination under the Central Board of Secondary Education.</p>
+          </div>
+          <span class="font-mono text-xs text-[var(--text-light)] pl-6 sm:pl-0">Year 2025–26</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: PROJECTS CATALOG (DYNAMICALLY EXTRACTED CATEGORIES) -->
+    <section id="projects" class="space-y-6 pt-4 editorial-border-top">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div class="space-y-1">
-          <div class="flex items-center gap-2">
-            <span class="p-2 rounded-xl bg-violet-500/10 border border-violet-500/30 text-violet-400">
-              <i data-lucide="folder-git-2" class="w-5 h-5"></i>
-            </span>
-            <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Featured Projects</h2>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-400">Interactive directory of tools, apps, and platforms built with code &amp; AI</p>
+        <div>
+          <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Index &amp; Archive</span>
+          <h2 class="font-serif-headline text-3xl sm:text-4xl text-[var(--text-main)] mt-1">Projects &amp; Utilities</h2>
+          <p class="text-xs text-[var(--text-muted)] mt-1">Tools built to solve practical needs, explore systems, and support daily workflows.</p>
         </div>
 
+        <!-- Search Bar -->
         <div class="relative w-full sm:w-64">
-          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-          <input type="text" id="projectSearchInput" placeholder="Search projects or tags..." class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors" />
+          <i data-lucide="search" class="w-3.5 h-3.5 text-[var(--text-light)] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          <input type="text" id="projectSearchInput" placeholder="Filter by keyword..." class="w-full pl-8 pr-3 py-1.5 rounded-md border border-[var(--border-color)] bg-[var(--surface-color)] text-xs text-[var(--text-main)] placeholder-[var(--text-light)] focus:outline-none focus:border-[var(--text-main)] transition-colors" />
         </div>
       </div>
 
-      <!-- DYNAMIC CATEGORY FILTER PILLS (Not hardcoded in HTML!) -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="categoryFilterContainer"></div>
+      <!-- DYNAMIC CATEGORY FILTER TABS (ZERO hardcoding in code!) -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none" id="categoryFilterContainer"></div>
 
-      <!-- PROJECTS GRID WITH 3D CARD HOVER TILT -->
-      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <!-- PROJECTS CATALOG GRID -->
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
 
       <!-- Empty State -->
-      <div id="emptyProjectsState" class="hidden glass-card rounded-2xl p-12 text-center space-y-3">
-        <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-slate-400">
-          <i data-lucide="inbox" class="w-6 h-6"></i>
-        </div>
-        <h3 class="font-display text-base font-bold text-white">No projects found</h3>
-        <p class="text-xs text-slate-400 max-w-sm mx-auto">No projects matched your selected filter or search term.</p>
-        <button type="button" id="resetProjectFilterBtn" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-xs text-white font-medium transition-all">Clear Filters</button>
+      <div id="emptyProjectsState" class="hidden p-10 editorial-border rounded-lg text-center space-y-2 bg-[var(--surface-color)]">
+        <p class="font-serif-headline text-xl text-[var(--text-main)]">No matching projects found</p>
+        <p class="text-xs text-[var(--text-muted)]">Try selecting another category or clearing your search term.</p>
+        <button type="button" id="resetProjectFilterBtn" class="mt-2 text-xs font-mono text-[var(--accent)] hover:underline">Reset filters</button>
       </div>
     </section>
 
-    <!-- HOW I BUILD & SKILLS (HONEST, EMPOWERING & AI-FIRST) -->
-    <section id="skills" class="space-y-6">
-      <div class="flex items-center gap-3">
-        <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-          <i data-lucide="sparkles" class="w-5 h-5"></i>
-        </div>
-        <div>
-          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Skills &amp; How I Build</h2>
-          <p class="text-xs sm:text-sm text-slate-400">Authentic toolkit: Foundation knowledge + AI model leverage</p>
-        </div>
+    <!-- SECTION: HOW I WORK (HONEST HUMAN METHODOLOGY) -->
+    <section id="how-i-work" class="space-y-6 pt-4 editorial-border-top">
+      <div class="max-w-2xl space-y-3">
+        <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Philosophy &amp; Method</span>
+        <h2 class="font-serif-headline text-3xl sm:text-4xl text-[var(--text-main)]">How I Build As a High School Student</h2>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         
-        <div class="glass-card rounded-2xl p-6 space-y-3 border-t-2 border-t-cyan-400">
-          <div class="flex items-center gap-2.5">
-            <div class="p-2 rounded-lg bg-cyan-500/15 text-cyan-300"><i data-lucide="bot" class="w-5 h-5"></i></div>
-            <h3 class="font-display text-sm font-bold text-white">AI-Assisted Engineering</h3>
+        <div class="editorial-card rounded-lg p-6 space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono text-[var(--text-light)]">
+            <span>01</span>
+            <span>APPROACH</span>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Proficient in using modern AI agent workflows (Gemini, Claude, GPT) to design architecture, write robust implementations, and rapidly debug issues.
+          <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">Logic First, AI as Co-pilot</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            I don't pretend to have years of legacy language mastery. Instead, I understand logical problem structures and collaborate with AI models to architect and write clean code.
           </p>
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-cyan-300 border border-white/5">Prompt Design</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-cyan-300 border border-white/5">Agentic Coding</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-cyan-300 border border-white/5">AI Debugging</span>
-          </div>
         </div>
 
-        <div class="glass-card rounded-2xl p-6 space-y-3 border-t-2 border-t-violet-400">
-          <div class="flex items-center gap-2.5">
-            <div class="p-2 rounded-lg bg-violet-500/15 text-violet-300"><i data-lucide="layout" class="w-5 h-5"></i></div>
-            <h3 class="font-display text-sm font-bold text-white">Applied Web Fundamentals</h3>
+        <div class="editorial-card rounded-lg p-6 space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono text-[var(--text-light)]">
+            <span>02</span>
+            <span>OBJECTIVE</span>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Practical knowledge of semantic HTML5, modern Tailwind CSS, and vanilla JavaScript for DOM manipulation, responsive layouts, and local storage state.
+          <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">Building What Works</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Every build solves a genuine need — from an Android UPI soundbox to local-first markdown notes and examination simulators. Function comes before vanity.
           </p>
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-violet-300 border border-white/5">HTML5 / CSS3</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-violet-300 border border-white/5">Tailwind CSS</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-violet-300 border border-white/5">JavaScript APIs</span>
-          </div>
         </div>
 
-        <div class="glass-card rounded-2xl p-6 space-y-3 border-t-2 border-t-emerald-400">
-          <div class="flex items-center gap-2.5">
-            <div class="p-2 rounded-lg bg-emerald-500/15 text-emerald-300"><i data-lucide="terminal" class="w-5 h-5"></i></div>
-            <h3 class="font-display text-sm font-bold text-white">Tools &amp; Environment</h3>
+        <div class="editorial-card rounded-lg p-6 space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono text-[var(--text-light)]">
+            <span>03</span>
+            <span>FOUNDATIONS</span>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Comfortable in Linux environments, terminal shell scripts, Git version control, Supabase cloud databases, and rapid tool deployment.
+          <h3 class="font-serif-headline text-2xl text-[var(--text-main)]">PCM &amp; Academic Focus</h3>
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            My primary priority remains Class 11th Physics, Chemistry, and Mathematics for JEE. Coding reinforces the mathematical and analytical clarity needed for competitive problem solving.
           </p>
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-emerald-300 border border-white/5">Git &amp; GitHub</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-emerald-300 border border-white/5">Linux CLI</span>
-            <span class="px-2 py-0.5 rounded bg-white/5 text-[10px] font-mono text-emerald-300 border border-white/5">Supabase</span>
-          </div>
         </div>
 
       </div>
     </section>
 
-    <!-- CONTACT SECTION WITH SUPABASE & ADMIN PANEL INTEGRATION -->
-    <section id="contact" class="space-y-6">
-      <div class="flex items-center gap-3">
-        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
-          <i data-lucide="message-square" class="w-5 h-5"></i>
-        </div>
-        <div>
-          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Let's Connect</h2>
-          <p class="text-xs sm:text-sm text-slate-400">Messages sent here directly reach Divesh's Admin Panel and Supabase Cloud database</p>
-        </div>
-      </div>
+    <!-- SECTION: CORRESPONDENCE / CONTACT (CONNECTED TO SUPABASE & ADMIN) -->
+    <section id="contact" class="space-y-6 pt-4 editorial-border-top">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Correspondence Memo -->
+        <div class="md:col-span-5 space-y-5">
+          <div>
+            <span class="font-mono text-[11px] text-[var(--accent)] uppercase tracking-wider block">Correspondence</span>
+            <h2 class="font-serif-headline text-3xl sm:text-4xl text-[var(--text-main)] mt-1">Get in Touch</h2>
+          </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div class="lg:col-span-5 glass-card rounded-2xl p-6 sm:p-8 space-y-6 flex flex-col justify-between">
-          <div class="space-y-5">
-            <h3 class="font-display text-lg font-bold text-white">Contact Information</h3>
-            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Whether you want to discuss high school PCM studies, software tools, or collaborate on open-source ideas, leave a message below.
-            </p>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+            Feel free to reach out with questions regarding projects, high school studies, or collaboration. Messages sent here are delivered directly to my private admin panel and cloud database.
+          </p>
 
-            <div class="space-y-3.5 text-xs">
-              <a href="mailto:diveshsah2@gmail.com" class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-white/5 hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all group">
-                <div class="p-2 rounded-lg bg-cyan-500/15 text-cyan-300 group-hover:scale-110 transition-transform">
-                  <i data-lucide="mail" class="w-4 h-4"></i>
-                </div>
-                <div>
-                  <span class="text-[10px] text-slate-400 block font-mono">EMAIL ME AT</span>
-                  <span class="font-medium text-white" id="contactEmail">diveshsah2@gmail.com</span>
-                </div>
-              </a>
-
-              <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-white/5 hover:border-violet-500/40 text-slate-300 hover:text-white transition-all group">
-                <div class="p-2 rounded-lg bg-violet-500/15 text-violet-300 group-hover:scale-110 transition-transform">
-                  <i data-lucide="github" class="w-4 h-4"></i>
-                </div>
-                <div>
-                  <span class="text-[10px] text-slate-400 block font-mono">GITHUB REPOSITORIES</span>
-                  <span class="font-medium text-white">github.com/missionjee</span>
-                </div>
-              </a>
-
-              <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-white/5 text-slate-300">
-                <div class="p-2 rounded-lg bg-emerald-500/15 text-emerald-300">
-                  <i data-lucide="database" class="w-4 h-4"></i>
-                </div>
-                <div>
-                  <span class="text-[10px] text-slate-400 block font-mono">CLOUD BACKEND</span>
-                  <span class="font-medium text-white">Supabase Enabled</span>
-                </div>
+          <div class="space-y-3 pt-2 text-xs">
+            <div class="editorial-border rounded-md p-3 bg-[var(--surface-color)] flex items-center justify-between">
+              <div>
+                <span class="font-mono text-[10px] text-[var(--text-light)] block uppercase">Direct Email</span>
+                <a href="mailto:diveshsah2@gmail.com" class="font-medium text-[var(--text-main)] hover:underline" id="contactEmail">diveshsah2@gmail.com</a>
               </div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-[var(--text-light)]"></i>
+            </div>
+
+            <div class="editorial-border rounded-md p-3 bg-[var(--surface-color)] flex items-center justify-between">
+              <div>
+                <span class="font-mono text-[10px] text-[var(--text-light)] block uppercase">GitHub Repositories</span>
+                <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="font-medium text-[var(--text-main)] font-mono hover:underline">github.com/missionjee</a>
+              </div>
+              <i data-lucide="external-link" class="w-4 h-4 text-[var(--text-light)]"></i>
             </div>
           </div>
-
-          <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-400">
-            <span>Status:</span>
-            <span class="text-emerald-400 font-medium flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Receiving Messages Live
-            </span>
-          </div>
         </div>
 
-        <!-- Interactive Contact Form with Dual-Delivery -->
-        <div class="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 space-y-4">
-          <div class="flex items-center justify-between">
-            <h3 class="font-display text-lg font-bold text-white">Send Direct Message</h3>
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Admin &amp; Supabase Synced</span>
+        <!-- Right: Dispatch Form -->
+        <div class="md:col-span-7 editorial-border rounded-lg p-6 sm:p-8 bg-[var(--surface-color)] space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-[var(--border-color)]">
+            <span class="font-mono text-xs text-[var(--text-main)] font-semibold">WRITE A MESSAGE</span>
+            <span class="text-[10px] font-mono text-[var(--text-light)]">DIRECT DISPATCH</span>
           </div>
-          <p class="text-xs text-slate-400">Your message is securely recorded into Divesh's Admin Panel Inbox.</p>
 
-          <form id="contactForm" class="space-y-4">
+          <form id="contactForm" class="space-y-4 text-xs">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="space-y-1.5">
-                <label class="block text-xs font-medium text-slate-300">Your Name *</label>
-                <input type="text" id="senderName" required placeholder="Alex Morgan" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors" />
+              <div class="space-y-1">
+                <label class="block font-medium text-[var(--text-main)]">Your Name *</label>
+                <input type="text" id="senderName" required placeholder="Name" class="w-full px-3 py-2 rounded border border-[var(--border-color)] bg-[var(--bg-color)] text-[var(--text-main)] focus:outline-none focus:border-[var(--text-main)] transition-colors" />
               </div>
-              <div class="space-y-1.5">
-                <label class="block text-xs font-medium text-slate-300">Your Email *</label>
-                <input type="email" id="senderEmail" required placeholder="alex@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors" />
+              <div class="space-y-1">
+                <label class="block font-medium text-[var(--text-main)]">Your Email *</label>
+                <input type="email" id="senderEmail" required placeholder="email@domain.com" class="w-full px-3 py-2 rounded border border-[var(--border-color)] bg-[var(--bg-color)] text-[var(--text-main)] focus:outline-none focus:border-[var(--text-main)] transition-colors" />
               </div>
             </div>
 
-            <div class="space-y-1.5">
-              <label class="block text-xs font-medium text-slate-300">Subject</label>
-              <input type="text" id="senderSubject" placeholder="Project inquiry / Greetings" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors" />
+            <div class="space-y-1">
+              <label class="block font-medium text-[var(--text-main)]">Subject</label>
+              <input type="text" id="senderSubject" placeholder="Regarding..." class="w-full px-3 py-2 rounded border border-[var(--border-color)] bg-[var(--bg-color)] text-[var(--text-main)] focus:outline-none focus:border-[var(--text-main)] transition-colors" />
             </div>
 
-            <div class="space-y-1.5">
-              <label class="block text-xs font-medium text-slate-300">Message *</label>
-              <textarea id="senderMessage" rows="4" required placeholder="Type your message here..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors resize-none"></textarea>
+            <div class="space-y-1">
+              <label class="block font-medium text-[var(--text-main)]">Message *</label>
+              <textarea id="senderMessage" rows="4" required placeholder="Write your note..." class="w-full px-3 py-2 rounded border border-[var(--border-color)] bg-[var(--bg-color)] text-[var(--text-main)] focus:outline-none focus:border-[var(--text-main)] transition-colors resize-none"></textarea>
             </div>
 
-            <!-- Status Alert -->
-            <div id="contactFormStatus" class="hidden p-3 rounded-xl text-xs font-medium"></div>
+            <div id="contactStatus" class="hidden p-3 rounded text-xs"></div>
 
-            <button type="submit" id="contactSubmitBtn" class="accent-gradient-btn w-full sm:w-auto px-6 py-2.5 rounded-xl text-white text-xs font-semibold flex items-center justify-center gap-2">
+            <button type="submit" id="contactSubmitBtn" class="btn-editorial px-5 py-2.5 rounded font-medium text-xs flex items-center gap-2">
+              <span>Send Note</span>
               <i data-lucide="send" class="w-3.5 h-3.5"></i>
-              <span>Send Message</span>
             </button>
           </form>
         </div>
+
       </div>
     </section>
 
   </main>
 
   <!-- ==================== PROJECT DETAILS MODAL ==================== -->
-  <div id="projectModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-    <div class="glass-card w-full max-w-2xl rounded-3xl overflow-hidden border border-white/15 max-h-[90vh] flex flex-col">
-      <div class="relative h-56 sm:h-64 bg-slate-900 shrink-0 overflow-hidden">
+  <div id="projectModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="editorial-card w-full max-w-xl rounded-lg overflow-hidden max-h-[90vh] flex flex-col bg-[var(--surface-color)]">
+      <div class="relative h-52 sm:h-60 bg-[var(--surface-muted)] shrink-0 overflow-hidden">
         <img id="modalProjectImage" src="" alt="" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
-        <button type="button" id="closeModalBtn" class="absolute top-4 right-4 p-2 rounded-full bg-slate-950/70 hover:bg-slate-900 border border-white/20 text-white transition-all">
+        <button type="button" id="closeModalBtn" class="absolute top-3 right-3 p-1.5 rounded-full bg-black/60 hover:bg-black text-white transition-all">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
-        <div class="absolute bottom-4 left-6 right-6">
-          <span id="modalProjectCategory" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Category</span>
-          <h3 id="modalProjectTitle" class="font-display text-2xl font-bold text-white mt-1">Project Title</h3>
-        </div>
       </div>
 
-      <div class="p-6 space-y-4 overflow-y-auto">
-        <p id="modalProjectDescription" class="text-sm text-slate-300 leading-relaxed"></p>
-        
-        <div class="space-y-2">
-          <span class="text-xs font-mono text-slate-400 uppercase">Tags &amp; Stack</span>
+      <div class="p-6 space-y-4 overflow-y-auto flex-1">
+        <div>
+          <span id="modalProjectCategory" class="text-[10px] font-mono tracking-wider uppercase text-[var(--accent)] font-semibold">Category</span>
+          <h3 id="modalProjectTitle" class="font-serif-headline text-3xl text-[var(--text-main)] mt-1">Project Title</h3>
+        </div>
+
+        <p id="modalProjectDescription" class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed"></p>
+
+        <div class="space-y-1.5 pt-2">
+          <span class="text-[10px] font-mono uppercase text-[var(--text-light)]">Stack &amp; Tags</span>
           <div id="modalProjectTags" class="flex flex-wrap gap-1.5"></div>
         </div>
 
-        <div class="pt-4 border-t border-white/10 flex items-center justify-between">
-          <span id="modalProjectDate" class="text-xs font-mono text-slate-400">Date: 2026</span>
-          <a id="modalProjectLink" href="#" target="_blank" rel="noopener noreferrer" class="accent-gradient-btn px-5 py-2.5 rounded-xl text-white text-xs font-semibold flex items-center gap-1.5">
-            <span>Visit Project / Code</span>
-            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        <div class="pt-4 border-t border-[var(--border-color)] flex items-center justify-between">
+          <span id="modalProjectDate" class="text-xs font-mono text-[var(--text-light)]"></span>
+          <a id="modalProjectLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-editorial px-4 py-2 rounded text-xs font-medium flex items-center gap-1.5">
+            <span>Open Source / Live</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
       </div>
@@ -617,148 +492,25 @@
   </div>
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="relative z-10 border-t border-white/10 bg-slate-950/80 mt-16 py-8">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+  <footer class="editorial-border-top py-8 mt-16 bg-[var(--surface-muted)] text-xs text-[var(--text-muted)]">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2">
-        <div class="w-6 h-6 rounded-lg accent-gradient-btn flex items-center justify-center font-display font-bold text-[10px] text-white">DK</div>
-        <span>&copy; <span id="currentYear"></span> <strong class="text-white">Divesh Kumar</strong> (<span class="font-mono text-cyan-400">@missionjee</span>). All rights reserved.</span>
+        <span class="font-serif-headline text-lg text-[var(--text-main)]">Divesh Kumar</span>
+        <span>&bull;</span>
+        <span class="font-mono text-[11px]">&copy; <span id="currentYear"></span> All rights reserved.</span>
       </div>
 
-      <div class="flex items-center gap-4">
-        <a href="#hero" class="hover:text-white transition-colors flex items-center gap-1">
+      <div class="flex items-center gap-5 font-mono text-[11px]">
+        <a href="#top" class="hover:text-[var(--text-main)] transition-colors flex items-center gap-1">
           <span>Back to Top</span>
-          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+          <i data-lucide="arrow-up" class="w-3 h-3"></i>
         </a>
       </div>
     </div>
   </footer>
 
-  <!-- ==================== SCRIPTS: 3D ENGINE & DYNAMIC DATA ==================== -->
+  <!-- ==================== SCRIPTS: DYNAMIC ENGINE ==================== -->
   <script>
-    // ==================== 1. THREE.JS 3D BACKGROUND ENGINE ====================
-    let scene, camera, renderer, particlesMesh, wireframeMesh;
-    let mouseX = 0, mouseY = 0;
-    let targetX = 0, targetY = 0;
-    const windowHalfX = window.innerWidth / 2;
-    const windowHalfY = window.innerHeight / 2;
-
-    function initThreeJs() {
-      const canvas = document.getElementById('threeJsCanvas');
-      scene = new THREE.Scene();
-
-      camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 2000);
-      camera.position.z = 800;
-
-      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      // 3D Particles Field
-      const particleCount = 280;
-      const geometry = new THREE.BufferGeometry();
-      const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-
-      const color1 = new THREE.Color(0x06b6d4); // Cyan
-      const color2 = new THREE.Color(0x8b5cf6); // Violet
-
-      for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 1600;
-        positions[i + 1] = (Math.random() - 0.5) * 1600;
-        positions[i + 2] = (Math.random() - 0.5) * 1200;
-
-        const mixedColor = color1.clone().lerp(color2, Math.random());
-        colors[i] = mixedColor.r;
-        colors[i + 1] = mixedColor.g;
-        colors[i + 2] = mixedColor.b;
-      }
-
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-      const particleMaterial = new THREE.PointsMaterial({
-        size: 4,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.75,
-        blending: THREE.AdditiveBlending
-      });
-
-      particlesMesh = new THREE.Points(geometry, particleMaterial);
-      scene.add(particlesMesh);
-
-      // 3D Wireframe Icosahedron Geometry
-      const icosaGeometry = new THREE.IcosahedronGeometry(120, 1);
-      const icosaMaterial = new THREE.MeshBasicMaterial({
-        color: 0x06b6d4,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.18
-      });
-      wireframeMesh = new THREE.Mesh(icosaGeometry, icosaMaterial);
-      wireframeMesh.position.set(280, 50, 0);
-      scene.add(wireframeMesh);
-
-      document.addEventListener('mousemove', onDocumentMouseMove);
-      window.addEventListener('resize', onWindowResize);
-
-      animateThreeJs();
-    }
-
-    function onDocumentMouseMove(event) {
-      mouseX = (event.clientX - windowHalfX) * 0.4;
-      mouseY = (event.clientY - windowHalfY) * 0.4;
-    }
-
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    function animateThreeJs() {
-      requestAnimationFrame(animateThreeJs);
-
-      targetX = mouseX * 0.001;
-      targetY = mouseY * 0.001;
-
-      if (particlesMesh) {
-        particlesMesh.rotation.y += 0.001;
-        particlesMesh.rotation.x += 0.0005;
-        particlesMesh.rotation.y += (targetX - particlesMesh.rotation.y) * 0.03;
-        particlesMesh.rotation.x += (targetY - particlesMesh.rotation.x) * 0.03;
-      }
-
-      if (wireframeMesh) {
-        wireframeMesh.rotation.x += 0.004;
-        wireframeMesh.rotation.y += 0.006;
-      }
-
-      renderer.render(scene, camera);
-    }
-
-    // ==================== 2. DYNAMIC CARD 3D TILT EFFECT ====================
-    function initCardTilt() {
-      const cards = document.querySelectorAll('.tilt-card');
-      cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -8;
-          const rotateY = ((x - centerX) / centerX) * 8;
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
-        });
-      });
-    }
-
-    // ==================== 3. DATA & SUPABASE ENGINE ====================
     const SUPABASE_URL = "https://ukoxijpkxmdckamcmczz.supabase.co";
     let supabaseClient = null;
     let projectsData = [];
@@ -770,9 +522,9 @@
       {
         id: "proj-1",
         title: "PayBell Soundbox Utility",
-        category: "Android Apps",
-        description: "Smart Android background listener that transforms any smartphone into an instant voice-alert soundbox for real-time UPI and banking transaction announcements.",
-        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80",
+        category: "Android Utilities",
+        description: "Background listener app for Android that announces incoming UPI transaction payments through vocal synthesis.",
+        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
         link: "https://github.com/missionjee",
         tags: ["Android", "Kotlin", "Accessibility API", "TTS"],
         featured: true,
@@ -782,8 +534,8 @@
         id: "proj-2",
         title: "Enigma KeyGen & Security Console",
         category: "Web Security",
-        description: "High-throughput cryptographic license key generator and web security console featuring custom entropy algorithms, tier validation, and batch CSV export.",
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80",
+        description: "Cryptographic license generation console with entropy calculations, tier verification, and batch CSV export.",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
         link: "https://github.com/missionjee",
         tags: ["JavaScript", "Cryptography", "Security", "Analytics"],
         featured: true,
@@ -792,35 +544,37 @@
       {
         id: "proj-3",
         title: "MissionJEE CBT Assessment Engine",
-        category: "Web Apps",
-        description: "Interactive, high-fidelity Computer-Based Test simulator calibrated to national engineering entrance exam specifications with time-trap analytics and live scoring.",
-        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=80",
+        category: "EdTech",
+        description: "Computer-Based Test simulation portal calibrated to national engineering entrance examination standards.",
+        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
         link: "https://github.com/missionjee/Divesh-",
-        tags: ["HTML5", "Tailwind CSS", "JavaScript", "EdTech"],
+        tags: ["HTML5", "Tailwind CSS", "JavaScript"],
         featured: true,
         date: "2026"
       },
       {
         id: "proj-4",
         title: "InkNote Productivity Suite",
-        category: "Productivity",
-        description: "Distraction-free markdown note-taking environment with instantaneous search, local-first storage, syntax highlighting, and clean export formatting.",
-        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=80",
+        category: "Software Tools",
+        description: "Minimalist, markdown-centric local-first notebook with instantaneous search and distraction-free workspace.",
+        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80",
         link: "https://github.com/missionjee",
-        tags: ["Local-First", "Markdown", "JavaScript", "UI/UX"],
+        tags: ["Local-First", "Markdown", "JavaScript"],
         featured: false,
         date: "2025"
       }
     ];
 
     async function loadData() {
+      // 1. Try local storage
       try {
-        const storedProjects = localStorage.getItem('divesh_projects');
-        const storedProfile = localStorage.getItem('divesh_profile');
-        if (storedProjects) projectsData = JSON.parse(storedProjects);
-        if (storedProfile) profileData = JSON.parse(storedProfile);
+        const storedP = localStorage.getItem('divesh_projects');
+        const storedProf = localStorage.getItem('divesh_profile');
+        if (storedP) projectsData = JSON.parse(storedP);
+        if (storedProf) profileData = JSON.parse(storedProf);
       } catch (e) {}
 
+      // 2. Fetch projects.json
       if (!projectsData.length) {
         try {
           const res = await fetch('projects.json');
@@ -828,6 +582,7 @@
         } catch (e) {}
       }
 
+      // 3. Fetch profile.json
       if (!profileData || !profileData.name) {
         try {
           const res = await fetch('profile.json');
@@ -840,15 +595,14 @@
         profileData = {
           name: "Divesh Kumar",
           handle: "missionjee",
-          tagline: "AI-Assisted Builder • High School Developer • JEE Aspirant",
-          status: "Class 11th (PCM) • Learning, Problem Solving & Building Tools with AI",
-          bio: "I am a Class 11th PCM student preparing for IIT-JEE. I pair foundational curiosity with state-of-the-art AI models to architect and ship practical software tools, Android utilities, and interactive web projects.",
+          tagline: "Student, builder, and problem solver in Class 11th (PCM)",
+          bio: "I am Divesh Kumar, currently studying in Class 11th with Physics, Chemistry, and Mathematics. Alongside academic problem solving, I build practical software tools and Android utilities using modern AI models as collaborative partners.",
           email: "diveshsah2@gmail.com",
           github: "https://github.com/missionjee"
         };
       }
 
-      // Try load Supabase config
+      // Initialize Supabase if configured
       try {
         const sbStored = localStorage.getItem('divesh_supabase_config');
         if (sbStored) {
@@ -869,26 +623,13 @@
       if (!profileData) return;
       if (profileData.name) {
         document.getElementById('headerName').textContent = profileData.name;
-        document.getElementById('heroName').textContent = profileData.name;
-        document.getElementById('specName').textContent = profileData.name;
-      }
-      if (profileData.handle) {
-        document.getElementById('headerHandle').textContent = '@' + profileData.handle.replace('@', '');
-      }
-      if (profileData.tagline) {
-        document.getElementById('heroTagline').innerHTML = `<span class="text-slate-500">&gt;</span> ${escapeHtml(profileData.tagline)}`;
-      }
-      if (profileData.status) {
-        document.getElementById('heroStatusText').textContent = profileData.status;
       }
       if (profileData.bio) {
         document.getElementById('heroBio').textContent = profileData.bio;
-        document.getElementById('aboutBioText').textContent = profileData.bio;
       }
       if (profileData.email) {
         document.getElementById('contactEmail').textContent = profileData.email;
-        const mLink = document.querySelector('a[href^="mailto:"]');
-        if (mLink) mLink.href = `mailto:${profileData.email}`;
+        document.getElementById('contactEmail').href = `mailto:${profileData.email}`;
       }
     }
 
@@ -906,10 +647,10 @@
       categories.forEach(cat => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
+        btn.className = `px-3 py-1 rounded text-xs font-mono transition-colors ${
           activeCategory === cat
-            ? 'accent-gradient-btn text-white border-transparent shadow-md'
-            : 'bg-slate-900/80 text-slate-400 hover:text-white border-white/10 hover:border-white/20'
+            ? 'bg-[var(--text-main)] text-[var(--bg-color)] font-medium'
+            : 'border border-[var(--border-color)] bg-[var(--surface-color)] text-[var(--text-muted)] hover:text-[var(--text-main)]'
         }`;
         btn.textContent = cat;
         btn.addEventListener('click', () => {
@@ -927,8 +668,7 @@
       grid.innerHTML = '';
 
       const count = projectsData.length;
-      document.getElementById('navProjectCountBadge').textContent = count;
-      document.getElementById('mobileProjectCountBadge').textContent = count;
+      document.getElementById('navCountBadge').textContent = count;
 
       const filtered = projectsData.filter(item => {
         const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
@@ -945,68 +685,61 @@
         emptyState.classList.remove('hidden');
       } else {
         emptyState.classList.add('hidden');
-        filtered.forEach(project => {
-          const card = createProjectCard(project);
+        filtered.forEach((project, idx) => {
+          const card = createProjectCard(project, idx + 1);
           grid.appendChild(card);
         });
       }
 
-      initCardTilt();
       if (window.lucide) lucide.createIcons();
     }
 
-    function createProjectCard(p) {
+    function createProjectCard(p, number) {
       const card = document.createElement('div');
-      card.className = 'glass-card tilt-card rounded-2xl overflow-hidden flex flex-col justify-between group';
+      card.className = 'editorial-card rounded-lg overflow-hidden flex flex-col justify-between group';
 
       const imageSrc = p.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80';
-      const tagsHtml = (p.tags || []).slice(0, 3).map(tag => 
-        `<span class="px-2 py-0.5 rounded-md bg-white/5 text-[10px] font-mono text-slate-300 border border-white/5">${escapeHtml(tag)}</span>`
-      ).join('');
+      const numFormatted = String(number).padStart(2, '0');
 
       card.innerHTML = `
         <div>
-          <div class="relative h-44 overflow-hidden bg-slate-900">
-            <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(p.title)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80'" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-            
-            <div class="absolute top-3 left-3">
-              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                ${escapeHtml(p.category || 'Project')}
+          <!-- Thumbnail -->
+          <div class="relative h-48 bg-[var(--surface-muted)] overflow-hidden border-b border-[var(--border-color)]">
+            <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(p.title)}" loading="lazy" class="w-full h-full object-cover filter contrast-[1.03] group-hover:scale-102 transition-transform duration-300" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80'" />
+            <div class="absolute top-3 left-3 flex items-center gap-1.5">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-[var(--surface-color)]/90 border border-[var(--border-color)] text-[var(--text-main)] font-semibold">
+                ${escapeHtml(p.category || 'General')}
               </span>
             </div>
-
-            ${p.featured ? `
-              <div class="absolute top-3 right-3">
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1">
-                  <i data-lucide="star" class="w-3 h-3 fill-amber-300"></i> Featured
-                </span>
-              </div>
-            ` : ''}
+            <div class="absolute top-3 right-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--surface-color)]/90 border border-[var(--border-color)] text-[var(--text-muted)]">
+                #${numFormatted}
+              </span>
+            </div>
           </div>
 
-          <div class="p-5 space-y-3">
-            <h3 class="font-display text-base font-bold text-white group-hover:text-cyan-400 transition-colors line-clamp-1">
+          <!-- Body -->
+          <div class="p-5 space-y-2.5">
+            <h3 class="font-serif-headline text-2xl text-[var(--text-main)] group-hover:text-[var(--accent)] transition-colors">
               ${escapeHtml(p.title)}
             </h3>
 
-            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3">
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed line-clamp-3">
               ${escapeHtml(p.description)}
             </p>
-
-            ${tagsHtml ? `<div class="flex flex-wrap gap-1.5 pt-1">${tagsHtml}</div>` : ''}
           </div>
         </div>
 
-        <div class="p-5 pt-0 grid grid-cols-2 gap-2 mt-2">
-          <button type="button" class="btn-view-details py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <!-- Footer -->
+        <div class="p-5 pt-0 flex items-center justify-between border-t border-[var(--border-color)] mt-3 pt-3 text-xs">
+          <button type="button" class="btn-view-details text-[var(--text-muted)] hover:text-[var(--text-main)] font-medium flex items-center gap-1 transition-colors">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
             <span>Details</span>
           </button>
 
-          <a href="${escapeHtml(p.link || '#')}" target="_blank" rel="noopener noreferrer" class="py-2 rounded-xl accent-gradient-btn text-white text-xs font-semibold flex items-center justify-center gap-1.5">
-            <span>Visit / Code</span>
-            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          <a href="${escapeHtml(p.link || '#')}" target="_blank" rel="noopener noreferrer" class="font-mono text-[11px] text-[var(--text-main)] hover:underline flex items-center gap-1">
+            <span>View Project</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
       `;
@@ -1028,7 +761,7 @@
       tagsContainer.innerHTML = '';
       (p.tags || []).forEach(tag => {
         const span = document.createElement('span');
-        span.className = 'px-2.5 py-1 rounded-lg bg-white/10 text-xs font-mono text-cyan-300';
+        span.className = 'px-2 py-0.5 rounded border border-[var(--border-color)] bg-[var(--surface-muted)] text-[10px] font-mono text-[var(--text-muted)]';
         span.textContent = tag;
         tagsContainer.appendChild(span);
       });
@@ -1039,18 +772,11 @@
 
     function escapeHtml(str) {
       if (!str) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-      initThreeJs();
       loadData();
 
       // Modal Handlers
@@ -1076,36 +802,27 @@
         renderProjects();
       });
 
-      // Mobile Menu
-      const mobileBtn = document.getElementById('mobileMenuBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-      document.querySelectorAll('.mobile-nav-link').forEach(link => {
-        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-      });
-
-      // Theme Toggle
+      // Theme Switcher (Editorial Light & Ink Modes)
       const themeBtn = document.getElementById('themeToggleBtn');
       themeBtn.addEventListener('click', () => {
         document.documentElement.classList.toggle('dark');
-        document.documentElement.classList.toggle('light');
         if (window.lucide) lucide.createIcons();
       });
 
-      // ==================== DUAL-DELIVERY CONTACT SUBMISSION ====================
+      // Contact Form: Dual Delivery to Supabase and Local Admin Panel
       const contactForm = document.getElementById('contactForm');
-      const statusDiv = document.getElementById('contactFormStatus');
+      const statusDiv = document.getElementById('contactStatus');
       const submitBtn = document.getElementById('contactSubmitBtn');
 
       contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const name = document.getElementById('senderName').value.trim();
         const email = document.getElementById('senderEmail').value.trim();
-        const subject = document.getElementById('senderSubject').value.trim() || 'Website Inquiry';
+        const subject = document.getElementById('senderSubject').value.trim() || 'General Correspondence';
         const message = document.getElementById('senderMessage').value.trim();
 
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span>Sending...</span>`;
+        submitBtn.innerHTML = `<span>Dispatching...</span>`;
 
         const payload = {
           name,
@@ -1115,7 +832,7 @@
           timestamp: new Date().toLocaleString()
         };
 
-        // 1. Post to local Admin Server API (http://localhost:5050/api/messages)
+        // 1. Post to Local Admin Server
         try {
           await fetch('/api/messages', {
             method: 'POST',
@@ -1124,7 +841,7 @@
           });
         } catch (err) {}
 
-        // 2. Save in LocalStorage for cross-tab instant sync
+        // 2. LocalStorage Sync
         try {
           const localMsgs = JSON.parse(localStorage.getItem('divesh_messages') || '[]');
           payload.id = 'msg_' + Date.now();
@@ -1133,32 +850,28 @@
           localStorage.setItem('divesh_messages', JSON.stringify(localMsgs));
         } catch (err) {}
 
-        // 3. Post to Supabase if configured
+        // 3. Post to Supabase Cloud
         if (supabaseClient) {
           try {
             await supabaseClient.from('messages').insert([
               { name, email, subject, message }
             ]);
           } catch (sbErr) {
-            console.warn('Supabase insert note:', sbErr);
+            console.warn('Supabase note:', sbErr);
           }
         }
 
-        statusDiv.className = 'p-3 rounded-xl text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-2';
-        statusDiv.innerHTML = `
-          <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
-          <span>Thank you! Your message has been sent directly to Divesh's Admin Panel.</span>
-        `;
-        statusDiv.classList.remove('hidden');
+        statusDiv.className = 'p-3 rounded text-xs font-mono border border-[var(--border-color)] bg-[var(--surface-muted)] text-[var(--text-main)] block';
+        statusDiv.textContent = 'Note dispatched successfully to Divesh Kumar.';
         contactForm.reset();
 
         submitBtn.disabled = false;
-        submitBtn.innerHTML = `<i data-lucide="send" class="w-3.5 h-3.5"></i><span>Send Message</span>`;
+        submitBtn.innerHTML = `<span>Send Note</span><i data-lucide="send" class="w-3.5 h-3.5"></i>`;
         if (window.lucide) lucide.createIcons();
 
         setTimeout(() => {
           statusDiv.classList.add('hidden');
-        }, 6000);
+        }, 5000);
       });
 
       // Storage event listener for real-time updates from Admin Panel
