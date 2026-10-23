@@ -1,26 +1,30 @@
 {
   "name": "Divesh Kumar",
   "handle": "missionjee",
-  "tagline": "Student Developer • Toolmaker • Problem Solver",
-  "status": "Class 11th (PCM) • Preparing for JEE & Building Creative Software",
-  "bio": "I am a Class 11th PCM student aspiring for IIT-JEE, driven by a passion for technology, systems programming, and full-stack software development. Beyond physics formulas and calculus, I craft production-ready web apps, Android utilities, and developer tools with a relentless focus on clean code and user experience.",
+  "tagline": "AI-Assisted Builder • High School Developer • JEE Aspirant",
+  "status": "Class 11th (PCM) • Learning, Problem Solving & Building Tools with AI",
+  "bio": "I am a Class 11th PCM student preparing for IIT-JEE. I pair foundational curiosity with state-of-the-art AI models to architect and ship practical software tools, Android utilities, and interactive web projects.",
   "email": "diveshsah2@gmail.com",
   "github": "https://github.com/missionjee",
   "location": "India",
-  "stats": [
-    { "label": "Projects Completed", "value": "12+" },
-    { "label": "Code Repositories", "value": "15+" },
-    { "label": "Lines of Clean Code", "value": "50K+" },
-    { "label": "JEE Prep Focus", "value": "Class 11" }
+  "education": [
+    {
+      "title": "Class 11th (PCM)",
+      "status": "Currently Studying",
+      "focus": "Physics, Chemistry, Mathematics"
+    },
+    {
+      "title": "Class 10th (CBSE)",
+      "status": "Completed",
+      "year": "2025–26"
+    }
   ],
   "skills": [
-    { "name": "JavaScript / TypeScript", "level": 90, "category": "Languages" },
-    { "name": "Python & Scripting", "level": 85, "category": "Languages" },
-    { "name": "C / C++ (Algorithms)", "level": 80, "category": "Languages" },
-    { "name": "HTML5 & Modern CSS3", "level": 95, "category": "Frontend" },
-    { "name": "Tailwind CSS & UI Systems", "level": 92, "category": "Frontend" },
-    { "name": "Android App Development", "level": 75, "category": "Mobile" },
-    { "name": "Git & Open Source Workflow", "level": 88, "category": "Tools" },
-    { "name": "Linux & Terminal Tooling", "level": 84, "category": "Systems" }
+    { "name": "AI-Assisted Development", "desc": "Using LLMs and Autonomous Agents to build software", "level": "Active Workflow" },
+    { "name": "Prompt Engineering & Logic", "desc": "Translating real-world problems into precise system prompts", "level": "Core Skill" },
+    { "name": "Rapid Prototyping", "desc": "Turning ideas into functional web & mobile tools quickly", "level": "Active Workflow" },
+    { "name": "HTML5 & Tailwind CSS", "desc": "Crafting clean, responsive user interfaces", "level": "Practical" },
+    { "name": "JavaScript Fundamentals", "desc": "Core logic, DOM manipulation, APIs & LocalStorage", "level": "Practical" },
+    { "name": "Linux & Git Workflows", "desc": "Terminal commands, version control & open-source tools", "level": "Everyday Tool" }
   ]
 }
