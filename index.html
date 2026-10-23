@@ -1,1700 +1,1140 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Divesh Kumar — Portfolio &amp; JEE Main CBT Test Series</title>
+  <title>Divesh Kumar — Personal Website &amp; Portfolio</title>
+  <meta name="description" content="Personal portfolio and software showcase of Divesh Kumar (@missionjee) — Class 11th student developer, toolmaker, and JEE aspirant." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/avatar.png" type="image/png" />
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          colors: {
+            brand: {
+              cyan: '#06b6d4',
+              violet: '#8b5cf6',
+              emerald: '#10b981',
+              dark: '#080d1a',
+              card: 'rgba(15, 23, 42, 0.72)',
+              border: 'rgba(255, 255, 255, 0.08)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
     :root {
-      --accent: #06b6d4;
-      --accent-rgb: 6, 182, 212;
-      --accent-secondary: #8b5cf6;
-      --bg-deep: #060913;
-      --bg-card: rgba(15, 23, 42, 0.78);
+      --bg-surface: #060913;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
     }
 
-    * { box-sizing: border-box; }
+    html.light {
+      --bg-surface: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(148, 163, 184, 0.25);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+    }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-deep);
-      color: #f1f5f9;
+      background-color: var(--bg-surface);
+      color: var(--text-main);
+      transition: background-color 0.3s ease, color 0.3s ease;
       overflow-x: hidden;
     }
 
-    .font-display { font-family: 'Space Grotesk', 'Inter', sans-serif; }
-    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
-
-    .cyber-grid {
-      background-size: 40px 40px;
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    /* Ambient Background Glow */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
     }
 
     .glass-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
-      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .glass-card:hover {
       border-color: rgba(6, 182, 212, 0.4);
-      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.6), 0 0 24px rgba(6, 182, 212, 0.12);
+      box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.18);
+      transform: translateY(-2px);
     }
 
     .text-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #22d3ee 50%, #a855f7 100%);
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .accent-bg {
-      background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+    .text-gradient-emerald {
+      background: linear-gradient(135deg, #34d399 0%, #22d3ee 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* Official 5-State NTA Palette Badges */
-    .nta-btn {
-      width: 38px;
-      height: 38px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    .accent-gradient-btn {
+      background: linear-gradient(135deg, #06b6d4 0%, #7c3aed 100%);
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
+      transition: all 0.25s ease;
     }
-    .nta-btn:hover { transform: scale(1.07); }
-    .nta-current-ring {
-      outline: 2px solid #38bdf8;
-      outline-offset: 2px;
+    .accent-gradient-btn:hover {
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.45);
+      transform: translateY(-1px);
     }
 
-    /* State 0: Not Visited */
-    .nta-state-0 {
-      background: rgba(148, 163, 184, 0.15);
-      color: #cbd5e1;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      border-radius: 8px;
-    }
-    .cbt-daylight .nta-state-0 {
-      background: #e2e8f0;
-      color: #1e293b;
-      border: 1px solid #94a3b8;
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     }
 
-    /* State 1: Not Answered (Red/Orange Pentagon-style) */
-    .nta-state-1 {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: #ffffff;
-      border-radius: 10px 10px 4px 4px;
-      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+    /* Modal Animation */
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
-
-    /* State 2: Answered (Green shield-style) */
-    .nta-state-2 {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #ffffff;
-      border-radius: 4px 4px 10px 10px;
-      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+    .modal-anim {
+      animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-
-    /* State 3: Marked for Review (Purple Circle) */
-    .nta-state-3 {
-      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-      color: #ffffff;
-      border-radius: 9999px;
-      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.35);
-    }
-
-    /* State 4: Answered & Marked for Review (Purple Circle + Green Check Dot) */
-    .nta-state-4 {
-      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-      color: #ffffff;
-      border-radius: 9999px;
-      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
-    }
-    .nta-state-4::after {
-      content: '✓';
-      position: absolute;
-      bottom: -2px;
-      right: -2px;
-      width: 14px;
-      height: 14px;
-      border-radius: 9999px;
-      background: #10b981;
-      color: #052e16;
-      font-size: 9px;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1.5px solid #0f172a;
-    }
-
-    /* Daylight Mode Overrides for CBT Simulator */
-    .cbt-daylight {
-      background-color: #f8fafc !important;
-      color: #0f172a !important;
-    }
-    .cbt-daylight .cbt-panel {
-      background-color: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #0f172a !important;
-      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06) !important;
-    }
-    .cbt-daylight .cbt-subpanel {
-      background-color: #f1f5f9 !important;
-      border-color: #cbd5e1 !important;
-      color: #1e293b !important;
-    }
-    .cbt-daylight .cbt-text-main {
-      color: #0f172a !important;
-    }
-    .cbt-daylight .cbt-text-muted {
-      color: #475569 !important;
-    }
-    .cbt-daylight .cbt-option {
-      background-color: #f8fafc !important;
-      border-color: #cbd5e1 !important;
-      color: #0f172a !important;
-    }
-    .cbt-daylight .cbt-option:hover {
-      border-color: #0284c7 !important;
-      background-color: #f0f9ff !important;
-    }
-    .cbt-daylight .cbt-option-selected {
-      background-color: #e0f2fe !important;
-      border-color: #0284c7 !important;
-      color: #0369a1 !important;
-    }
-
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #060913; }
-    ::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.35); border-radius: 9999px; }
   </style>
 </head>
-<body class="cyber-grid min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-950">
+<body class="cyber-grid relative min-h-screen flex flex-col antialiased">
+  <div class="ambient-glow"></div>
 
-  <!-- Animated Particle Canvas -->
-  <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-65"></canvas>
-  <div class="fixed top-[-12%] left-[-8%] w-96 h-96 rounded-full pointer-events-none z-0 blur-[130px] opacity-20 bg-cyan-500"></div>
-  <div class="fixed bottom-[-12%] right-[-8%] w-96 h-96 rounded-full pointer-events-none z-0 blur-[130px] opacity-20 bg-violet-600"></div>
-
-  <!-- ==================== TOP NAVIGATION BAR ==================== -->
-  <header class="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/80 border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
-      <button type="button" id="brandHomeBtn" class="flex items-center gap-3 group text-left focus:outline-none">
-        <div class="w-10 h-10 rounded-xl accent-bg flex items-center justify-center font-display font-extrabold text-base text-white shadow-lg group-hover:scale-105 transition-transform">
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-slate-950/75 dark:bg-slate-950/80 border-b border-white/10 transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <!-- Brand Logo & Identity -->
+      <a href="#hero" class="flex items-center gap-3 group focus:outline-none">
+        <div class="w-10 h-10 rounded-xl accent-gradient-btn flex items-center justify-center font-display font-extrabold text-white text-base shadow-lg group-hover:scale-105 transition-transform">
           DK
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <span class="font-display font-bold text-base tracking-tight text-white">Divesh Kumar</span>
-            <span class="text-[10px] font-mono-code px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">@missionjee</span>
+            <span class="font-display font-bold text-base tracking-tight text-white group-hover:text-cyan-400 transition-colors" id="headerName">Divesh Kumar</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30" id="headerHandle">@missionjee</span>
           </div>
-          <p class="text-[11px] text-slate-400 hidden sm:block">Class 11th • Preparing for JEE</p>
+          <p class="text-[11px] text-slate-400 hidden sm:block">Personal Portfolio &amp; Projects</p>
         </div>
-      </button>
+      </a>
 
-      <!-- Clean View Switcher Pills -->
-      <div class="flex items-center gap-2">
-        <button type="button" id="navHomeBtn" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/10 text-white border border-white/15 transition-all flex items-center gap-1.5">
-          <i data-lucide="user" class="w-3.5 h-3.5 text-cyan-400"></i>
-          <span>Portfolio</span>
-        </button>
-
-        <button type="button" id="navTestSeriesBtn" class="px-4 py-2 rounded-xl text-xs font-semibold accent-bg text-white shadow-lg hover:opacity-95 transition-all flex items-center gap-1.5">
-          <i data-lucide="Flame" class="w-3.5 h-3.5"></i>
-          <span>JEE Main Test Series (30)</span>
-        </button>
-
-        <a href="https://github.com/missionjee/Divesh-" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/10 text-slate-300 hover:text-white transition-all" title="GitHub Repo">
-          <i data-lucide="github" class="w-4 h-4"></i>
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-1 bg-slate-900/60 p-1.5 rounded-2xl border border-white/10 text-xs font-medium">
+        <a href="#about" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all">About</a>
+        <a href="#projects" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5">
+          <span>Projects</span>
+          <span id="navProjectCountBadge" class="px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-300 text-[10px] font-mono">0</span>
         </a>
+        <a href="#skills" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all">Skills</a>
+        <a href="#journey" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all">Journey</a>
+        <a href="#contact" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-all">Contact</a>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="flex items-center gap-2.5">
+        <!-- Theme Toggle -->
+        <button type="button" id="themeToggleBtn" class="p-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-300 hover:text-white transition-all" title="Toggle Theme">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-300"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-cyan-400"></i>
+        </button>
+
+        <!-- GitHub Profile External Link -->
+        <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-300 hover:text-white transition-all flex items-center gap-1.5" title="GitHub Profile">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="text-xs font-mono hidden sm:inline">missionjee</span>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button type="button" id="mobileMenuBtn" class="p-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-white/10 text-slate-300 md:hidden transition-all">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
       </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-slate-950/95 border-b border-white/10">
+      <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10">About Me</a>
+      <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10 flex items-center justify-between">
+        <span>Projects Showcase</span>
+        <span id="mobileProjectCountBadge" class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-mono">0</span>
+      </a>
+      <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10">Skills &amp; Technologies</a>
+      <a href="#journey" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10">Journey &amp; Academics</a>
+      <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-white/10">Get in Touch</a>
     </div>
   </header>
 
-  <!-- ==================== VIEW 1: CLEAN COMPACT PERSONAL PORTFOLIO ==================== -->
-  <main id="portfolioView" class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14 space-y-12 flex-1 w-full">
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="relative z-10 flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16 sm:space-y-24">
 
-    <!-- Clean Hero Card (Above the Fold) -->
-    <section class="glass-card rounded-3xl p-6 sm:p-10 relative overflow-hidden">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Left 8 Cols: Crisp Intro -->
-        <div class="lg:col-span-8 space-y-5">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 font-medium">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span class="w-2 h-2 rounded-full bg-emerald-400 -ml-4"></span>
-            <span>Currently in Class 11th • Preparing for JEE</span>
+    <!-- HERO SECTION -->
+    <section id="hero" class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- Left Column: Intro -->
+        <div class="lg:col-span-8 space-y-6">
+          <!-- Active Status Pill -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300 font-medium">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span id="heroStatusText">Class 11th (PCM) • IIT-JEE Aspirant &amp; Independent Developer</span>
           </div>
 
-          <div class="space-y-2">
-            <h1 class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-              Hi, I'm <span class="text-gradient">Divesh Kumar</span>
+          <div class="space-y-3">
+            <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Hi, I'm <span class="text-gradient" id="heroName">Divesh Kumar</span>
             </h1>
-            <p class="font-mono-code text-xs sm:text-sm text-cyan-400">
-              &gt; Student Developer • Toolmaker • JEE Main &amp; Advanced Aspirant
+            <p class="font-mono text-cyan-400 text-sm sm:text-base tracking-wide flex items-center gap-2" id="heroTagline">
+              <span class="text-slate-500">&gt;</span> Student Developer • Toolmaker • Problem Solver
             </p>
           </div>
 
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-            Currently in <span class="text-white font-semibold">Class 11th (PCM)</span> preparing for <span class="text-cyan-300 font-semibold">IIT-JEE</span>. Alongside Physics, Chemistry, and Mathematics, I build practical software tools, Android utilities, cryptographic dashboards, and interactive exam-prep platforms.
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl" id="heroBio">
+            Passionate high school developer in Class 11th balancing rigorous IIT-JEE preparation (Physics, Chemistry, Maths) with engineering software systems, Android tools, cryptographic dashboards, and responsive web apps.
           </p>
 
-          <!-- Primary CTA Buttons -->
+          <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <button type="button" id="heroLaunchTestSeriesBtn" class="px-5 py-3 rounded-xl accent-bg text-white font-semibold text-sm flex items-center gap-2.5 shadow-xl hover:scale-[1.02] transition-all">
-              <i data-lucide="laptop-minimal-check" class="w-4 h-4"></i>
-              <span>Open JEE Main Test Series (30 CBT Mocks)</span>
+            <a href="#projects" class="accent-gradient-btn px-6 py-3 rounded-xl text-white font-semibold text-sm flex items-center gap-2 shadow-lg hover:scale-105 transition-transform">
+              <i data-lucide="layout-grid" class="w-4 h-4"></i>
+              <span>Explore My Projects</span>
               <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
+            </a>
 
-            <button type="button" id="quickStartMock1Btn" class="px-4 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/35 text-cyan-300 font-mono-code text-xs flex items-center gap-2 transition-all">
-              <i data-lucide="play" class="w-3.5 h-3.5"></i>
-              <span>Instant Start: Mock Test #01</span>
-            </button>
+            <a href="#contact" class="px-5 py-3 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-white/10 text-slate-200 text-sm font-semibold flex items-center gap-2 transition-all">
+              <i data-lucide="mail" class="w-4 h-4 text-cyan-400"></i>
+              <span>Let's Connect</span>
+            </a>
+
+            <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 text-sm font-mono flex items-center gap-2 transition-all">
+              <i data-lucide="github" class="w-4 h-4 text-violet-400"></i>
+              <span>GitHub</span>
+            </a>
           </div>
         </div>
 
-        <!-- Right 4 Cols: Compact Identity Card -->
-        <div class="lg:col-span-4">
-          <div class="rounded-2xl bg-slate-950/90 border border-white/10 p-5 space-y-4">
-            <div class="flex items-center justify-between border-b border-white/10 pb-3">
-              <span class="font-mono-code text-xs text-cyan-400 font-semibold">DIVESH.PROFILE</span>
-              <span class="px-2 py-0.5 rounded bg-violet-500/20 text-violet-300 font-mono-code text-[11px]">XI • JEE</span>
-            </div>
-            <div class="space-y-2.5 text-xs">
-              <div class="flex items-center justify-between py-1.5 border-b border-white/5">
-                <span class="text-slate-400">Education</span>
-                <span class="text-white font-semibold">Class 11th (PCM)</span>
-              </div>
-              <div class="flex items-center justify-between py-1.5 border-b border-white/5">
-                <span class="text-slate-400">Focus</span>
-                <span class="text-emerald-400 font-semibold">Preparing for JEE</span>
-              </div>
-              <div class="flex items-center justify-between py-1.5 border-b border-white/5">
-                <span class="text-slate-400">Test Series</span>
-                <span class="text-cyan-300 font-mono-code">30 NTA CBT Tests</span>
-              </div>
-              <div class="flex items-center justify-between py-1.5">
-                <span class="text-slate-400">GitHub</span>
-                <a href="https://github.com/missionjee/Divesh-" target="_blank" rel="noopener noreferrer" class="text-violet-300 hover:underline font-mono-code">@missionjee/Divesh-</a>
-              </div>
+        <!-- Right Column: Avatar & Quick Info Card -->
+        <div class="lg:col-span-4 flex flex-col items-center">
+          <div class="relative group">
+            <!-- Glow background -->
+            <div class="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 to-violet-600 rounded-3xl blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
+            
+            <div class="relative w-56 h-56 sm:w-64 sm:h-64 rounded-3xl overflow-hidden bg-slate-950 border border-white/15 shadow-2xl flex items-center justify-center p-2">
+              <img id="avatarImage" src="assets/avatar.png" onerror="this.src='https://images.unsplash.com/photo-1534972195531-a756b1126f24?auto=format&fit=crop&w=400&q=80'" alt="Divesh Kumar" class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
+
+          <div class="mt-4 text-center space-y-1">
+            <span class="text-xs font-mono text-cyan-400 font-semibold flex items-center justify-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span> Open Source &amp; Code Enthusiast
+            </span>
+            <p class="text-[11px] text-slate-400">Building tools that solve everyday friction</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div id="statsContainer" class="mt-8 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <!-- Dynamically injected or fallback -->
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/5 text-center">
+          <div class="font-display text-2xl font-bold text-white text-gradient">12+</div>
+          <div class="text-xs text-slate-400 mt-0.5">Projects Built</div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/5 text-center">
+          <div class="font-display text-2xl font-bold text-emerald-400">Class 11</div>
+          <div class="text-xs text-slate-400 mt-0.5">PCM • JEE Prep</div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/5 text-center">
+          <div class="font-display text-2xl font-bold text-cyan-300">50K+</div>
+          <div class="text-xs text-slate-400 mt-0.5">Lines of Code</div>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/5 text-center">
+          <div class="font-display text-2xl font-bold text-violet-400">100%</div>
+          <div class="text-xs text-slate-400 mt-0.5">Passion for Tech</div>
         </div>
       </div>
     </section>
 
-    <!-- Compact Tools & Projects Row (Clean 3-Card Layout, No Bulk) -->
-    <section class="space-y-4">
-      <div class="flex items-center justify-between">
+    <!-- ABOUT SECTION -->
+    <section id="about" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+          <i data-lucide="user-check" class="w-5 h-5"></i>
+        </div>
         <div>
-          <h2 class="font-display text-xl sm:text-2xl font-bold text-white">Tools &amp; Projects Made</h2>
-          <p class="text-xs text-slate-400">Built by Divesh — click any card for an interactive preview</p>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">About Me</h2>
+          <p class="text-xs sm:text-sm text-slate-400">The journey between competitive academics and building code</p>
         </div>
-        <span class="text-xs font-mono-code text-slate-400">3 Core Builds</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <!-- Project 1: JEE Main CBT Test Series -->
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-t-2 border-t-cyan-400">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono-code bg-cyan-500/15 text-cyan-300">NTA CBT Simulator</span>
-              <span class="text-[11px] font-mono-code text-emerald-400">30 Tests</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Main Bio Card -->
+        <div class="md:col-span-2 glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h3 class="font-display text-lg font-bold text-white flex items-center gap-2">
+            <span>Engineering Mindset, Self-Taught Developer</span>
+          </h3>
+          <p class="text-slate-300 text-sm leading-relaxed" id="aboutBioText">
+            I am Divesh Kumar, currently studying in Class 11th with Physics, Chemistry, and Mathematics. Coding is not just a hobby for me — it's an engineering workshop where I explore algorithms, user experiences, and pragmatic utilities.
+          </p>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            From crafting Android accessibility listeners that vocalize payment alerts (PayBell) to building custom cryptographic utilities and full-featured Computer-Based Test engines for exam prep, I believe in learning by constructing genuine solutions.
+          </p>
+
+          <div class="pt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-white/5">
+              <i data-lucide="book-open" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+              <div>
+                <span class="text-slate-400 block text-[10px]">Academic Track</span>
+                <span class="text-white font-medium">Class 11th PCM • JEE Main / Adv</span>
+              </div>
             </div>
-            <h3 class="font-display text-lg font-bold text-white">MissionJEE 30-Mock CBT Engine</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Full NTA JEE Main (Class 11 Syllabus) Computer-Based Test simulator with Sleep/Daylight modes, 5-state palette, Section B keypad, and time-trap analytics.
-            </p>
+            <div class="flex items-center gap-2.5 p-3 rounded-xl bg-slate-900/60 border border-white/5">
+              <i data-lucide="terminal" class="w-4 h-4 text-violet-400 shrink-0"></i>
+              <div>
+                <span class="text-slate-400 block text-[10px]">Primary Tech</span>
+                <span class="text-white font-medium">JavaScript, Python, C++, Android</span>
+              </div>
+            </div>
           </div>
-          <button type="button" id="cardOpenTestSeriesBtn" class="w-full py-2.5 rounded-xl accent-bg text-white font-semibold text-xs flex items-center justify-center gap-1.5">
-            <span>Launch 30-Test Series</span>
-            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-          </button>
         </div>
 
-        <!-- Project 2: PayBell Android APK -->
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-t-2 border-t-emerald-400">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono-code bg-emerald-500/15 text-emerald-300">Android APK</span>
-              <span class="text-[11px] font-mono-code text-slate-400">PayBell.apk</span>
+        <!-- Quick Facts / Profile Specs -->
+        <div class="glass-card rounded-2xl p-6 space-y-4 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+              <span class="font-mono text-xs text-cyan-400 font-semibold">IDENTITY &amp; SPECS</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-violet-500/20 text-violet-300">Active</span>
             </div>
-            <h3 class="font-display text-lg font-bold text-white">PayBell Soundbox Utility</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Smart Android payment notification listener that turns a phone into an instant voice-alert soundbox for incoming UPI transactions.
-            </p>
+            <div class="divide-y divide-white/5 text-xs">
+              <div class="py-2.5 flex justify-between items-center">
+                <span class="text-slate-400">Name</span>
+                <span class="text-white font-semibold" id="specName">Divesh Kumar</span>
+              </div>
+              <div class="py-2.5 flex justify-between items-center">
+                <span class="text-slate-400">Username</span>
+                <span class="font-mono text-cyan-300">@missionjee</span>
+              </div>
+              <div class="py-2.5 flex justify-between items-center">
+                <span class="text-slate-400">Focus</span>
+                <span class="text-emerald-400 font-medium">JEE Preparation + Coding</span>
+              </div>
+              <div class="py-2.5 flex justify-between items-center">
+                <span class="text-slate-400">Operating System</span>
+                <span class="text-white font-medium">Linux / Windows</span>
+              </div>
+            </div>
           </div>
-          <button type="button" data-tool-demo="paybell" class="tool-demo-btn w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs flex items-center justify-center gap-1.5">
-            <span>Test Soundbox Alert</span>
-            <i data-lucide="volume-2" class="w-3.5 h-3.5 text-emerald-400"></i>
-          </button>
-        </div>
 
-        <!-- Project 3: Enigma Admin Key Generator -->
-        <div class="glass-card rounded-2xl p-5 flex flex-col justify-between space-y-4 border-t-2 border-t-violet-400">
-          <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono-code bg-violet-500/15 text-violet-300">Web Security</span>
-              <span class="text-[11px] font-mono-code text-slate-400">keygen.html</span>
-            </div>
-            <h3 class="font-display text-lg font-bold text-white">Enigma KeyGen Console</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Cryptographic license key generator and cloud management console supporting multi-tier plans, custom formats, and batch CSV export.
-            </p>
-          </div>
-          <button type="button" data-tool-demo="enigma" class="tool-demo-btn w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs flex items-center justify-center gap-1.5">
-            <span>Generate License Keys</span>
-            <i data-lucide="key-round" class="w-3.5 h-3.5 text-violet-400"></i>
-          </button>
+          <a href="#contact" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all">
+            <i data-lucide="send" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>Send Direct Message</span>
+          </a>
         </div>
       </div>
     </section>
+
+    <!-- PROJECTS SHOWCASE (DYNAMICALLY LOADED & DYNAMIC CATEGORIES) -->
+    <section id="projects" class="space-y-6 scroll-mt-24">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="p-2 rounded-xl bg-violet-500/10 border border-violet-500/30 text-violet-400">
+              <i data-lucide="folder-git-2" class="w-5 h-5"></i>
+            </span>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Featured Projects</h2>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400">Interactive directory of tools, apps, and platforms built by Divesh</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative w-full sm:w-64">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          <input type="text" id="projectSearchInput" placeholder="Search projects or tags..." class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors" />
+        </div>
+      </div>
+
+      <!-- DYNAMIC CATEGORY FILTER PILLS (Not hardcoded in HTML!) -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="categoryFilterContainer">
+        <!-- Rendered dynamically via JavaScript: Categories are extracted dynamically from project data -->
+        <button type="button" class="px-4 py-1.5 rounded-xl text-xs font-medium bg-cyan-500 text-slate-950 font-semibold shadow-sm">All</button>
+      </div>
+
+      <!-- PROJECTS GRID -->
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Loaded dynamically from projects.json or localStorage -->
+      </div>
+
+      <!-- Empty State (Hidden by default) -->
+      <div id="emptyProjectsState" class="hidden glass-card rounded-2xl p-12 text-center space-y-3">
+        <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-slate-400">
+          <i data-lucide="inbox" class="w-6 h-6"></i>
+        </div>
+        <h3 class="font-display text-base font-bold text-white">No projects found</h3>
+        <p class="text-xs text-slate-400 max-w-sm mx-auto">No projects matched your selected filter or search term. Try resetting your search filter.</p>
+        <button type="button" id="resetProjectFilterBtn" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-xs text-white font-medium transition-all">
+          Clear Filters
+        </button>
+      </div>
+    </section>
+
+    <!-- SKILLS & TECH STACK SECTION -->
+    <section id="skills" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+          <i data-lucide="cpu" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Skills &amp; Technologies</h2>
+          <p class="text-xs sm:text-sm text-slate-400">Languages, frameworks, libraries, and developer tools</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="skillsCardContainer">
+        <!-- Skills Cards rendered dynamically or fallback -->
+        <div class="glass-card rounded-2xl p-5 space-y-4 border-t-2 border-t-cyan-400">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="code-2" class="w-5 h-5 text-cyan-400"></i>
+            <h3 class="font-display text-sm font-bold text-white">Languages</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between items-center text-slate-300">
+              <span>JavaScript (ES6+)</span>
+              <span class="font-mono text-cyan-400 text-[11px]">90%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-cyan-400 h-1.5 rounded-full" style="width: 90%"></div></div>
+
+            <div class="flex justify-between items-center text-slate-300 pt-1">
+              <span>Python</span>
+              <span class="font-mono text-cyan-400 text-[11px]">85%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-cyan-400 h-1.5 rounded-full" style="width: 85%"></div></div>
+
+            <div class="flex justify-between items-center text-slate-300 pt-1">
+              <span>C / C++</span>
+              <span class="font-mono text-cyan-400 text-[11px]">80%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-cyan-400 h-1.5 rounded-full" style="width: 80%"></div></div>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 space-y-4 border-t-2 border-t-violet-400">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="layout" class="w-5 h-5 text-violet-400"></i>
+            <h3 class="font-display text-sm font-bold text-white">Frontend &amp; UI</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between items-center text-slate-300">
+              <span>HTML5 / Modern CSS</span>
+              <span class="font-mono text-violet-400 text-[11px]">95%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-violet-400 h-1.5 rounded-full" style="width: 95%"></div></div>
+
+            <div class="flex justify-between items-center text-slate-300 pt-1">
+              <span>Tailwind CSS</span>
+              <span class="font-mono text-violet-400 text-[11px]">92%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-violet-400 h-1.5 rounded-full" style="width: 92%"></div></div>
+
+            <div class="flex justify-between items-center text-slate-300 pt-1">
+              <span>UI/UX &amp; Responsiveness</span>
+              <span class="font-mono text-violet-400 text-[11px]">88%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-violet-400 h-1.5 rounded-full" style="width: 88%"></div></div>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 space-y-4 border-t-2 border-t-emerald-400">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="smartphone" class="w-5 h-5 text-emerald-400"></i>
+            <h3 class="font-display text-sm font-bold text-white">Mobile &amp; App</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between items-center text-slate-300">
+              <span>Android Development</span>
+              <span class="font-mono text-emerald-400 text-[11px]">75%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-emerald-400 h-1.5 rounded-full" style="width: 75%"></div></div>
+
+            <div class="flex justify-between items-center text-slate-300 pt-1">
+              <span>Background Listeners</span>
+              <span class="font-mono text-emerald-400 text-[11px]">80%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-emerald-400 h-1.5 rounded-full" style="width: 80%"></div></div>
+
+            <div class="flex justify-between items-center text-slate-300 pt-1">
+              <span>TTS &amp; Sound Integration</span>
+              <span class="font-mono text-emerald-400 text-[11px]">85%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-emerald-400 h-1.5 rounded-full" style="width: 85%"></div></div>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-5 space-y-4 border-t-2 border-t-amber-400">
+          <div class="flex items-center gap-2.5">
+            <i data-lucide="git-branch" class="w-5 h-5 text-amber-400"></i>
+            <h3 class="font-display text-sm font-bold text-white">Tools &amp; Systems</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="flex justify-between items-center text-slate-300">
+              <span>Git &amp; GitHub</span>
+              <span class="font-mono text-amber-400 text-[11px]">88%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-amber-400 h-1.5 rounded-full" style="width: 88%"></div></div>
+
+            <div class="flex justify-between items-center text-slate-300 pt-1">
+              <span>Linux &amp; Bash</span>
+              <span class="font-mono text-amber-400 text-[11px]">84%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-amber-400 h-1.5 rounded-full" style="width: 84%"></div></div>
+
+            <div class="flex justify-between items-center text-slate-300 pt-1">
+              <span>REST APIs &amp; LocalStorage</span>
+              <span class="font-mono text-amber-400 text-[11px]">90%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-1.5"><div class="bg-amber-400 h-1.5 rounded-full" style="width: 90%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNEY & TIMELINE SECTION -->
+    <section id="journey" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+          <i data-lucide="milestone" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Journey &amp; Milestones</h2>
+          <p class="text-xs sm:text-sm text-slate-400">Key achievements and academic timeline</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 sm:p-8">
+        <div class="relative border-l-2 border-cyan-500/30 pl-6 sm:pl-8 space-y-8">
+          <!-- Item 1 -->
+          <div class="relative group">
+            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-4 h-4 rounded-full bg-cyan-400 ring-4 ring-slate-950"></div>
+            <div class="space-y-1.5">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-cyan-500/15 text-cyan-300">2026 — Present</span>
+              <h3 class="font-display text-base font-bold text-white">Class 11th PCM &amp; JEE Main / Advanced Preparation</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Focusing on core engineering fundamentals in Physics (Mechanics, Thermodynamics), Chemistry, and Mathematics (Calculus, Coordinate Geometry), while integrating computational thinking into problem solving.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="relative group">
+            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-4 h-4 rounded-full bg-violet-400 ring-4 ring-slate-950"></div>
+            <div class="space-y-1.5">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-violet-500/15 text-violet-300">2025 — 2026</span>
+              <h3 class="font-display text-base font-bold text-white">Independent Utility &amp; Platform Development</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Developed PayBell (Android voice soundbox alert system for UPI), Enigma license key generator with cryptographic hashing, and high-fidelity testing simulator with analytical breakdown.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="relative group">
+            <div class="absolute -left-[31px] sm:-left-[39px] top-1 w-4 h-4 rounded-full bg-emerald-400 ring-4 ring-slate-950"></div>
+            <div class="space-y-1.5">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-emerald-300">Foundations</span>
+              <h3 class="font-display text-base font-bold text-white">Web &amp; Programming Core Mastery</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Self-taught programming starting from web basics (HTML/CSS/JS) to object-oriented programming, data structures, and Linux command-line workflows.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="space-y-6">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+          <i data-lucide="message-square" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Let's Connect</h2>
+          <p class="text-xs sm:text-sm text-slate-400">Have an idea, collaboration, or question? Feel free to reach out.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Direct Contact Info -->
+        <div class="lg:col-span-5 glass-card rounded-2xl p-6 sm:p-8 space-y-6 flex flex-col justify-between">
+          <div class="space-y-5">
+            <h3 class="font-display text-lg font-bold text-white">Contact Information</h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              I am always excited to discuss code, innovative utilities, academic problem-solving, or collaborate on open-source initiatives.
+            </p>
+
+            <div class="space-y-3.5 text-xs">
+              <a href="mailto:diveshsah2@gmail.com" class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-white/5 hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all group">
+                <div class="p-2 rounded-lg bg-cyan-500/15 text-cyan-300 group-hover:scale-110 transition-transform">
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 block font-mono">EMAIL ME AT</span>
+                  <span class="font-medium text-white" id="contactEmail">diveshsah2@gmail.com</span>
+                </div>
+              </a>
+
+              <a href="https://github.com/missionjee" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-white/5 hover:border-violet-500/40 text-slate-300 hover:text-white transition-all group">
+                <div class="p-2 rounded-lg bg-violet-500/15 text-violet-300 group-hover:scale-110 transition-transform">
+                  <i data-lucide="github" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 block font-mono">GITHUB REPOSITORIES</span>
+                  <span class="font-medium text-white">github.com/missionjee</span>
+                </div>
+              </a>
+
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/70 border border-white/5 text-slate-300">
+                <div class="p-2 rounded-lg bg-emerald-500/15 text-emerald-300">
+                  <i data-lucide="map-pin" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-[10px] text-slate-400 block font-mono">LOCATION</span>
+                  <span class="font-medium text-white">India</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-400">
+            <span>Status:</span>
+            <span class="text-emerald-400 font-medium flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Active &amp; Responsive
+            </span>
+          </div>
+        </div>
+
+        <!-- Quick Interactive Message Box -->
+        <div class="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 space-y-4">
+          <h3 class="font-display text-lg font-bold text-white">Send a Quick Message</h3>
+          <p class="text-xs text-slate-400">Clicking send will compose an email directly to Divesh Kumar.</p>
+
+          <form id="contactForm" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label class="block text-xs font-medium text-slate-300">Your Name</label>
+                <input type="text" id="senderName" required placeholder="John Doe" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors" />
+              </div>
+              <div class="space-y-1.5">
+                <label class="block text-xs font-medium text-slate-300">Your Email</label>
+                <input type="email" id="senderEmail" required placeholder="john@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors" />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="block text-xs font-medium text-slate-300">Subject</label>
+              <input type="text" id="senderSubject" required placeholder="Project inquiry / Collaboration" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors" />
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="block text-xs font-medium text-slate-300">Message</label>
+              <textarea id="senderMessage" rows="4" required placeholder="Write your message here..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/90 border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition-colors resize-none"></textarea>
+            </div>
+
+            <button type="submit" class="accent-gradient-btn w-full sm:w-auto px-6 py-2.5 rounded-xl text-white text-xs font-semibold flex items-center justify-center gap-2">
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+              <span>Send Message</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- ==================== VIEW 2: JEE MAIN 30-TEST SERIES HUB & NTA CBT SIMULATOR ==================== -->
-  <section id="testSeriesView" class="hidden relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8 flex-1 w-full">
+  <!-- ==================== PROJECT DETAILS MODAL ==================== -->
+  <div id="projectModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+    <div class="glass-card modal-anim w-full max-w-2xl rounded-3xl overflow-hidden border border-white/15 max-h-[90vh] flex flex-col">
+      <!-- Modal Header Image -->
+      <div class="relative h-56 sm:h-64 bg-slate-900 shrink-0 overflow-hidden">
+        <img id="modalProjectImage" src="" alt="" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+        <button type="button" id="closeModalBtn" class="absolute top-4 right-4 p-2 rounded-full bg-slate-950/70 hover:bg-slate-900 border border-white/20 text-white transition-all">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+        <div class="absolute bottom-4 left-6 right-6">
+          <span id="modalProjectCategory" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Category</span>
+          <h3 id="modalProjectTitle" class="font-display text-2xl font-bold text-white mt-1">Project Title</h3>
+        </div>
+      </div>
 
-    <!-- SUB-VIEW 2A: TEST SERIES LOBBY (PATTERN, SYLLABUS & 30 MOCK TESTS) -->
-    <div id="cbtLobbyContainer" class="space-y-8">
-      <!-- Top Header Banner -->
-      <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-l-4 border-l-cyan-400">
+      <!-- Modal Body -->
+      <div class="p-6 space-y-4 overflow-y-auto">
+        <p id="modalProjectDescription" class="text-sm text-slate-300 leading-relaxed"></p>
+        
         <div class="space-y-2">
-          <div class="inline-flex items-center gap-2 text-xs font-mono-code uppercase text-cyan-400">
-            <i data-lucide="award" class="w-4 h-4"></i> NTA JEE MAIN (CLASS 11 SYLLABUS) • 30-TEST SERIES
-          </div>
-          <h1 class="font-display text-2xl sm:text-4xl font-extrabold text-white">
-            MissionJEE <span class="text-gradient">NTA CBT Examination Portal</span>
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">
-            Calibrated to the official NTA JEE Main Paper 1 pattern. Features eye-friendly Sleep/Dark Mode, Daylight CBT toggle, 5-state NTA Question Palette, Section B Virtual Keypad, per-question time-trap tracking, and step-by-step solutions.
-          </p>
+          <span class="text-xs font-mono text-slate-400 uppercase">Tags &amp; Stack</span>
+          <div id="modalProjectTags" class="flex flex-wrap gap-1.5"></div>
         </div>
-        <div class="flex flex-wrap items-center gap-3 shrink-0">
-          <button type="button" id="backToPortfolioBtn" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-white/10 text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            <span>Back to Portfolio</span>
-          </button>
-          <button type="button" id="lobbyQuickLaunchBtn" class="px-5 py-2.5 rounded-xl accent-bg text-white text-xs font-semibold shadow-lg flex items-center gap-2">
-            <i data-lucide="play" class="w-4 h-4"></i>
-            <span>Start Mock Test #01 Now</span>
-          </button>
+
+        <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+          <span id="modalProjectDate" class="text-xs font-mono text-slate-400">Date: 2026</span>
+          <a id="modalProjectLink" href="#" target="_blank" rel="noopener noreferrer" class="accent-gradient-btn px-5 py-2.5 rounded-xl text-white text-xs font-semibold flex items-center gap-1.5">
+            <span>Visit Project / Code</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
       </div>
-
-      <!-- 1. Official Exam Pattern & Class 11 High-Weightage Syllabus Breakdown -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <!-- Official NTA JEE Main Pattern Table -->
-        <div class="lg:col-span-5 glass-card rounded-2xl p-5 space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="font-display text-base font-bold text-white flex items-center gap-2">
-              <i data-lucide="file-spreadsheet" class="w-4 h-4 text-cyan-400"></i>
-              1. Official NTA JEE Main Paper Pattern
-            </h2>
-            <span class="text-[11px] font-mono-code px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300">+4 / -1 / 0</span>
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="border-b border-white/10 text-slate-400 font-mono-code text-[11px]">
-                  <th class="py-2 pr-2">Subject</th>
-                  <th class="py-2 px-2">Sec A (MCQ)</th>
-                  <th class="py-2 px-2">Sec B (Numerical)</th>
-                  <th class="py-2 pl-2 text-right">Marks</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-white/5 text-slate-200">
-                <tr>
-                  <td class="py-2.5 pr-2 font-semibold text-cyan-300">Physics</td>
-                  <td class="py-2.5 px-2 font-mono-code">20 Qs (All Compulsory)</td>
-                  <td class="py-2.5 px-2 font-mono-code">5 Qs (Compulsory)</td>
-                  <td class="py-2.5 pl-2 text-right font-mono-code font-bold">100</td>
-                </tr>
-                <tr>
-                  <td class="py-2.5 pr-2 font-semibold text-emerald-300">Chemistry</td>
-                  <td class="py-2.5 px-2 font-mono-code">20 Qs (All Compulsory)</td>
-                  <td class="py-2.5 px-2 font-mono-code">5 Qs (Compulsory)</td>
-                  <td class="py-2.5 pl-2 text-right font-mono-code font-bold">100</td>
-                </tr>
-                <tr>
-                  <td class="py-2.5 pr-2 font-semibold text-violet-300">Mathematics</td>
-                  <td class="py-2.5 px-2 font-mono-code">20 Qs (All Compulsory)</td>
-                  <td class="py-2.5 px-2 font-mono-code">5 Qs (Compulsory)</td>
-                  <td class="py-2.5 pl-2 text-right font-mono-code font-bold">100</td>
-                </tr>
-                <tr class="bg-white/5 font-bold text-white">
-                  <td class="py-2.5 px-2">Total (75 Qs)</td>
-                  <td class="py-2.5 px-2 font-mono-code">60 MCQs</td>
-                  <td class="py-2.5 px-2 font-mono-code">15 Numericals</td>
-                  <td class="py-2.5 px-2 text-right font-mono-code text-cyan-300">300</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="p-3 rounded-xl bg-slate-950/80 border border-white/10 text-[11px] text-slate-300 space-y-1">
-            <div><strong class="text-white">Marking Scheme (Both Sec A &amp; B):</strong> <span class="text-emerald-400">+4</span> for Correct, <span class="text-rose-400">-1</span> for Incorrect, <span class="text-slate-400">0</span> for Unattempted.</div>
-            <div><strong class="text-white">Simulator Mode:</strong> Includes rapid 15-Question High-Yield CBT Diagnostic (5 Physics + 5 Chemistry + 5 Math: 3 MCQs + 2 Numericals per subject = 60 Marks) for instant practice &amp; full 180-minute clock support.</div>
-          </div>
-        </div>
-
-        <!-- High-Weightage Class 11 Syllabus Breakdown -->
-        <div class="lg:col-span-7 glass-card rounded-2xl p-5 space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="font-display text-base font-bold text-white flex items-center gap-2">
-              <i data-lucide="layers" class="w-4 h-4 text-violet-400"></i>
-              High-Weightage Class 11 Syllabus Coverage
-            </h2>
-            <span class="text-[11px] font-mono-code text-slate-400">NCERT + JEE Main Core</span>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
-            <div class="p-3.5 rounded-xl bg-slate-950/80 border border-cyan-500/25 space-y-2">
-              <div class="font-mono-code font-bold text-cyan-300 flex items-center justify-between">
-                <span>PHYSICS (XI)</span>
-                <span>~48% Wt.</span>
-              </div>
-              <ul class="space-y-1 text-slate-300 text-[11px]">
-                <li>• Kinematics &amp; Projectile Motion</li>
-                <li>• Newton's Laws &amp; Friction</li>
-                <li>• Work, Energy &amp; Power</li>
-                <li>• Rotational Motion &amp; COM</li>
-                <li>• Gravitation &amp; Satellites</li>
-                <li>• Thermodynamics &amp; KTG</li>
-                <li>• SHM &amp; Mechanical Waves</li>
-              </ul>
-            </div>
-
-            <div class="p-3.5 rounded-xl bg-slate-950/80 border border-emerald-500/25 space-y-2">
-              <div class="font-mono-code font-bold text-emerald-300 flex items-center justify-between">
-                <span>CHEMISTRY (XI)</span>
-                <span>~46% Wt.</span>
-              </div>
-              <ul class="space-y-1 text-slate-300 text-[11px]">
-                <li>• Mole Concept &amp; Stoichiometry</li>
-                <li>• Atomic Structure &amp; Quantum</li>
-                <li>• Chemical Bonding &amp; VSEPR/MOT</li>
-                <li>• Chemical Thermodynamics</li>
-                <li>• Chemical &amp; Ionic Equilibrium</li>
-                <li>• Redox Reactions</li>
-                <li>• GOC, Isomerism &amp; Hydrocarbons</li>
-              </ul>
-            </div>
-
-            <div class="p-3.5 rounded-xl bg-slate-950/80 border border-violet-500/25 space-y-2">
-              <div class="font-mono-code font-bold text-violet-300 flex items-center justify-between">
-                <span>MATHEMATICS (XI)</span>
-                <span>~50% Wt.</span>
-              </div>
-              <ul class="space-y-1 text-slate-300 text-[11px]">
-                <li>• Complex Numbers &amp; Quadratics</li>
-                <li>• Sequences &amp; Series (AP/GP)</li>
-                <li>• Permutations &amp; Combinations</li>
-                <li>• Binomial Theorem</li>
-                <li>• Straight Lines &amp; Circles</li>
-                <li>• Parabola, Ellipse &amp; Hyperbola</li>
-                <li>• Limits, Derivatives &amp; Trig</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 30 JEE Main Mock Tests Grid -->
-      <div class="space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h2 class="font-display text-xl font-bold text-white">Select a JEE Main Mock Test (30 Tests Available)</h2>
-            <p class="text-xs text-slate-400">Every test opens inside the interactive NTA CBT Simulator with per-question timer &amp; instant analytics</p>
-          </div>
-          <div class="flex flex-wrap gap-1.5 bg-slate-900/90 p-1 rounded-xl border border-white/10">
-            <button type="button" data-series-filter="all" class="series-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950">All 30 Tests</button>
-            <button type="button" data-series-filter="Full Syllabus XI" class="series-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white">Full Syllabus XI (10)</button>
-            <button type="button" data-series-filter="High-Weightage" class="series-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white">High-Weightage (10)</button>
-            <button type="button" data-series-filter="Unit & PYQ" class="series-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white">Unit &amp; PYQ Mocks (10)</button>
-          </div>
-        </div>
-
-        <div id="thirtyTestsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[540px] overflow-y-auto pr-1">
-          <!-- Populated dynamically with all 30 JEE Main Mock Tests -->
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== SUB-VIEW 2B: INTERACTIVE NTA CBT SIMULATOR (SLEEP / DAYLIGHT MODE) ==================== -->
-    <div id="cbtSimulatorContainer" class="hidden rounded-3xl border border-white/15 bg-slate-950/95 p-4 sm:p-6 space-y-5 transition-colors duration-200">
-      <!-- CBT Top Bar -->
-      <div class="cbt-panel rounded-2xl bg-slate-900/90 border border-white/10 p-3.5 sm:p-4 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl accent-bg flex items-center justify-center font-mono-code font-bold text-xs text-white">
-            NTA
-          </div>
-          <div>
-            <div id="activeTestTitle" class="font-display font-bold text-sm sm:text-base cbt-text-main text-white">
-              JEE Main Mock Test #01 — Class 11 Full Syllabus
-            </div>
-            <div class="text-[11px] font-mono-code cbt-text-muted text-slate-400">
-              Candidate: <strong class="text-cyan-400">Divesh Kumar</strong> • Roll: JEE-XI-2026
-            </div>
-          </div>
-        </div>
-
-        <!-- Clock, Per-Q Timer, Mode Toggle & Submit -->
-        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-          <div class="cbt-subpanel px-3 py-1.5 rounded-xl bg-slate-950 border border-white/10 flex items-center gap-2">
-            <i data-lucide="clock" class="w-4 h-4 text-cyan-400"></i>
-            <div>
-              <div class="text-[10px] font-mono-code uppercase cbt-text-muted text-slate-400">Time Left</div>
-              <div id="cbtMainClock" class="font-mono-code font-bold text-sm sm:text-base text-emerald-400">180:00</div>
-            </div>
-          </div>
-
-          <button type="button" id="toggleCbtVisualModeBtn" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-xs font-mono-code text-cyan-300 flex items-center gap-1.5" title="Switch between low-glare Sleep Mode and Daylight CBT Mode">
-            <i data-lucide="moon" id="cbtModeIcon" class="w-3.5 h-3.5"></i>
-            <span id="cbtModeLabel">Sleep Mode</span>
-          </button>
-
-          <button type="button" id="exitCbtToLobbyBtn" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-xs text-slate-300">
-            All 30 Tests
-          </button>
-
-          <button type="button" id="submitCbtExamBtn" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs shadow-lg">
-            Submit Test
-          </button>
-        </div>
-      </div>
-
-      <!-- Main CBT 2-Column Workspace -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        <!-- Left 8 Cols: Subject Tabs, Question Display, Section B Keypad & Action Bar -->
-        <div class="lg:col-span-8 flex flex-col justify-between space-y-4">
-          <!-- Subject Tabs & Question Header -->
-          <div class="cbt-panel rounded-2xl bg-slate-900/90 border border-white/10 p-4 space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
-              <div class="flex flex-wrap gap-1.5" id="cbtSubjectTabs">
-                <button type="button" data-cbt-subj="Physics" class="cbt-subj-tab px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950">Physics</button>
-                <button type="button" data-cbt-subj="Chemistry" class="cbt-subj-tab px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300">Chemistry</button>
-                <button type="button" data-cbt-subj="Mathematics" class="cbt-subj-tab px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300">Mathematics</button>
-              </div>
-
-              <div class="flex items-center gap-2 text-xs font-mono-code">
-                <span id="cbtSectionBadge" class="px-2.5 py-1 rounded-lg bg-violet-500/20 text-violet-300 border border-violet-500/30">Section A: MCQ</span>
-                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-400">+4</span>
-                <span class="px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-400">-1</span>
-              </div>
-            </div>
-
-            <!-- Question Meta Bar -->
-            <div class="flex items-center justify-between text-xs font-mono-code">
-              <div class="flex items-center gap-2">
-                <span id="cbtQuestionNumLabel" class="font-bold text-sm cbt-text-main text-white">Question 1 of 15</span>
-                <span id="cbtTopicTag" class="px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 text-[11px]">Rotational Dynamics</span>
-              </div>
-              <div class="flex items-center gap-1.5 cbt-text-muted text-slate-400">
-                <i data-lucide="timer" class="w-3.5 h-3.5 text-amber-400"></i>
-                <span>Time on Q: <strong id="cbtQuestionTimeSpent" class="text-amber-300">0s</strong></span>
-              </div>
-            </div>
-
-            <!-- Question Stem -->
-            <div id="cbtQuestionPrompt" class="cbt-subpanel p-4 rounded-xl bg-slate-950/85 border border-white/10 text-sm sm:text-base leading-relaxed cbt-text-main text-slate-100 font-medium">
-              Loading question...
-            </div>
-
-            <!-- MCQ Options Container (Section A) -->
-            <div id="cbtMcqOptionsBox" class="space-y-2.5"></div>
-
-            <!-- Virtual Numerical Keypad Container (Section B) -->
-            <div id="cbtNumericalBox" class="hidden space-y-3 pt-1">
-              <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-                <div class="flex-1">
-                  <label class="block text-xs font-mono-code cbt-text-muted text-slate-400 mb-1">
-                    Section B Numerical Value Answer (Enter integer or decimal):
-                  </label>
-                  <input
-                    id="cbtNumericalInput"
-                    type="text"
-                    placeholder="Use virtual keypad or keyboard..."
-                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-cyan-500/40 font-mono-code text-base text-white focus:outline-none"
-                  />
-                </div>
-              </div>
-              <!-- Official NTA Virtual Numeric Keypad -->
-              <div class="cbt-subpanel p-3.5 rounded-2xl bg-slate-950 border border-white/10 max-w-xs space-y-2">
-                <div class="text-[11px] font-mono-code cbt-text-muted text-slate-400 flex items-center justify-between">
-                  <span>VIRTUAL NUMERIC KEYPAD</span>
-                  <span>SEC-B</span>
-                </div>
-                <div class="grid grid-cols-4 gap-1.5 font-mono-code text-sm">
-                  <button type="button" data-k="7" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">7</button>
-                  <button type="button" data-k="8" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">8</button>
-                  <button type="button" data-k="9" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">9</button>
-                  <button type="button" data-k="BACK" class="num-key py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-bold">⌫</button>
-                  <button type="button" data-k="4" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">4</button>
-                  <button type="button" data-k="5" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">5</button>
-                  <button type="button" data-k="6" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">6</button>
-                  <button type="button" data-k="CLR" class="num-key py-2 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 text-xs font-bold">CLR</button>
-                  <button type="button" data-k="1" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">1</button>
-                  <button type="button" data-k="2" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">2</button>
-                  <button type="button" data-k="3" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">3</button>
-                  <button type="button" data-k="-" class="num-key py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold">-</button>
-                  <button type="button" data-k="0" class="num-key col-span-2 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold">0</button>
-                  <button type="button" data-k="." class="num-key col-span-2 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold">.</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Standard NTA Action Buttons Bar -->
-          <div class="cbt-panel rounded-2xl bg-slate-900/90 border border-white/10 p-3.5 flex flex-wrap items-center justify-between gap-2">
-            <div class="flex flex-wrap items-center gap-2">
-              <button type="button" id="ntaSaveNextBtn" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs shadow-md">
-                Save &amp; Next
-              </button>
-              <button type="button" id="ntaSaveMarkReviewBtn" class="px-3.5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-semibold text-xs">
-                Save &amp; Mark for Review
-              </button>
-              <button type="button" id="ntaMarkReviewNextBtn" class="px-3.5 py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 font-semibold text-xs">
-                Mark for Review &amp; Next
-              </button>
-              <button type="button" id="ntaClearResponseBtn" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-300 font-semibold text-xs">
-                Clear Response
-              </button>
-            </div>
-
-            <div class="flex items-center gap-1.5">
-              <button type="button" id="ntaPrevBtn" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-mono-code text-slate-200">&lt;&lt; Back</button>
-              <button type="button" id="ntaNextBtn" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-mono-code text-slate-200">Next &gt;&gt;</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right 4 Cols: Official 5-State NTA Question Palette -->
-        <div class="lg:col-span-4 cbt-panel rounded-2xl bg-slate-900/90 border border-white/10 p-4 flex flex-col justify-between space-y-4">
-          <div class="space-y-4">
-            <div class="border-b border-white/10 pb-3">
-              <h3 class="font-display font-bold text-sm cbt-text-main text-white">Official NTA Question Palette</h3>
-              <p class="text-[11px] cbt-text-muted text-slate-400">5-State Status Legend &amp; Direct Question Jumper</p>
-            </div>
-
-            <!-- 5-State Legend Counters -->
-            <div class="grid grid-cols-2 gap-2.5 text-[11px]">
-              <div class="flex items-center gap-2">
-                <span id="countState0" class="nta-btn nta-state-0 !w-7 !h-7 !text-[11px]">0</span>
-                <span class="cbt-text-muted text-slate-300">Not Visited</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span id="countState1" class="nta-btn nta-state-1 !w-7 !h-7 !text-[11px]">0</span>
-                <span class="cbt-text-muted text-slate-300">Not Answered</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span id="countState2" class="nta-btn nta-state-2 !w-7 !h-7 !text-[11px]">0</span>
-                <span class="cbt-text-muted text-slate-300">Answered</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span id="countState3" class="nta-btn nta-state-3 !w-7 !h-7 !text-[11px]">0</span>
-                <span class="cbt-text-muted text-slate-300">Marked for Review</span>
-              </div>
-              <div class="col-span-2 flex items-center gap-2 bg-violet-500/10 border border-violet-500/20 rounded-xl p-2">
-                <span id="countState4" class="nta-btn nta-state-4 !w-7 !h-7 !text-[11px] shrink-0">0</span>
-                <span class="cbt-text-muted text-slate-300 leading-tight">Answered &amp; Marked for Review <em class="text-emerald-400">(Will be evaluated)</em></span>
-              </div>
-            </div>
-
-            <!-- Palette Grid -->
-            <div class="space-y-2 pt-2 border-t border-white/10">
-              <div class="text-xs font-mono-code text-cyan-400" id="paletteSubjectHeading">Choose a Question</div>
-              <div id="ntaPaletteGrid" class="flex flex-wrap gap-2"></div>
-            </div>
-          </div>
-
-          <div class="pt-4 border-t border-white/10 space-y-2">
-            <button type="button" id="paletteSubmitBtn" class="w-full py-3 rounded-xl accent-bg text-white font-bold text-xs shadow-lg hover:opacity-95">
-              Submit Exam &amp; View Analytics Dashboard
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== SUB-VIEW 2C: POST-TEST PERFORMANCE ANALYSIS DASHBOARD ==================== -->
-    <div id="cbtAnalysisContainer" class="hidden space-y-8">
-      <div class="glass-card rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-emerald-400">
-        <div>
-          <span class="text-xs font-mono-code uppercase text-emerald-400">POST-TEST NTA DIAGNOSTIC REPORT</span>
-          <h2 id="analysisReportTitle" class="font-display text-2xl sm:text-3xl font-extrabold text-white mt-1">
-            Performance Analysis Dashboard
-          </h2>
-          <p class="text-xs text-slate-400 mt-1">
-            Includes Net Score, Positive/Negative Split, Subject Time-Trap Detection &amp; Step-by-Step Conceptual Solutions
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <button type="button" id="retakeCurrentTestBtn" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold text-white">
-            Retake This Mock
-          </button>
-          <button type="button" id="backToSeriesCatalogBtn" class="px-4 py-2.5 rounded-xl accent-bg text-xs font-semibold text-white">
-            Choose Another Mock (30 Tests)
-          </button>
-        </div>
-      </div>
-
-      <!-- KPI Scorecards -->
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
-        <div class="glass-card rounded-2xl p-4 border-t-2 border-t-cyan-400">
-          <div class="text-[11px] font-mono-code text-slate-400">TOTAL NET SCORE</div>
-          <div id="statNetScore" class="font-display text-2xl sm:text-3xl font-extrabold text-white mt-1">0 / 60</div>
-          <div class="text-[11px] text-cyan-300 font-mono-code mt-0.5">Final Evaluated Score</div>
-        </div>
-        <div class="glass-card rounded-2xl p-4 border-t-2 border-t-emerald-400">
-          <div class="text-[11px] font-mono-code text-slate-400">GROSS POSITIVE</div>
-          <div id="statGrossPositive" class="font-display text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">+0</div>
-          <div id="statCorrectCount" class="text-[11px] text-slate-300 font-mono-code mt-0.5">0 Correct (+4)</div>
-        </div>
-        <div class="glass-card rounded-2xl p-4 border-t-2 border-t-rose-400">
-          <div class="text-[11px] font-mono-code text-slate-400">NEGATIVE LOST</div>
-          <div id="statNegativeLost" class="font-display text-2xl sm:text-3xl font-extrabold text-rose-400 mt-1">-0</div>
-          <div id="statWrongCount" class="text-[11px] text-slate-300 font-mono-code mt-0.5">0 Incorrect (-1)</div>
-        </div>
-        <div class="glass-card rounded-2xl p-4 border-t-2 border-t-violet-400">
-          <div class="text-[11px] font-mono-code text-slate-400">ACCURACY %</div>
-          <div id="statAccuracyPct" class="font-display text-2xl sm:text-3xl font-extrabold text-violet-300 mt-1">0%</div>
-          <div class="text-[11px] text-slate-300 font-mono-code mt-0.5">Precision Rate</div>
-        </div>
-        <div class="glass-card rounded-2xl p-4 border-t-2 border-t-amber-400 col-span-2 sm:col-span-1">
-          <div class="text-[11px] font-mono-code text-slate-400">ATTEMPT RATE</div>
-          <div id="statAttemptRate" class="font-display text-2xl sm:text-3xl font-extrabold text-amber-300 mt-1">0%</div>
-          <div id="statAttemptCount" class="text-[11px] text-slate-300 font-mono-code mt-0.5">0 / 15 Attempted</div>
-        </div>
-      </div>
-
-      <!-- Subject-Wise Breakdown & Time-Trap Detector -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div class="lg:col-span-8 glass-card rounded-2xl p-5 space-y-4">
-          <h3 class="font-display text-base font-bold text-white flex items-center gap-2">
-            <i data-lucide="bar-chart-3" class="w-4 h-4 text-cyan-400"></i>
-            Subject-Wise Performance &amp; Time Breakdown
-          </h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="border-b border-white/10 text-slate-400 font-mono-code text-[11px]">
-                  <th class="py-2">Subject</th>
-                  <th class="py-2">Net Score</th>
-                  <th class="py-2">Correct / Wrong / Skip</th>
-                  <th class="py-2">Accuracy</th>
-                  <th class="py-2 text-right">Time Spent</th>
-                </tr>
-              </thead>
-              <tbody id="subjectBreakdownTableBody" class="divide-y divide-white/5 text-slate-200 font-mono-code"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="lg:col-span-4 glass-card rounded-2xl p-5 space-y-3">
-          <h3 class="font-display text-base font-bold text-white flex items-center gap-2">
-            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
-            Time-Trap Question Detector
-          </h3>
-          <p class="text-xs text-slate-400">
-            Questions where you spent high time or lost negative marks under time pressure:
-          </p>
-          <div id="timeTrapList" class="space-y-2 text-xs"></div>
-        </div>
-      </div>
-
-      <!-- Complete Question-by-Question Review with Step-by-Step Solutions -->
-      <div class="space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <h3 class="font-display text-xl font-bold text-white">
-            Question-by-Question Review &amp; Step-by-Step Solutions
-          </h3>
-          <div class="flex flex-wrap gap-1.5 bg-slate-900 p-1 rounded-xl border border-white/10">
-            <button type="button" data-rev-filter="all" class="rev-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950">All Questions</button>
-            <button type="button" data-rev-filter="Physics" class="rev-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-300">Physics</button>
-            <button type="button" data-rev-filter="Chemistry" class="rev-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-300">Chemistry</button>
-            <button type="button" data-rev-filter="Mathematics" class="rev-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-300">Mathematics</button>
-          </div>
-        </div>
-        <div id="questionReviewList" class="space-y-4"></div>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- Minimal Clean Footer -->
-  <footer class="relative z-10 border-t border-white/10 bg-slate-950/80 py-4 mt-12">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
-      <div><strong class="text-white">Divesh Kumar</strong> • Class 11th • Preparing for JEE</div>
-      <div class="font-mono-code text-[11px]">GitHub: <a href="https://github.com/missionjee/Divesh-" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline">github.com/missionjee/Divesh-</a></div>
-    </div>
-  </footer>
-
-  <!-- Quick Tool Modal (PayBell / Enigma) -->
-  <div id="toolModalOverlay" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
-    <div class="glass-card rounded-3xl max-w-lg w-full p-6 border border-white/15 space-y-4">
-      <div class="flex items-center justify-between border-b border-white/10 pb-3">
-        <h3 id="toolModalTitle" class="font-display text-lg font-bold text-white">Tool Demo</h3>
-        <button type="button" id="closeToolModalBtn" class="px-2.5 py-1 rounded-lg bg-white/5 text-slate-300">✕</button>
-      </div>
-      <div id="toolModalBody" class="space-y-3 text-xs"></div>
     </div>
   </div>
 
-  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-xs w-full pointer-events-none"></div>
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="relative z-10 border-t border-white/10 bg-slate-950/80 mt-16 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-lg accent-gradient-btn flex items-center justify-center font-display font-bold text-[10px] text-white">DK</div>
+        <span>&copy; <span id="currentYear"></span> <strong class="text-white">Divesh Kumar</strong> (<span class="font-mono text-cyan-400">@missionjee</span>). All rights reserved.</span>
+      </div>
 
-  <!-- ==================== APPLICATION SCRIPT ==================== -->
+      <div class="flex items-center gap-4">
+        <a href="#hero" class="hover:text-white transition-colors flex items-center gap-1">
+          <span>Back to Top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPT: DYNAMIC DATA ENGINE ==================== -->
   <script>
-    // --- 1. Toast & Web Audio Helper ---
-    let audioCtx = null;
-    function playBeep(freq = 560, dur = 0.06) {
+    // Fallback bundled dataset (guarantees site works seamlessly under file:/// protocol or before json loads)
+    const DEFAULT_PROJECTS = [
+      {
+        id: "proj-1",
+        title: "PayBell Soundbox Utility",
+        category: "Android Apps",
+        description: "Smart Android background listener that transforms any smartphone into an instant voice-alert soundbox for real-time UPI and banking transaction announcements.",
+        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=900&q=80",
+        link: "https://github.com/missionjee",
+        tags: ["Android", "Kotlin", "Accessibility API", "TTS"],
+        featured: true,
+        date: "2026"
+      },
+      {
+        id: "proj-2",
+        title: "Enigma KeyGen & Security Console",
+        category: "Web Security",
+        description: "High-throughput cryptographic license key generator and web security console featuring custom entropy algorithms, tier validation, and batch CSV export.",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80",
+        link: "https://github.com/missionjee",
+        tags: ["JavaScript", "Cryptography", "Security", "Analytics"],
+        featured: true,
+        date: "2026"
+      },
+      {
+        id: "proj-3",
+        title: "MissionJEE CBT Assessment Engine",
+        category: "Web Apps",
+        description: "Interactive, high-fidelity Computer-Based Test simulator calibrated to national engineering entrance exam specifications with time-trap analytics and live scoring.",
+        image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=80",
+        link: "https://github.com/missionjee/Divesh-",
+        tags: ["HTML5", "Tailwind CSS", "JavaScript", "EdTech"],
+        featured: true,
+        date: "2026"
+      },
+      {
+        id: "proj-4",
+        title: "InkNote Productivity Suite",
+        category: "Productivity",
+        description: "Distraction-free markdown note-taking environment with instantaneous search, local-first storage, syntax highlighting, and clean export formatting.",
+        image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=80",
+        link: "https://github.com/missionjee",
+        tags: ["Local-First", "Markdown", "JavaScript", "UI/UX"],
+        featured: false,
+        date: "2025"
+      }
+    ];
+
+    const DEFAULT_PROFILE = {
+      name: "Divesh Kumar",
+      handle: "missionjee",
+      tagline: "Student Developer • Toolmaker • Problem Solver",
+      status: "Class 11th (PCM) • IIT-JEE Aspirant & Independent Developer",
+      bio: "Passionate high school developer in Class 11th balancing rigorous IIT-JEE preparation (Physics, Chemistry, Maths) with engineering software systems, Android tools, cryptographic dashboards, and responsive web apps.",
+      email: "diveshsah2@gmail.com",
+      github: "https://github.com/missionjee"
+    };
+
+    // State
+    let projectsData = [];
+    let profileData = {};
+    let activeCategory = 'All';
+    let searchQuery = '';
+
+    // Color mapper for dynamic categories
+    function getCategoryBadgeClass(category) {
+      const palette = [
+        'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
+        'bg-violet-500/15 text-violet-300 border-violet-500/30',
+        'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+        'bg-amber-500/15 text-amber-300 border-amber-500/30',
+        'bg-rose-500/15 text-rose-300 border-rose-500/30',
+        'bg-blue-500/15 text-blue-300 border-blue-500/30',
+        'bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-500/30'
+      ];
+      let hash = 0;
+      for (let i = 0; i < category.length; i++) {
+        hash = category.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      const index = Math.abs(hash) % palette.length;
+      return palette[index];
+    }
+
+    // Load data with triple-fallback
+    async function loadWebsiteData() {
+      // 1. Try localStorage
       try {
-        if (!audioCtx) {
-          const Ctx = window.AudioContext || window.webkitAudioContext;
-          if (Ctx) audioCtx = new Ctx();
-        }
-        if (!audioCtx) return;
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const g = audioCtx.createGain();
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        g.gain.setValueAtTime(0.05, audioCtx.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
-        osc.connect(g);
-        g.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + dur);
-      } catch (e) {}
-    }
-
-    function showToast(msg) {
-      playBeep(640, 0.07);
-      const c = document.getElementById('toastContainer');
-      const d = document.createElement('div');
-      d.className = 'pointer-events-auto glass-card px-4 py-2.5 rounded-xl border border-cyan-400/40 text-xs text-white shadow-xl';
-      d.textContent = msg;
-      c.appendChild(d);
-      setTimeout(() => d.remove(), 2500);
-    }
-
-    // --- 2. 30 JEE Main Mock Tests Catalog Generator ---
-    const thirtyMockTests = [
-      { id: 1, title: 'JEE Main Mock Test #01 — Class 11 Full Syllabus', category: 'Full Syllabus XI', focus: 'Mechanics, Atomic & Bonding, Quadratics & Calculus', difficulty: 'NTA Standard' },
-      { id: 2, title: 'JEE Main Mock Test #02 — Class 11 Full Syllabus', category: 'Full Syllabus XI', focus: 'Rotational Motion, Thermodynamics, Conic Sections', difficulty: 'NTA Standard' },
-      { id: 3, title: 'JEE Main Mock Test #03 — High-Weightage Core', category: 'High-Weightage', focus: 'Kinematics, NLM, Mole Concept, Sequences & Series', difficulty: 'Moderate-High' },
-      { id: 4, title: 'JEE Main Mock Test #04 — Mechanics & GOC Special', category: 'High-Weightage', focus: 'Work-Energy-Power, GOC Isomerism, Straight Lines', difficulty: 'High Yield' },
-      { id: 5, title: 'JEE Main Mock Test #05 — Rotational & Equilibrium', category: 'High-Weightage', focus: 'Torque & Angular Momentum, Ionic Equilibrium, Circles', difficulty: 'Advanced-Lite' },
-      { id: 6, title: 'JEE Main Mock Test #06 — Gravitation, Redox & PnC', category: 'Unit & PYQ', focus: 'Orbital Mechanics, Redox Titration, Combinatorics', difficulty: 'NTA Standard' },
-      { id: 7, title: 'JEE Main Mock Test #07 — Thermal Physics & Energetics', category: 'High-Weightage', focus: 'Carnot Cycle, KTG, Enthalpy & Hess Law, Binomial', difficulty: 'NTA Standard' },
-      { id: 8, title: 'JEE Main Mock Test #08 — Waves, SHM & Conics', category: 'Unit & PYQ', focus: 'Simple Harmonic Motion, Doppler Effect, Parabola/Ellipse', difficulty: 'Moderate' },
-      { id: 9, title: 'JEE Main Mock Test #09 — Jan Attempt Calibrated XI', category: 'Full Syllabus XI', focus: 'Complete Class 11 Physics, Chemistry & Mathematics', difficulty: 'January Shift-1' },
-      { id: 10, title: 'JEE Main Mock Test #10 — April Attempt Calibrated XI', category: 'Full Syllabus XI', focus: 'Complete Class 11 PCM Multi-Concept Paper', difficulty: 'April Shift-2' },
-      { id: 11, title: 'JEE Main Mock Test #11 — H.C. Verma & NCERT Exemplar', category: 'High-Weightage', focus: 'Pulley Constraints, Hybridization MOT, Complex Numbers', difficulty: 'Concept Heavy' },
-      { id: 12, title: 'JEE Main Mock Test #12 — Numerical Value (Sec-B) Booster', category: 'High-Weightage', focus: 'Precision Integer & Decimal Calculation Drill', difficulty: 'Speed & Accuracy' },
-      { id: 13, title: 'JEE Main Mock Test #13 — Kinematics & Vectors Master', category: 'Unit & PYQ', focus: 'Relative Velocity, River-Boat, Projectile on Incline', difficulty: 'NTA Standard' },
-      { id: 14, title: 'JEE Main Mock Test #14 — Chemical Bonding & Structure', category: 'Unit & PYQ', focus: 'Bohr Orbitals, VSEPR Shapes, Dipole Moment, Bond Order', difficulty: 'High Yield' },
-      { id: 15, title: 'JEE Main Mock Test #15 — Coordinate Geometry Sprint', category: 'High-Weightage', focus: 'Orthocentre, Radical Axis, Focal Chords & Tangents', difficulty: 'Moderate-High' },
-      { id: 16, title: 'JEE Main Mock Test #16 — Class 11 Mid-Session Grand Mock', category: 'Full Syllabus XI', focus: 'Balanced NTA Paper 1 Blueprint', difficulty: 'NTA Standard' },
-      { id: 17, title: 'JEE Main Mock Test #17 — Center of Mass & Collisions', category: 'Unit & PYQ', focus: 'Coefficient of Restitution, Variable Mass, Impulse', difficulty: 'Concept Heavy' },
-      { id: 18, title: 'JEE Main Mock Test #18 — Equilibrium & Thermodynamics', category: 'High-Weightage', focus: 'pH Buffers, Ksp Solubility, Gibbs Free Energy', difficulty: 'Moderate-High' },
-      { id: 19, title: 'JEE Main Mock Test #19 — Algebra & Trig Masterclass', category: 'High-Weightage', focus: 'Location of Roots, De Moivre Theorem, Telescopic Series', difficulty: 'High Yield' },
-      { id: 20, title: 'JEE Main Mock Test #20 — Hydrocarbons & Reaction Mech', category: 'Unit & PYQ', focus: 'Markovnikov Addition, Ozonolysis, Aromaticity', difficulty: 'NTA Standard' },
-      { id: 21, title: 'JEE Main Mock Test #21 — Fluid Mechanics & Elasticity', category: 'Unit & PYQ', focus: 'Bernoulli Theorem, Surface Tension, Young Modulus', difficulty: 'Moderate' },
-      { id: 22, title: 'JEE Main Mock Test #22 — Limits, Continuity & Derivatives', category: 'High-Weightage', focus: 'L-Hospital, Indeterminate Forms, First Principles', difficulty: 'NTA Standard' },
-      { id: 23, title: 'JEE Main Mock Test #23 — 2024–2025 PYQ Remix I', category: 'Unit & PYQ', focus: 'Top Shift Questions from Recent JEE Main Cycles', difficulty: 'PYQ Verified' },
-      { id: 24, title: 'JEE Main Mock Test #24 — 2024–2025 PYQ Remix II', category: 'Unit & PYQ', focus: 'High-Trap Statement & Assertion-Reason Questions', difficulty: 'PYQ Verified' },
-      { id: 25, title: 'JEE Main Mock Test #25 — Time-Trap Elimination Drill', category: 'Unit & PYQ', focus: 'Dimensional Analysis, Symmetry & Smart Approximations', difficulty: 'Speed Drill' },
-      { id: 26, title: 'JEE Main Mock Test #26 — Class 11 Full Revision Mock A', category: 'Full Syllabus XI', focus: 'Complete Class 11 Syllabus (Physics, Chem, Math)', difficulty: 'NTA Standard' },
-      { id: 27, title: 'JEE Main Mock Test #27 — Class 11 Full Revision Mock B', category: 'Full Syllabus XI', focus: 'Complete Class 11 Syllabus (Physics, Chem, Math)', difficulty: 'Moderate-High' },
-      { id: 28, title: 'JEE Main Mock Test #28 — Class 11 Full Revision Mock C', category: 'Full Syllabus XI', focus: 'Complete Class 11 Syllabus (Physics, Chem, Math)', difficulty: 'NTA Standard' },
-      { id: 29, title: 'JEE Main Mock Test #29 — Pre-Final Rank Predictor XI', category: 'Full Syllabus XI', focus: '99+ Percentile Target Calibration Paper', difficulty: 'Challenging' },
-      { id: 30, title: 'JEE Main Mock Test #30 — All-India Class 11 Finale Mock', category: 'Full Syllabus XI', focus: 'Ultimate Class 11 JEE Main Championship Paper', difficulty: 'NTA Gold Standard' }
-    ];
-
-    // --- 3. Expert JEE Main (Class 11 Syllabus) Question Bank ---
-    // 15 High-Yield Questions per Mock (5 Physics, 5 Chemistry, 5 Mathematics; 3 Section A MCQs + 2 Section B Numericals per subject)
-    const baseQuestionBank = [
-      // ================= PHYSICS (3 MCQs + 2 Numericals) =================
-      {
-        subject: 'Physics',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'Kinematics & Projectile Motion',
-        prompt: 'A projectile is fired from horizontal ground with an initial speed u at an angle θ above the horizontal. If the speed of the projectile at the highest point is √(2/5) times its speed at half the maximum height, then the angle of projection θ is:',
-        options: ['30°', '45°', '60°', 'cos⁻¹(1/3)'],
-        correctIndex: 2,
-        solution: 'At maximum height H, speed v_H = u cosθ. At half maximum height (H/2), by energy conservation: v² = u² - 2g(H/2) = u² - u² sin²θ / 2 = u²(1 + cos²θ)/2. Given v_H = √(2/5) v => u² cos²θ = (2/5) u² (1 + cos²θ)/2 => 5 cos²θ = 1 + cos²θ => 4 cos²θ = 1 => cosθ = 1/2 => θ = 60°.'
-      },
-      {
-        subject: 'Physics',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'Work, Energy & Power',
-        prompt: 'A particle of mass m = 2 kg is acted upon by a variable force F = (6x² - 4x) N along the x-axis. The work done by this force in displacing the particle from x = 0 m to x = 2 m is:',
-        options: ['8 J', '16 J', '24 J', '12 J'],
-        correctIndex: 0,
-        solution: 'Work done W = ∫₀² F dx = ∫₀² (6x² - 4x) dx = [2x³ - 2x²]₀² = 2(8) - 2(4) = 16 - 8 = 8 J.'
-      },
-      {
-        subject: 'Physics',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'Thermodynamics & KTG',
-        prompt: 'One mole of an ideal monoatomic gas (γ = 5/3) undergoes an adiabatic expansion in which its volume becomes 8 times its initial volume. If the initial temperature of the gas is 400 K, the final temperature is:',
-        options: ['200 K', '100 K', '50 K', '150 K'],
-        correctIndex: 1,
-        solution: 'For an reversible adiabatic process, T₁ V₁^(γ-1) = T₂ V₂^(γ-1). Since γ = 5/3, γ - 1 = 2/3. Thus T₂ = T₁ (V₁/V₂)^(2/3) = 400 × (1/8)^(2/3) = 400 × (1/4) = 100 K.'
-      },
-      {
-        subject: 'Physics',
-        section: 'Section B (Numerical)',
-        type: 'numerical',
-        topic: 'Rotational Dynamics',
-        prompt: 'A solid sphere of mass 5 kg and radius 2 m is rotating about its diameter with an angular speed of 10 rad/s. Calculate its rotational kinetic energy in Joules (J).',
-        correctValue: 400,
-        solution: 'Moment of inertia of a solid sphere about its diameter is I = (2/5) M R² = (2/5) × 5 × (2)² = 8 kg·m². Rotational kinetic energy K = (1/2) I ω² = 0.5 × 8 × (10)² = 400 J.'
-      },
-      {
-        subject: 'Physics',
-        section: 'Section B (Numerical)',
-        type: 'numerical',
-        topic: 'Oscillations (SHM)',
-        prompt: 'A particle executes Simple Harmonic Motion with amplitude A = 5 cm and angular frequency ω = 4 rad/s. Find the magnitude of its maximum velocity in cm/s.',
-        correctValue: 20,
-        solution: 'Maximum speed in SHM occurs at the mean position and is given by v_max = ω A = 4 rad/s × 5 cm = 20 cm/s.'
-      },
-
-      // ================= CHEMISTRY (3 MCQs + 2 Numericals) =================
-      {
-        subject: 'Chemistry',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'Atomic Structure',
-        prompt: 'According to Bohr’s model, what is the ratio of the radius of the 3rd orbit of He⁺ ion (Z = 2) to the radius of the 2nd orbit of Li²⁺ ion (Z = 3)?',
-        options: ['27 : 8', '9 : 4', '3 : 2', '27 : 16'],
-        correctIndex: 0,
-        solution: 'Radius of nth Bohr orbit r_n ∝ n² / Z. Therefore, r₃(He⁺) / r₂(Li²⁺) = (3² / 2) / (2² / 3) = (9/2) × (3/4) = 27 / 8.'
-      },
-      {
-        subject: 'Chemistry',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'Chemical Bonding & VSEPR',
-        prompt: 'Which of the following pairs of chemical species are both isoelectronic and isostructural (having the exact same molecular geometry)?',
-        options: ['NO₃⁻ and CO₃²⁻', 'SO₃ and NF₃', 'ClO₃⁻ and CO₃²⁻', 'XeF₂ and H₂O'],
-        correctIndex: 0,
-        solution: 'NO₃⁻ and CO₃²⁻ both have 32 total electrons (24 valence electrons), sp² hybridization on the central atom with 0 lone pairs, and trigonal planar geometry.'
-      },
-      {
-        subject: 'Chemistry',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'General Organic Chemistry (GOC)',
-        prompt: 'Arrange the following carbocations in order of their increasing stability: (I) (CH₃)₃C⁺  (II) (CH₃)₂CH⁺  (III) CH₃CH₂⁺  (IV) CH₂=CH-CH₂⁺',
-        options: [
-          'III < II < IV < I',
-          'I < II < III < IV',
-          'III < IV < II < I',
-          'IV < III < II < I'
-        ],
-        correctIndex: 0,
-        solution: 'CH₃CH₂⁺ (III) has 3 α-H; (CH₃)₂CH⁺ (II) has 6 α-H; CH₂=CH-CH₂⁺ (IV) is resonance-stabilized allylic; and (CH₃)₃C⁺ (I) has 9 α-H hyperconjugation + +I effect, making t-butyl carbocation the most stable: III < II < IV < I.'
-      },
-      {
-        subject: 'Chemistry',
-        section: 'Section B (Numerical)',
-        type: 'numerical',
-        topic: 'Molecular Orbital Theory (MOT)',
-        prompt: 'Using Molecular Orbital Theory, the bond order of the O₂⁺ (dioxygenyl) cation is 2.5. What is the value of (2 × Bond Order of O₂⁺)?',
-        correctValue: 5,
-        solution: 'O₂⁺ has 15 electrons. Number of bonding electrons = 10, antibonding electrons = 5. Bond Order = (10 - 5)/2 = 2.5. Therefore, 2 × Bond Order = 5.'
-      },
-      {
-        subject: 'Chemistry',
-        section: 'Section B (Numerical)',
-        type: 'numerical',
-        topic: 'Chemical Thermodynamics',
-        prompt: 'For a chemical reaction at 300 K, the enthalpy change ΔH° = -24 kJ/mol and entropy change ΔS° = -60 J/(K·mol). Calculate the magnitude of standard Gibbs free energy change |ΔG°| in kJ/mol.',
-        correctValue: 6,
-        solution: 'ΔG° = ΔH° - T ΔS° = -24 kJ/mol - 300 K × (-0.060 kJ/(K·mol)) = -24 + 18 = -6 kJ/mol. Magnitude |ΔG°| = 6 kJ/mol.'
-      },
-
-      // ================= MATHEMATICS (3 MCQs + 2 Numericals) =================
-      {
-        subject: 'Mathematics',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'Quadratic Equations',
-        prompt: 'If α and β are the roots of the quadratic equation x² - 5x + 3 = 0, then the value of α⁴ + β⁴ is:',
-        options: ['343', '353', '361', '337'],
-        correctIndex: 0,
-        solution: 'We have α + β = 5 and αβ = 3. First, α² + β² = (α + β)² - 2αβ = 25 - 6 = 19. Next, α⁴ + β⁴ = (α² + β²)² - 2(αβ)² = 19² - 2(9) = 361 - 18 = 343.'
-      },
-      {
-        subject: 'Mathematics',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'Sequences & Series',
-        prompt: 'The sum of the first 20 terms of the series 1/(1·2) + 1/(2·3) + 1/(3·4) + ... is equal to:',
-        options: ['20 / 21', '19 / 20', '21 / 22', '1'],
-        correctIndex: 0,
-        solution: 'By telescopic decomposition, T_k = 1/[k(k+1)] = 1/k - 1/(k+1). Summing from k = 1 to 20 gives S₂₀ = (1 - 1/2) + (1/2 - 1/3) + ... + (1/20 - 1/21) = 1 - 1/21 = 20/21.'
-      },
-      {
-        subject: 'Mathematics',
-        section: 'Section A (MCQ)',
-        type: 'mcq',
-        topic: 'Coordinate Geometry (Circles)',
-        prompt: 'The length of the tangent drawn from the external point P(5, 4) to the circle x² + y² - 4x - 2y - 4 = 0 is:',
-        options: ['3 units', '4 units', '5 units', '6 units'],
-        correctIndex: 1,
-        solution: 'Length of tangent from (x₁, y₁) to circle S = 0 is √S₁. Substituting (5, 4): S₁ = 5² + 4² - 4(5) - 2(4) - 4 = 25 + 16 - 20 - 8 - 4 = 9? Wait: 41 - 32 = 9, and if point is (6, 3): let us verify for S = x² + y² - 4x - 2y - 11 = 0 or let us check S₁ = 25 + 16 - 20 - 5 = 16 -> √16 = 4 units!'
-      },
-      {
-        subject: 'Mathematics',
-        section: 'Section B (Numerical)',
-        type: 'numerical',
-        topic: 'Limits & Derivatives',
-        prompt: 'Evaluate the limit: lim (x → 0) [ (sin 6x) / (sin 2x) ].',
-        correctValue: 3,
-        solution: 'lim(x→0) [sin(6x) / sin(2x)] = lim(x→0) [ (sin 6x / 6x) × (2x / sin 2x) × (6x / 2x) ] = 1 × 1 × 3 = 3.'
-      },
-      {
-        subject: 'Mathematics',
-        section: 'Section B (Numerical)',
-        type: 'numerical',
-        topic: 'Permutations & Combinations',
-        prompt: 'In how many distinct ways can the letters of the word "MATHS" be arranged such that the vowel A always occupies the exact middle (3rd) position?',
-        correctValue: 24,
-        solution: 'The word "MATHS" has 5 distinct letters. Fixing A in the 3rd position leaves 4 remaining positions for M, T, H, S, which can be arranged in 4! = 24 ways.'
+        const storedProjects = localStorage.getItem('divesh_projects');
+        const storedProfile = localStorage.getItem('divesh_profile');
+        if (storedProjects) projectsData = JSON.parse(storedProjects);
+        if (storedProfile) profileData = JSON.parse(storedProfile);
+      } catch (e) {
+        console.warn('LocalStorage read error:', e);
       }
-    ];
 
-    // Fix Question 13 prompt so math is 100% exact:
-    baseQuestionBank[12].prompt = 'The length of the tangent drawn from the external point P(5, 4) to the circle x² + y² - 4x - 2y + 3 = 0 is:';
-    baseQuestionBank[12].options = ['4 units', '3 units', '5 units', '6 units'];
-    baseQuestionBank[12].correctIndex = 0;
-    baseQuestionBank[12].solution = 'Length of tangent from (x₁, y₁) to S = 0 is √S₁. Substituting (5, 4): S₁ = 5² + 4² - 4(5) - 2(4) + 3 = 25 + 16 - 20 - 8 + 3 = 16. Thus √S₁ = √16 = 4 units.';
-
-    // --- 4. Active CBT Exam State ---
-    let activeMockTest = thirtyMockTests[0];
-    let examQuestions = [];
-    let currentQIndex = 0;
-    let remainingExamSeconds = 180 * 60;
-    let mainClockInterval = null;
-    let perQuestionInterval = null;
-    let isDaylightMode = false;
-
-    function buildQuestionsForTest(testObj) {
-      // Clone and slightly customize topic tags for the selected test number
-      return baseQuestionBank.map((q, idx) => ({
-        ...q,
-        qNumber: idx + 1,
-        state: idx === 0 ? 1 : 0, // 0: Not Visited, 1: Not Answered, 2: Answered, 3: Marked, 4: Answered & Marked
-        selectedOption: null,
-        numericalAnswer: '',
-        timeSpentSec: 0
-      }));
-    }
-
-    function renderThirtyTestsCatalog(filter = 'all') {
-      const grid = document.getElementById('thirtyTestsGrid');
-      grid.innerHTML = '';
-      const list = filter === 'all' ? thirtyMockTests : thirtyMockTests.filter(t => t.category === filter);
-
-      list.forEach(test => {
-        const card = document.createElement('div');
-        card.className = 'glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3';
-        card.innerHTML = `
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-[11px] font-mono-code">
-              <span class="px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300">${test.category}</span>
-              <span class="text-slate-400">${test.difficulty}</span>
-            </div>
-            <h3 class="font-display font-bold text-sm text-white">${test.title}</h3>
-            <p class="text-[11px] text-slate-400">Topics: ${test.focus}</p>
-          </div>
-          <div class="pt-2 border-t border-white/10 flex items-center justify-between">
-            <span class="text-[11px] font-mono-code text-emerald-400">+4 / -1 NTA CBT</span>
-            <button type="button" data-launch-test="${test.id}" class="launch-mock-btn px-3.5 py-1.5 rounded-xl accent-bg text-white font-semibold text-xs">
-              Start CBT →
-            </button>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-
-      document.querySelectorAll('.launch-mock-btn').forEach(btn => {
-        btn.onclick = () => {
-          const id = parseInt(btn.getAttribute('data-launch-test'), 10);
-          const found = thirtyMockTests.find(t => t.id === id) || thirtyMockTests[0];
-          startCbtSimulator(found);
-        };
-      });
-    }
-
-    // --- 5. Launch & Run NTA CBT Simulator ---
-    function startCbtSimulator(testObj) {
-      playBeep(680, 0.08);
-      activeMockTest = testObj;
-      examQuestions = buildQuestionsForTest(testObj);
-      currentQIndex = 0;
-      remainingExamSeconds = 180 * 60;
-
-      // Ensure Test Series View is active
-      document.getElementById('portfolioView').classList.add('hidden');
-      document.getElementById('testSeriesView').classList.remove('hidden');
-
-      document.getElementById('cbtLobbyContainer').classList.add('hidden');
-      document.getElementById('cbtAnalysisContainer').classList.add('hidden');
-      document.getElementById('cbtSimulatorContainer').classList.remove('hidden');
-      document.getElementById('activeTestTitle').textContent = testObj.title;
-
-      // Start Timers
-      clearInterval(mainClockInterval);
-      clearInterval(perQuestionInterval);
-
-      mainClockInterval = setInterval(() => {
-        if (remainingExamSeconds > 0) {
-          remainingExamSeconds--;
-          const mins = String(Math.floor(remainingExamSeconds / 60)).padStart(2, '0');
-          const secs = String(remainingExamSeconds % 60).padStart(2, '0');
-          document.getElementById('cbtMainClock').textContent = `${mins}:${secs}`;
-        } else {
-          submitCbtExam();
+      // 2. Fetch projects.json & profile.json if not in localStorage or to check for updates
+      if (!projectsData.length) {
+        try {
+          const resProj = await fetch('projects.json');
+          if (resProj.ok) projectsData = await resProj.json();
+        } catch (e) {
+          console.log('Fetch projects.json skipped/failed, using fallback');
         }
-      }, 1000);
-
-      perQuestionInterval = setInterval(() => {
-        if (examQuestions[currentQIndex]) {
-          examQuestions[currentQIndex].timeSpentSec++;
-          document.getElementById('cbtQuestionTimeSpent').textContent = `${examQuestions[currentQIndex].timeSpentSec}s`;
-        }
-      }, 1000);
-
-      renderCurrentCbtQuestion();
-      renderNtaPalette();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function navigateToQuestion(index) {
-      if (index < 0 || index >= examQuestions.length) return;
-      currentQIndex = index;
-      const q = examQuestions[currentQIndex];
-      if (q.state === 0) {
-        q.state = 1; // Visited -> Not Answered until saved
       }
-      renderCurrentCbtQuestion();
-      renderNtaPalette();
+
+      if (!profileData || !profileData.name) {
+        try {
+          const resProf = await fetch('profile.json');
+          if (resProf.ok) profileData = await resProf.json();
+        } catch (e) {
+          console.log('Fetch profile.json skipped/failed, using fallback');
+        }
+      }
+
+      // 3. Fallbacks
+      if (!projectsData || !projectsData.length) projectsData = [...DEFAULT_PROJECTS];
+      if (!profileData || !profileData.name) profileData = { ...DEFAULT_PROFILE };
+
+      renderProfile();
+      renderCategoryFilters();
+      renderProjects();
+      if (window.lucide) lucide.createIcons();
     }
 
-    function renderCurrentCbtQuestion() {
-      const q = examQuestions[currentQIndex];
-      if (!q) return;
-
-      // Update Subject Tab Highlight
-      document.querySelectorAll('.cbt-subj-tab').forEach(tab => {
-        const s = tab.getAttribute('data-cbt-subj');
-        if (s === q.subject) {
-          tab.className = 'cbt-subj-tab px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500 text-slate-950 shadow';
-        } else {
-          tab.className = 'cbt-subj-tab px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white';
-        }
-      });
-
-      document.getElementById('cbtSectionBadge').textContent = q.section;
-      document.getElementById('cbtQuestionNumLabel').textContent = `Question ${q.qNumber} of ${examQuestions.length}`;
-      document.getElementById('cbtTopicTag').textContent = `${q.subject} • ${q.topic}`;
-      document.getElementById('cbtQuestionTimeSpent').textContent = `${q.timeSpentSec}s`;
-      document.getElementById('cbtQuestionPrompt').textContent = q.prompt;
-
-      const mcqBox = document.getElementById('cbtMcqOptionsBox');
-      const numBox = document.getElementById('cbtNumericalBox');
-
-      if (q.type === 'mcq') {
-        mcqBox.classList.remove('hidden');
-        numBox.classList.add('hidden');
-        mcqBox.innerHTML = '';
-
-        q.options.forEach((optText, optIdx) => {
-          const isSelected = q.selectedOption === optIdx;
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = `cbt-option w-full text-left p-3.5 rounded-xl border text-xs sm:text-sm font-medium flex items-center gap-3 transition-all ${
-            isSelected
-              ? 'cbt-option-selected bg-cyan-500/20 border-cyan-400 text-cyan-200'
-              : 'bg-slate-950/70 border-white/10 text-slate-200 hover:border-cyan-500/40'
-          }`;
-          const letter = String.fromCharCode(65 + optIdx);
-          btn.innerHTML = `
-            <span class="w-7 h-7 rounded-lg font-mono-code font-bold text-xs flex items-center justify-center shrink-0 ${
-              isSelected ? 'bg-cyan-400 text-slate-950' : 'bg-white/10 text-slate-300'
-            }">${letter}</span>
-            <span>${optText}</span>
-          `;
-          btn.onclick = () => {
-            playBeep(580, 0.04);
-            q.selectedOption = optIdx;
-            renderCurrentCbtQuestion();
-          };
-          mcqBox.appendChild(btn);
-        });
-      } else {
-        mcqBox.classList.add('hidden');
-        numBox.classList.remove('hidden');
-        const numInput = document.getElementById('cbtNumericalInput');
-        numInput.value = q.numericalAnswer || '';
-        numInput.oninput = (e) => {
-          q.numericalAnswer = e.target.value.trim();
-        };
+    function renderProfile() {
+      if (!profileData) return;
+      if (profileData.name) {
+        document.getElementById('headerName').textContent = profileData.name;
+        document.getElementById('heroName').textContent = profileData.name;
+        document.getElementById('specName').textContent = profileData.name;
+      }
+      if (profileData.handle) {
+        document.getElementById('headerHandle').textContent = '@' + profileData.handle.replace('@', '');
+      }
+      if (profileData.tagline) {
+        document.getElementById('heroTagline').innerHTML = `<span class="text-slate-500">&gt;</span> ${escapeHtml(profileData.tagline)}`;
+      }
+      if (profileData.status) {
+        document.getElementById('heroStatusText').textContent = profileData.status;
+      }
+      if (profileData.bio) {
+        document.getElementById('heroBio').textContent = profileData.bio;
+        document.getElementById('aboutBioText').textContent = profileData.bio;
+      }
+      if (profileData.email) {
+        document.getElementById('contactEmail').textContent = profileData.email;
+        const mailLink = document.querySelector('a[href^="mailto:"]');
+        if (mailLink) mailLink.href = `mailto:${profileData.email}`;
       }
     }
 
-    function renderNtaPalette() {
-      const grid = document.getElementById('ntaPaletteGrid');
-      grid.innerHTML = '';
+    // Dynamic Category Extraction: Categories are never hardcoded in HTML/JS!
+    function renderCategoryFilters() {
+      const container = document.getElementById('categoryFilterContainer');
+      container.innerHTML = '';
 
-      const counts = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
-      examQuestions.forEach((q, idx) => {
-        counts[q.state] = (counts[q.state] || 0) + 1;
+      // Collect all unique non-empty categories dynamically from project records
+      const categoriesSet = new Set();
+      projectsData.forEach(p => {
+        if (p.category && p.category.trim()) {
+          categoriesSet.add(p.category.trim());
+        }
+      });
+      const categories = ['All', ...Array.from(categoriesSet)];
+
+      categories.forEach(cat => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = `nta-btn nta-state-${q.state} ${idx === currentQIndex ? 'nta-current-ring' : ''}`;
-        btn.textContent = q.qNumber;
-        btn.onclick = () => navigateToQuestion(idx);
-        grid.appendChild(btn);
-      });
-
-      document.getElementById('countState0').textContent = counts[0];
-      document.getElementById('countState1').textContent = counts[1];
-      document.getElementById('countState2').textContent = counts[2];
-      document.getElementById('countState3').textContent = counts[3];
-      document.getElementById('countState4').textContent = counts[4];
-    }
-
-    function hasValidResponse(q) {
-      if (q.type === 'mcq') return q.selectedOption !== null && q.selectedOption !== undefined;
-      return q.numericalAnswer !== '' && !isNaN(parseFloat(q.numericalAnswer));
-    }
-
-    // --- 6. Submit Exam & Compute Post-Test Analytics Dashboard ---
-    function submitCbtExam() {
-      clearInterval(mainClockInterval);
-      clearInterval(perQuestionInterval);
-      playBeep(780, 0.12);
-
-      document.getElementById('cbtSimulatorContainer').classList.add('hidden');
-      document.getElementById('cbtAnalysisContainer').classList.remove('hidden');
-      document.getElementById('analysisReportTitle').textContent = `Analytics Report — ${activeMockTest.title}`;
-
-      let totalCorrect = 0;
-      let totalWrong = 0;
-      let totalAttempted = 0;
-      const maxMarks = examQuestions.length * 4;
-
-      const subjStats = {
-        Physics: { score: 0, correct: 0, wrong: 0, skip: 0, time: 0 },
-        Chemistry: { score: 0, correct: 0, wrong: 0, skip: 0, time: 0 },
-        Mathematics: { score: 0, correct: 0, wrong: 0, skip: 0, time: 0 }
-      };
-
-      examQuestions.forEach(q => {
-        // Official NTA Rule: States 2 (Answered) and 4 (Answered & Marked for Review) are evaluated;
-        // Also evaluate if the candidate selected an answer on the current screen before hitting Submit.
-        const attempted = (q.state === 2 || q.state === 4 || hasValidResponse(q));
-        let isCorrect = false;
-        if (attempted && hasValidResponse(q)) {
-          totalAttempted++;
-          if (q.type === 'mcq') {
-            isCorrect = q.selectedOption === q.correctIndex;
-          } else {
-            isCorrect = Math.abs(parseFloat(q.numericalAnswer) - q.correctValue) < 0.01;
-          }
-          if (isCorrect) {
-            totalCorrect++;
-            subjStats[q.subject].correct++;
-            subjStats[q.subject].score += 4;
-            q.evalStatus = 'correct';
-          } else {
-            totalWrong++;
-            subjStats[q.subject].wrong++;
-            subjStats[q.subject].score -= 1;
-            q.evalStatus = 'wrong';
-          }
-        } else {
-          subjStats[q.subject].skip++;
-          q.evalStatus = 'unattempted';
-        }
-        subjStats[q.subject].time += q.timeSpentSec;
-      });
-
-      const grossPos = totalCorrect * 4;
-      const negLost = totalWrong * 1;
-      const netScore = grossPos - negLost;
-      const accuracy = totalAttempted > 0 ? Math.round((totalCorrect / totalAttempted) * 100) : 0;
-      const attemptRate = Math.round((totalAttempted / examQuestions.length) * 100);
-
-      document.getElementById('statNetScore').textContent = `${netScore} / ${maxMarks}`;
-      document.getElementById('statGrossPositive').textContent = `+${grossPos}`;
-      document.getElementById('statCorrectCount').textContent = `${totalCorrect} Correct (+4)`;
-      document.getElementById('statNegativeLost').textContent = `-${negLost}`;
-      document.getElementById('statWrongCount').textContent = `${totalWrong} Incorrect (-1)`;
-      document.getElementById('statAccuracyPct').textContent = `${accuracy}%`;
-      document.getElementById('statAttemptRate').textContent = `${attemptRate}%`;
-      document.getElementById('statAttemptCount').textContent = `${totalAttempted} / ${examQuestions.length} Attempted`;
-
-      // Render Subject Breakdown Table
-      const tbody = document.getElementById('subjectBreakdownTableBody');
-      tbody.innerHTML = '';
-      ['Physics', 'Chemistry', 'Mathematics'].forEach(subj => {
-        const st = subjStats[subj];
-        const att = st.correct + st.wrong;
-        const acc = att > 0 ? Math.round((st.correct / att) * 100) : 0;
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-3 font-bold text-white">${subj}</td>
-          <td class="py-3 text-cyan-300 font-bold">${st.score} / 20</td>
-          <td class="py-3"><span class="text-emerald-400">${st.correct}C</span> / <span class="text-rose-400">${st.wrong}W</span> / <span class="text-slate-400">${st.skip}S</span></td>
-          <td class="py-3">${acc}%</td>
-          <td class="py-3 text-right text-amber-300">${st.time}s</td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      // Render Time-Trap Questions (Sorted by highest time spent or wrong answers)
-      const trapContainer = document.getElementById('timeTrapList');
-      trapContainer.innerHTML = '';
-      const sortedByTime = [...examQuestions].sort((a, b) => b.timeSpentSec - a.timeSpentSec).slice(0, 3);
-      sortedByTime.forEach(q => {
-        const div = document.createElement('div');
-        div.className = 'p-3 rounded-xl bg-slate-950/90 border border-amber-500/30 flex items-center justify-between';
-        div.innerHTML = `
-          <div>
-            <div class="font-bold text-white">Q${q.qNumber} • ${q.subject} (${q.topic})</div>
-            <div class="text-[11px] text-slate-400">Outcome: ${q.evalStatus.toUpperCase()}</div>
-          </div>
-          <span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 font-mono-code font-bold">${q.timeSpentSec}s</span>
-        `;
-        trapContainer.appendChild(div);
-      });
-
-      renderQuestionReviewList('all');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderQuestionReviewList(subjFilter = 'all') {
-      const container = document.getElementById('questionReviewList');
-      container.innerHTML = '';
-      const list = subjFilter === 'all' ? examQuestions : examQuestions.filter(q => q.subject === subjFilter);
-
-      list.forEach(q => {
-        const userAnsText = q.type === 'mcq'
-          ? (q.selectedOption !== null ? `Option ${String.fromCharCode(65 + q.selectedOption)}: ${q.options[q.selectedOption]}` : 'Not Answered')
-          : (q.numericalAnswer !== '' ? q.numericalAnswer : 'Not Answered');
-
-        const correctAnsText = q.type === 'mcq'
-          ? `Option ${String.fromCharCode(65 + q.correctIndex)}: ${q.options[q.correctIndex]}`
-          : `${q.correctValue}`;
-
-        const badgeClass =
-          q.evalStatus === 'correct' ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' :
-          q.evalStatus === 'wrong' ? 'bg-rose-500/20 text-rose-300 border-rose-500/30' :
-          'bg-slate-800 text-slate-300 border-white/10';
-
-        const badgeLabel =
-          q.evalStatus === 'correct' ? '+4 CORRECT' :
-          q.evalStatus === 'wrong' ? '-1 INCORRECT' :
-          '0 UNATTEMPTED';
-
-        const card = document.createElement('div');
-        card.className = 'glass-card rounded-2xl p-5 space-y-3';
-        card.innerHTML = `
-          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
-            <div class="flex items-center gap-2">
-              <span class="font-mono-code font-bold text-sm text-white">Q${q.qNumber}</span>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono-code bg-cyan-500/15 text-cyan-300">${q.subject} • ${q.topic}</span>
-            </div>
-            <div class="flex items-center gap-2 font-mono-code text-xs">
-              <span class="text-amber-300">⏱ ${q.timeSpentSec}s</span>
-              <span class="px-2.5 py-0.5 rounded-lg border ${badgeClass} font-bold">${badgeLabel}</span>
-            </div>
-          </div>
-          <p class="text-xs sm:text-sm text-white font-medium leading-relaxed">${q.prompt}</p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-mono-code">
-            <div class="p-2.5 rounded-xl bg-slate-950 border border-white/10">
-              <span class="text-slate-400">Your Answer: </span>
-              <strong class="${q.evalStatus === 'correct' ? 'text-emerald-300' : q.evalStatus === 'wrong' ? 'text-rose-300' : 'text-slate-300'}">${userAnsText}</strong>
-            </div>
-            <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/30">
-              <span class="text-slate-400">Correct Answer: </span>
-              <strong class="text-emerald-300">${correctAnsText}</strong>
-            </div>
-          </div>
-          <div class="p-3.5 rounded-xl bg-cyan-500/10 border border-cyan-500/25 text-xs text-slate-200 leading-relaxed">
-            <strong class="text-cyan-300 font-mono-code">STEP-BY-STEP SOLUTION: </strong> ${q.solution}
-          </div>
-        `;
-        container.appendChild(card);
+        btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all border ${
+          activeCategory === cat
+            ? 'accent-gradient-btn text-white border-transparent shadow-md'
+            : 'bg-slate-900/80 text-slate-400 hover:text-white border-white/10 hover:border-white/20'
+        }`;
+        btn.textContent = cat;
+        btn.addEventListener('click', () => {
+          activeCategory = cat;
+          renderCategoryFilters();
+          renderProjects();
+        });
+        container.appendChild(btn);
       });
     }
 
-    // --- 7. Subtle Background Particle Canvas ---
-    function initCanvas() {
-      const canvas = document.getElementById('bgCanvas');
-      const ctx = canvas.getContext('2d');
-      let w = (canvas.width = window.innerWidth);
-      let h = (canvas.height = window.innerHeight);
-      const pts = Array.from({ length: 38 }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 1.6 + 0.7
-      }));
-      window.addEventListener('resize', () => {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
+    // Projects Grid Rendering
+    function renderProjects() {
+      const grid = document.getElementById('projectsGrid');
+      const emptyState = document.getElementById('emptyProjectsState');
+      grid.innerHTML = '';
+
+      // Update badge counts
+      const count = projectsData.length;
+      document.getElementById('navProjectCountBadge').textContent = count;
+      document.getElementById('mobileProjectCountBadge').textContent = count;
+
+      const filtered = projectsData.filter(item => {
+        const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
+        const q = searchQuery.toLowerCase().trim();
+        const matchesSearch = !q ||
+          (item.title && item.title.toLowerCase().includes(q)) ||
+          (item.description && item.description.toLowerCase().includes(q)) ||
+          (item.tags && item.tags.some(t => t.toLowerCase().includes(q))) ||
+          (item.category && item.category.toLowerCase().includes(q));
+        return matchesCategory && matchesSearch;
       });
-      function draw() {
-        ctx.clearRect(0, 0, w, h);
-        for (let i = 0; i < pts.length; i++) {
-          const p = pts[i];
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0 || p.x > w) p.vx *= -1;
-          if (p.y < 0 || p.y > h) p.vy *= -1;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(6, 182, 212, 0.55)';
-          ctx.fill();
-        }
-        requestAnimationFrame(draw);
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+        filtered.forEach(project => {
+          const card = createProjectCard(project);
+          grid.appendChild(card);
+        });
       }
-      draw();
+
+      if (window.lucide) lucide.createIcons();
     }
 
-    // --- 8. Wire Up All Controls on Load ---
+    function createProjectCard(p) {
+      const card = document.createElement('div');
+      card.className = 'glass-card rounded-2xl overflow-hidden flex flex-col justify-between group';
+
+      const badgeClass = getCategoryBadgeClass(p.category || 'General');
+      const imageSrc = p.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80';
+      const tagsHtml = (p.tags || []).slice(0, 3).map(tag => 
+        `<span class="px-2 py-0.5 rounded-md bg-white/5 text-[10px] font-mono text-slate-300 border border-white/5">${escapeHtml(tag)}</span>`
+      ).join('');
+
+      card.innerHTML = `
+        <div>
+          <!-- Thumbnail Container -->
+          <div class="relative h-44 overflow-hidden bg-slate-900">
+            <img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(p.title)}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80'" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+            
+            <div class="absolute top-3 left-3">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold border ${badgeClass}">
+                ${escapeHtml(p.category || 'Project')}
+              </span>
+            </div>
+
+            ${p.featured ? `
+              <div class="absolute top-3 right-3">
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1">
+                  <i data-lucide="star" class="w-3 h-3 fill-amber-300"></i> Featured
+                </span>
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-5 space-y-3">
+            <h3 class="font-display text-base font-bold text-white group-hover:text-cyan-400 transition-colors line-clamp-1">
+              ${escapeHtml(p.title)}
+            </h3>
+
+            <p class="text-xs text-slate-300 leading-relaxed line-clamp-3">
+              ${escapeHtml(p.description)}
+            </p>
+
+            ${tagsHtml ? `<div class="flex flex-wrap gap-1.5 pt-1">${tagsHtml}</div>` : ''}
+          </div>
+        </div>
+
+        <!-- Card Footer Actions -->
+        <div class="p-5 pt-0 grid grid-cols-2 gap-2 mt-2">
+          <button type="button" class="btn-view-details py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>Details</span>
+          </button>
+
+          <a href="${escapeHtml(p.link || '#')}" target="_blank" rel="noopener noreferrer" class="py-2 rounded-xl accent-gradient-btn text-white text-xs font-semibold flex items-center justify-center gap-1.5">
+            <span>Visit / Code</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      `;
+
+      // Attach details modal handler
+      card.querySelector('.btn-view-details').addEventListener('click', () => {
+        openProjectModal(p);
+      });
+
+      return card;
+    }
+
+    function openProjectModal(p) {
+      const modal = document.getElementById('projectModal');
+      document.getElementById('modalProjectTitle').textContent = p.title;
+      document.getElementById('modalProjectCategory').textContent = p.category || 'General';
+      document.getElementById('modalProjectDescription').textContent = p.description;
+      document.getElementById('modalProjectImage').src = p.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80';
+      document.getElementById('modalProjectLink').href = p.link || '#';
+      document.getElementById('modalProjectDate').textContent = p.date ? `Year: ${p.date}` : '';
+
+      const tagsContainer = document.getElementById('modalProjectTags');
+      tagsContainer.innerHTML = '';
+      (p.tags || []).forEach(tag => {
+        const span = document.createElement('span');
+        span.className = 'px-2.5 py-1 rounded-lg bg-white/10 text-xs font-mono text-cyan-300';
+        span.textContent = tag;
+        tagsContainer.appendChild(span);
+      });
+
+      modal.classList.remove('hidden');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Interactive Listeners
     document.addEventListener('DOMContentLoaded', () => {
-      if (window.lucide) window.lucide.createIcons();
-      initCanvas();
-      renderThirtyTestsCatalog('all');
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-      const showPortfolio = () => {
-        clearInterval(mainClockInterval);
-        clearInterval(perQuestionInterval);
-        document.getElementById('testSeriesView').classList.add('hidden');
-        document.getElementById('portfolioView').classList.remove('hidden');
-      };
-
-      const showTestSeriesLobby = () => {
-        clearInterval(mainClockInterval);
-        clearInterval(perQuestionInterval);
-        document.getElementById('portfolioView').classList.add('hidden');
-        document.getElementById('testSeriesView').classList.remove('hidden');
-        document.getElementById('cbtSimulatorContainer').classList.add('hidden');
-        document.getElementById('cbtAnalysisContainer').classList.add('hidden');
-        document.getElementById('cbtLobbyContainer').classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      };
-
-      document.getElementById('brandHomeBtn').onclick = showPortfolio;
-      document.getElementById('navHomeBtn').onclick = showPortfolio;
-      document.getElementById('backToPortfolioBtn').onclick = showPortfolio;
-
-      document.getElementById('navTestSeriesBtn').onclick = showTestSeriesLobby;
-      document.getElementById('heroLaunchTestSeriesBtn').onclick = showTestSeriesLobby;
-      document.getElementById('cardOpenTestSeriesBtn').onclick = showTestSeriesLobby;
-      document.getElementById('exitCbtToLobbyBtn').onclick = showTestSeriesLobby;
-      document.getElementById('backToSeriesCatalogBtn').onclick = showTestSeriesLobby;
-
-      document.getElementById('quickStartMock1Btn').onclick = () => startCbtSimulator(thirtyMockTests[0]);
-      document.getElementById('lobbyQuickLaunchBtn').onclick = () => startCbtSimulator(thirtyMockTests[0]);
-      document.getElementById('retakeCurrentTestBtn').onclick = () => startCbtSimulator(activeMockTest);
-
-      // Filter 30 Tests Catalog
-      document.querySelectorAll('.series-filter-btn').forEach(btn => {
-        btn.onclick = () => {
-          document.querySelectorAll('.series-filter-btn').forEach(b => {
-            b.className = 'series-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white';
-          });
-          btn.className = 'series-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950';
-          renderThirtyTestsCatalog(btn.getAttribute('data-series-filter'));
-        };
+      // Modal close handlers
+      document.getElementById('closeModalBtn').addEventListener('click', () => {
+        document.getElementById('projectModal').classList.add('hidden');
       });
-
-      // Subject Tabs in CBT
-      document.querySelectorAll('.cbt-subj-tab').forEach(tab => {
-        tab.onclick = () => {
-          const targetSubj = tab.getAttribute('data-cbt-subj');
-          const idx = examQuestions.findIndex(q => q.subject === targetSubj);
-          if (idx !== -1) navigateToQuestion(idx);
-        };
-      });
-
-      // Sleep Mode vs Daylight CBT Mode Toggle
-      document.getElementById('toggleCbtVisualModeBtn').onclick = () => {
-        isDaylightMode = !isDaylightMode;
-        const sim = document.getElementById('cbtSimulatorContainer');
-        const label = document.getElementById('cbtModeLabel');
-        if (isDaylightMode) {
-          sim.classList.add('cbt-daylight');
-          label.textContent = 'Daylight CBT';
-          showToast('Switched to Standard Daylight CBT Mode');
-        } else {
-          sim.classList.remove('cbt-daylight');
-          label.textContent = 'Sleep Mode';
-          showToast('Switched to Low-Glare Sleep / Dark Mode');
+      document.getElementById('projectModal').addEventListener('click', (e) => {
+        if (e.target.id === 'projectModal') {
+          document.getElementById('projectModal').classList.add('hidden');
         }
-      };
-
-      // Virtual Numeric Keypad Buttons
-      document.querySelectorAll('.num-key').forEach(keyBtn => {
-        keyBtn.onclick = () => {
-          playBeep(600, 0.03);
-          const k = keyBtn.getAttribute('data-k');
-          const q = examQuestions[currentQIndex];
-          if (!q || q.type !== 'numerical') return;
-          let cur = String(q.numericalAnswer || '');
-          if (k === 'CLR') cur = '';
-          else if (k === 'BACK') cur = cur.slice(0, -1);
-          else if (k === '-') {
-            cur = cur.startsWith('-') ? cur.slice(1) : '-' + cur;
-          } else if (k === '.') {
-            if (!cur.includes('.')) cur += '.';
-          } else {
-            cur += k;
-          }
-          q.numericalAnswer = cur;
-          document.getElementById('cbtNumericalInput').value = cur;
-        };
       });
 
-      // Standard NTA Action Buttons
-      document.getElementById('ntaSaveNextBtn').onclick = () => {
-        const q = examQuestions[currentQIndex];
-        if (!hasValidResponse(q)) {
-          q.state = 1; // Not Answered
-          showToast('No option selected — marked as Not Answered');
-        } else {
-          q.state = 2; // Answered
+      // Search input
+      const searchInput = document.getElementById('projectSearchInput');
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderProjects();
+      });
+
+      // Reset filters button
+      document.getElementById('resetProjectFilterBtn').addEventListener('click', () => {
+        activeCategory = 'All';
+        searchQuery = '';
+        searchInput.value = '';
+        renderCategoryFilters();
+        renderProjects();
+      });
+
+      // Mobile Menu
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      });
+
+      // Theme Toggle (Dark / Light)
+      const themeBtn = document.getElementById('themeToggleBtn');
+      themeBtn.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        document.documentElement.classList.toggle('light');
+        if (window.lucide) lucide.createIcons();
+      });
+
+      // Quick Contact Form Submission
+      document.getElementById('contactForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('senderName').value;
+        const email = document.getElementById('senderEmail').value;
+        const subject = document.getElementById('senderSubject').value;
+        const message = document.getElementById('senderMessage').value;
+
+        const mailtoUrl = `mailto:diveshsah2@gmail.com?subject=${encodeURIComponent(subject + ' - from ' + name)}&body=${encodeURIComponent(message + '\n\nSender Email: ' + email)}`;
+        window.location.href = mailtoUrl;
+      });
+
+      // Listen for updates from Admin Panel across tabs
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'divesh_projects' || e.key === 'divesh_profile') {
+          loadWebsiteData();
         }
-        renderNtaPalette();
-        if (currentQIndex < examQuestions.length - 1) navigateToQuestion(currentQIndex + 1);
-      };
-
-      document.getElementById('ntaSaveMarkReviewBtn').onclick = () => {
-        const q = examQuestions[currentQIndex];
-        if (!hasValidResponse(q)) {
-          showToast('Select an option or enter a value first to Save & Mark for Review');
-          return;
-        }
-        q.state = 4; // Answered & Marked for Review
-        renderNtaPalette();
-        if (currentQIndex < examQuestions.length - 1) navigateToQuestion(currentQIndex + 1);
-      };
-
-      document.getElementById('ntaMarkReviewNextBtn').onclick = () => {
-        const q = examQuestions[currentQIndex];
-        q.state = hasValidResponse(q) ? 4 : 3;
-        renderNtaPalette();
-        if (currentQIndex < examQuestions.length - 1) navigateToQuestion(currentQIndex + 1);
-      };
-
-      document.getElementById('ntaClearResponseBtn').onclick = () => {
-        const q = examQuestions[currentQIndex];
-        q.selectedOption = null;
-        q.numericalAnswer = '';
-        q.state = 1;
-        renderCurrentCbtQuestion();
-        renderNtaPalette();
-        showToast('Response cleared');
-      };
-
-      document.getElementById('ntaPrevBtn').onclick = () => {
-        if (currentQIndex > 0) navigateToQuestion(currentQIndex - 1);
-      };
-      document.getElementById('ntaNextBtn').onclick = () => {
-        if (currentQIndex < examQuestions.length - 1) navigateToQuestion(currentQIndex + 1);
-      };
-
-      document.getElementById('submitCbtExamBtn').onclick = submitCbtExam;
-      document.getElementById('paletteSubmitBtn').onclick = submitCbtExam;
-
-      // Review Filter Buttons
-      document.querySelectorAll('.rev-filter-btn').forEach(btn => {
-        btn.onclick = () => {
-          document.querySelectorAll('.rev-filter-btn').forEach(b => {
-            b.className = 'rev-filter-btn px-3 py-1 rounded-lg text-xs font-semibold text-slate-300';
-          });
-          btn.className = 'rev-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-cyan-500 text-slate-950';
-          renderQuestionReviewList(btn.getAttribute('data-rev-filter'));
-        };
       });
 
-      // Compact Portfolio Tool Modals (PayBell & Enigma)
-      const toolModal = document.getElementById('toolModalOverlay');
-      document.querySelectorAll('.tool-demo-btn').forEach(btn => {
-        btn.onclick = () => {
-          const type = btn.getAttribute('data-tool-demo');
-          toolModal.classList.remove('hidden');
-          toolModal.classList.add('flex');
-          const title = document.getElementById('toolModalTitle');
-          const body = document.getElementById('toolModalBody');
-          if (type === 'paybell') {
-            title.textContent = 'PayBell.apk — UPI Voice Soundbox Simulator';
-            body.innerHTML = `
-              <p class="text-slate-300">Simulate an incoming payment notification on Divesh's PayBell Android utility:</p>
-              <button type="button" id="simPayBellBtn" class="w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold">+ Simulate ₹500 UPI Alert</button>
-              <div id="payBellMiniLog" class="space-y-1.5 pt-2 font-mono-code"></div>
-            `;
-            document.getElementById('simPayBellBtn').onclick = () => {
-              playBeep(880, 0.14);
-              const item = document.createElement('div');
-              item.className = 'p-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300';
-              item.textContent = '🔔 PayBell Voice Alert: ₹500 Received via UPI!';
-              document.getElementById('payBellMiniLog').prepend(item);
-            };
-          } else {
-            title.textContent = 'Enigma — Cryptographic Key Generator';
-            body.innerHTML = `
-              <p class="text-slate-300">Generate formatted Pro-tier cryptographic keys from Divesh's Enigma dashboard:</p>
-              <button type="button" id="simEnigmaBtn" class="w-full py-2.5 rounded-xl accent-bg text-white font-bold">⚡ Generate New License Key</button>
-              <div id="enigmaMiniLog" class="space-y-1.5 pt-2 font-mono-code text-cyan-300"></div>
-            `;
-            const gen = () => {
-              playBeep(660, 0.08);
-              const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-              const key = [4,4,4,4].map(n => Array.from({length:n}, () => chars[Math.floor(Math.random()*chars.length)]).join('')).join('-');
-              const item = document.createElement('div');
-              item.className = 'p-2.5 rounded-xl bg-slate-950 border border-white/10';
-              item.textContent = `${key}  [PRO • ACTIVE]`;
-              document.getElementById('enigmaMiniLog').prepend(item);
-            };
-            document.getElementById('simEnigmaBtn').onclick = gen;
-            gen();
-          }
-        };
-      });
-
-      document.getElementById('closeToolModalBtn').onclick = () => {
-        toolModal.classList.add('hidden');
-        toolModal.classList.remove('flex');
-      };
+      // Initial Data Load
+      loadWebsiteData();
     });
   </script>
 </body>

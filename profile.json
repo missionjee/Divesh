@@ -1,0 +1,26 @@
+{
+  "name": "Divesh Kumar",
+  "handle": "missionjee",
+  "tagline": "Student Developer • Toolmaker • Problem Solver",
+  "status": "Class 11th (PCM) • Preparing for JEE & Building Creative Software",
+  "bio": "I am a Class 11th PCM student aspiring for IIT-JEE, driven by a passion for technology, systems programming, and full-stack software development. Beyond physics formulas and calculus, I craft production-ready web apps, Android utilities, and developer tools with a relentless focus on clean code and user experience.",
+  "email": "diveshsah2@gmail.com",
+  "github": "https://github.com/missionjee",
+  "location": "India",
+  "stats": [
+    { "label": "Projects Completed", "value": "12+" },
+    { "label": "Code Repositories", "value": "15+" },
+    { "label": "Lines of Clean Code", "value": "50K+" },
+    { "label": "JEE Prep Focus", "value": "Class 11" }
+  ],
+  "skills": [
+    { "name": "JavaScript / TypeScript", "level": 90, "category": "Languages" },
+    { "name": "Python & Scripting", "level": 85, "category": "Languages" },
+    { "name": "C / C++ (Algorithms)", "level": 80, "category": "Languages" },
+    { "name": "HTML5 & Modern CSS3", "level": 95, "category": "Frontend" },
+    { "name": "Tailwind CSS & UI Systems", "level": 92, "category": "Frontend" },
+    { "name": "Android App Development", "level": 75, "category": "Mobile" },
+    { "name": "Git & Open Source Workflow", "level": 88, "category": "Tools" },
+    { "name": "Linux & Terminal Tooling", "level": 84, "category": "Systems" }
+  ]
+}

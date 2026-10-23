@@ -1,0 +1,18 @@
+# Ignore Admin Panel files from Git (Per user instruction: update git with main website, not the admin)
+admin/
+admin*/
+.admin/
+*admin*server*
+*admin*.html
+
+# Python cache & temp
+__pycache__/
+*.py[cod]
+*$py.class
+.cache/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.log
